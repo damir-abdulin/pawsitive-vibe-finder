@@ -1,0 +1,8 @@
+{
+  "@@locale": "es",
+  "helloWorld": "¡Hola Mundo!",
+  "appTitle": "Buscador de Vibras Pawsitivas",
+  "homeWelcome": "¡Bienvenido!",
+  "homeError": "¡Algo salió mal!",
+  "homeBreedLabel": "Raza: {breedName}"
+}

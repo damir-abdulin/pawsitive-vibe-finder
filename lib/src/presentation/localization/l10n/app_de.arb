@@ -1,0 +1,8 @@
+{
+  "@@locale": "de",
+  "helloWorld": "Hallo Welt!",
+  "appTitle": "Pawsitive Vibe Finder",
+  "homeWelcome": "Willkommen!",
+  "homeError": "Etwas ist schief gelaufen!",
+  "homeBreedLabel": "Rasse: {breedName}"
+}

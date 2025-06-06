@@ -1,0 +1,8 @@
+{
+  "@@locale": "fr",
+  "helloWorld": "Bonjour le monde!",
+  "appTitle": "Chercheur d'Ambiance Pawsitive",
+  "homeWelcome": "Bienvenue!",
+  "homeError": "Quelque chose s'est mal passé!",
+  "homeBreedLabel": "Race: {breedName}"
+}

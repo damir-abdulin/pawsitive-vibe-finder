@@ -1,0 +1,13 @@
+targets:
+  $default:
+    builders:
+      # drift_dev:
+      #   generate_for:
+      #     - "lib/src/data/**"
+      auto_route_generator:
+        generate_for:
+          - "lib/src/presentation/**"
+      json_serializable:
+        generate_for:
+          - "lib/src/data/entities/**"
+          - "lib/src/domain/models/**" 
