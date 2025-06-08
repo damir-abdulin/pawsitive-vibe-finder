@@ -3,9 +3,14 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../data/breed/providers/breed_provider.dart';
+import '../data/breed/repository/breed_repository_impl.dart';
+import '../data/providers/network_provider.dart';
 import '../data/providers/providers.dart';
 import '../data/repository_impl/repository_impl.dart';
 import '../data/services/connectivity_service_impl.dart';
+import '../domain/breed/repository/breed_repository.dart';
+import '../domain/breed/use_case/get_breeds_use_case.dart';
 import '../domain/repository/repository.dart';
 import '../domain/services/connectivity_service.dart';
 import '../domain/use_case/use_cases.dart';
@@ -28,6 +33,15 @@ Future<void> configureDependencies() async {
   );
 
   // Providers
+  appLocator.registerLazySingleton<NetworkProvider>(
+    () => NetworkProvider(dio: appLocator()),
+  );
+  appLocator.registerLazySingleton<BreedProvider>(
+    () => BreedProvider(
+      networkProvider: appLocator(),
+      baseUrl: 'https://dog.ceo/api',
+    ),
+  );
   appLocator.registerLazySingleton<DogApiProvider>(
     () => DogApiProviderImpl(dio: appLocator()),
   );
@@ -36,6 +50,9 @@ Future<void> configureDependencies() async {
   );
 
   // Repositories
+  appLocator.registerLazySingleton<BreedRepository>(
+    () => BreedRepositoryImpl(breedProvider: appLocator()),
+  );
   appLocator.registerLazySingleton<DogRepository>(
     () => DogRepositoryImpl(dogApiProvider: appLocator()),
   );
@@ -47,6 +64,9 @@ Future<void> configureDependencies() async {
   );
 
   // Use Cases
+  appLocator.registerFactory(
+    () => GetBreedsUseCase(breedRepository: appLocator()),
+  );
   appLocator.registerFactory(
     () => GetRandomDogUseCase(dogRepository: appLocator()),
   );

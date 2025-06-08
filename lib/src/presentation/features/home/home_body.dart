@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../localization/locale_extension.dart';
+import '../../widgets/app_drawer.dart';
 import 'bloc/home_bloc.dart';
 import 'widgets/home_interaction_view.dart';
 
@@ -20,7 +21,20 @@ class HomeBody extends StatelessWidget {
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: Text(context.locale.appTitle)),
+        appBar: AppBar(
+          leading: Builder(
+            builder: (context) {
+              return IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+              );
+            },
+          ),
+          title: Text(context.locale.appTitle),
+        ),
+        drawer: const AppDrawer(),
         body: BlocBuilder<HomeBloc, HomeState>(
           builder: (BuildContext context, HomeState state) {
             return switch (state) {

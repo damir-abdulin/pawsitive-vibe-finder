@@ -1,11 +1,8 @@
-/// A base class for all application-specific exceptions.
+/// A base class for all exceptions in the application.
 class AppException implements Exception {
-  final String? message;
+  /// The error message.
+  final String message;
 
-  const AppException({this.message});
-
-  @override
-  String toString() {
-    return message ?? 'An application error occurred.';
-  }
+  /// Creates an [AppException].
+  const AppException(this.message);
 }

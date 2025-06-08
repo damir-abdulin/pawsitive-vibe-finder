@@ -1,4 +1,5 @@
 import '../../domain/domain.dart';
+import '../../domain/exceptions/dog_exception.dart';
 import '../entities/random_dog/random_dog_entity.dart';
 import '../mappers/mappers.dart';
 import '../providers/providers.dart';
@@ -19,15 +20,15 @@ class DogRepositoryImpl implements DogRepository {
       return RandomDogMapper.toDomain(randomDogEntity);
     } on NetworkException catch (e) {
       // Add context and rethrow as a domain-specific exception
-      throw DogException(message: 'Failed to fetch dog from API: ${e.message}');
+      throw DogException('Failed to fetch dog from API: ${e.message}');
     } on ProviderException catch (e) {
       // Handle other provider errors
       throw DogException(
-        message: 'An error occurred in the data provider: ${e.message}',
+        'An error occurred in the data provider: ${e.message}',
       );
     } catch (e) {
       // Handle unexpected errors
-      throw DogException(message: 'An unexpected error occurred: $e');
+      throw DogException('An unexpected error occurred: $e');
     }
   }
 

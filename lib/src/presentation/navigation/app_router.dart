@@ -6,12 +6,12 @@ import '../features/home/home_screen.dart';
 
 part 'app_router.gr.dart';
 
-@AutoRouterConfig(replaceInRouteName: 'Screen,Route')
+@AutoRouterConfig()
 class AppRouter extends RootStackRouter {
   @override
-  List<AutoRoute> get routes => <AutoRoute>[
-    AutoRoute(page: HomeRoute.page, initial: true),
-    AutoRoute(page: BreedListRoute.page),
-    AutoRoute(page: FavoritesRoute.page),
+  List<AutoRoute> get routes => [
+    AutoRoute(page: BreedListRoute.page, path: '/breed-list', initial: true),
+    AutoRoute(page: FavoritesRoute.page, path: '/favorites'),
+    AutoRoute(page: HomeRoute.page, path: '/home'),
   ];
 }
