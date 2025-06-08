@@ -3,20 +3,13 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../data/providers/network_provider.dart';
 import '../data/providers/providers.dart';
 import '../data/repository_impl/breed_repository_impl.dart';
 import '../data/repository_impl/repository_impl.dart';
 import '../data/services/connectivity_service_impl.dart';
-import '../domain/repository/breed_repository.dart';
-import '../domain/repository/repository.dart';
-import '../domain/services/connectivity_service.dart';
-import '../domain/use_case/get_breeds_use_case.dart';
-import '../domain/use_case/use_cases.dart';
-import '../presentation/navigation/app_router.dart';
-import '../data/providers/database.dart';
-import '../data/repository_impl/favorites_repository_impl.dart';
 import '../domain/domain.dart';
+import '../domain/services/connectivity_service.dart';
+import '../presentation/navigation/app_router.dart';
 
 final GetIt appLocator = GetIt.instance;
 
@@ -78,6 +71,9 @@ Future<void> configureDependencies() async {
   );
   appLocator.registerFactory(
     () => RemoveFavoriteDogUseCase(favoritesRepository: appLocator()),
+  );
+  appLocator.registerFactory(
+    () => IsFavoriteDogUseCase(favoritesRepository: appLocator()),
   );
   appLocator.registerFactory(
     () => CheckFirstLaunchUseCase(preferencesRepository: appLocator()),

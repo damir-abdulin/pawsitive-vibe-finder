@@ -10,7 +10,7 @@ class BreedMapper {
   static String fromDomain(BreedType breed) {
     final String breedName = breed.name;
     // Regex to find position before an uppercase letter in the camelCase enum name.
-    final RegExp uppercaseRegex = RegExp(r'(?=[A-Z])');
+    final RegExp uppercaseRegex = RegExp('(?=[A-Z])');
     final List<String> nameParts = breedName.split(uppercaseRegex);
     final List<String> lowercasedParts = nameParts
         .map((String part) => part.toLowerCase())

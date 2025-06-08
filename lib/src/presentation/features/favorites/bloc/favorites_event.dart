@@ -17,6 +17,9 @@ abstract class FavoritesEvent extends Equatable {
 /// favorite dogs from the repository.
 class FavoritesStarted extends FavoritesEvent {}
 
+/// Event dispatched to force a refresh of the favorite dogs list.
+class FavoritesRefreshed extends FavoritesEvent {}
+
 /// Event dispatched when the user removes a dog from the favorites list.
 class FavoriteDogRemoved extends FavoritesEvent {
   /// The dog to be removed.
@@ -42,13 +45,4 @@ class FavoriteDogAdded extends FavoritesEvent {
 
   @override
   List<Object> get props => <Object>[dog];
-}
-
-class _UpdateDogs extends FavoritesEvent {
-  final List<DogModel> dogs;
-
-  const _UpdateDogs({required this.dogs});
-
-  @override
-  List<Object> get props => <Object>[dogs];
 }

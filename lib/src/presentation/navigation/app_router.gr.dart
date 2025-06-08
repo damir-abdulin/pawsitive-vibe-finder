@@ -27,6 +27,53 @@ class BreedListRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [DogDetailsScreen]
+class DogDetailsRoute extends PageRouteInfo<DogDetailsRouteArgs> {
+  DogDetailsRoute({
+    required DogModel dog,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         DogDetailsRoute.name,
+         args: DogDetailsRouteArgs(dog: dog, key: key),
+         initialChildren: children,
+       );
+
+  static const String name = 'DogDetailsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<DogDetailsRouteArgs>();
+      return DogDetailsScreen(dog: args.dog, key: args.key);
+    },
+  );
+}
+
+class DogDetailsRouteArgs {
+  const DogDetailsRouteArgs({required this.dog, this.key});
+
+  final DogModel dog;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'DogDetailsRouteArgs{dog: $dog, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! DogDetailsRouteArgs) return false;
+    return dog == other.dog && key == other.key;
+  }
+
+  @override
+  int get hashCode => dog.hashCode ^ key.hashCode;
+}
+
+/// generated route for
 /// [FavoritesScreen]
 class FavoritesRoute extends PageRouteInfo<void> {
   const FavoritesRoute({List<PageRouteInfo>? children})

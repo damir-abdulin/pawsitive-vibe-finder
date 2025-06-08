@@ -17,33 +17,43 @@ class FavoriteDogCard extends StatelessWidget {
   /// A callback function that is invoked when the heart icon is tapped.
   final VoidCallback onFavoritePressed;
 
+  /// A callback function that is invoked when the card itself is tapped.
+  final VoidCallback onCardTapped;
+
   /// Creates a [FavoriteDogCard] instance.
   const FavoriteDogCard({
     required this.dog,
     required this.isFavorite,
     required this.onFavoritePressed,
+    required this.onCardTapped,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final ThemeData theme = Theme.of(context);
 
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(16),
-      child: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          CachedNetworkImage(
-            imageUrl: dog.imageUrl,
-            fit: BoxFit.cover,
-            placeholder: (BuildContext context, String url) =>
-                const Center(child: CircularProgressIndicator()),
-            errorWidget: (BuildContext context, String url, Object error) =>
-                const Icon(Icons.error),
-          ),
-          _buildFavoriteIcon(theme),
-        ],
+    return GestureDetector(
+      onTap: onCardTapped,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: Stack(
+          fit: StackFit.expand,
+          children: <Widget>[
+            Hero(
+              tag: dog.imageUrl,
+              child: CachedNetworkImage(
+                imageUrl: dog.imageUrl,
+                fit: BoxFit.cover,
+                placeholder: (BuildContext context, String url) =>
+                    const Center(child: CircularProgressIndicator()),
+                errorWidget: (BuildContext context, String url, Object error) =>
+                    const Icon(Icons.error),
+              ),
+            ),
+            _buildFavoriteIcon(theme),
+          ],
+        ),
       ),
     );
   }
@@ -54,7 +64,7 @@ class FavoriteDogCard extends StatelessWidget {
       child: IconButton(
         icon: Icon(
           isFavorite ? Icons.favorite : Icons.favorite_border,
-          color: theme.colorScheme.primary,
+          color: theme.colorScheme.error,
         ),
         onPressed: onFavoritePressed,
       ),

@@ -16,7 +16,6 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
   final GetFavoriteDogsUseCase _getFavoriteDogsUseCase;
   final SaveFavoriteDogUseCase _saveFavoriteDogUseCase;
   final RemoveFavoriteDogUseCase _removeFavoriteDogUseCase;
-  StreamSubscription<List<DogModel>>? _favoritesSubscription;
 
   /// Creates a [FavoritesBloc] instance.
   ///
@@ -32,28 +31,37 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
     on<FavoritesStarted>(_onFavoritesStarted);
     on<FavoriteDogRemoved>(_onFavoriteDogRemoved);
     on<FavoriteDogAdded>(_onFavoriteDogAdded);
-    on<_UpdateDogs>(_onUpdateDogs);
+    on<FavoritesRefreshed>(_onFavoritesRefreshed);
   }
 
-  @override
-  Future<void> close() {
-    _favoritesSubscription?.cancel();
-    return super.close();
-  }
-
-  void _onFavoritesStarted(
+  Future<void> _onFavoritesStarted(
     FavoritesStarted event,
     Emitter<FavoritesState> emit,
-  ) {
+  ) async {
+    await _fetchAndEmitFavorites(emit);
+  }
+
+  Future<void> _onFavoritesRefreshed(
+    FavoritesRefreshed event,
+    Emitter<FavoritesState> emit,
+  ) async {
+    await _fetchAndEmitFavorites(emit);
+  }
+
+  Future<void> _fetchAndEmitFavorites(Emitter<FavoritesState> emit) async {
     emit(FavoritesLoadInProgress());
-    _favoritesSubscription?.cancel();
-    _favoritesSubscription = _getFavoriteDogsUseCase.execute(null).listen(
-      (List<DogModel> dogs) {
-        add(_UpdateDogs(dogs: dogs));
-      },
-      onError: (Object error) =>
-          emit(FavoritesLoadFailure(message: error.toString())),
-    );
+    try {
+      final List<DogModel> dogs = await _getFavoriteDogsUseCase
+          .execute(null)
+          .first;
+      if (dogs.isEmpty) {
+        emit(FavoritesEmpty());
+      } else {
+        emit(FavoritesLoadSuccess(favoriteDogs: dogs));
+      }
+    } catch (error) {
+      emit(FavoritesLoadFailure(message: error.toString()));
+    }
   }
 
   Future<void> _onFavoriteDogRemoved(
@@ -68,13 +76,5 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
     Emitter<FavoritesState> emit,
   ) async {
     await _saveFavoriteDogUseCase.execute(event.dog);
-  }
-
-  void _onUpdateDogs(_UpdateDogs event, Emitter<FavoritesState> emit) {
-    if (event.dogs.isEmpty) {
-      emit(FavoritesEmpty());
-    } else {
-      emit(FavoritesLoadSuccess(favoriteDogs: event.dogs));
-    }
   }
 }

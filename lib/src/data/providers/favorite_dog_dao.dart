@@ -29,5 +29,5 @@ class FavoriteDogDao extends DatabaseAccessor<AppDatabase>
   /// Deletes a favorite dog from the database.
   Future<void> deleteFavoriteDog(FavoriteDogEntity favorite) => (delete(
     favoriteDogs,
-  )..where((tbl) => tbl.imageUrl.equals(favorite.imageUrl))).go();
+  )..where(($FavoriteDogsTable tbl) => tbl.imageUrl.equals(favorite.imageUrl))).go();
 }

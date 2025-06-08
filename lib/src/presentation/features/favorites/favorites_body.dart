@@ -1,7 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../domain/domain.dart';
 import '../../localization/locale_extension.dart';
+import '../../navigation/app_router.dart';
 import 'bloc/favorites_bloc.dart';
 import 'widgets/favorite_dog_card.dart';
 
@@ -43,8 +46,10 @@ class _FavoritesBodyState extends State<FavoritesBody> {
             ),
             itemCount: state.favoriteDogs.length,
             itemBuilder: (BuildContext context, int index) {
-              final dog = state.favoriteDogs[index];
-              final isFavorite = !_unfavoritedInSession.contains(dog.imageUrl);
+              final DogModel dog = state.favoriteDogs[index];
+              final bool isFavorite = !_unfavoritedInSession.contains(
+                dog.imageUrl,
+              );
 
               return FavoriteDogCard(
                 dog: dog,
@@ -63,6 +68,17 @@ class _FavoritesBodyState extends State<FavoritesBody> {
                       );
                     }
                   });
+                },
+                onCardTapped: () async {
+                  final bool? wasToggled = await context.router.push<bool>(
+                    DogDetailsRoute(dog: dog),
+                  );
+                  if (wasToggled ?? false) {
+                    if (context.mounted) {
+                      context.read<FavoritesBloc>().add(FavoritesRefreshed());
+                      _unfavoritedInSession.clear();
+                    }
+                  }
                 },
               );
             },

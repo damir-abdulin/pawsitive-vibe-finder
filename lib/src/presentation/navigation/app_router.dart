@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../domain/domain.dart';
 import '../features/breed_list/breed_list_screen.dart';
+import '../features/dog_details/dog_details_screen.dart';
 import '../features/favorites/favorites_screen.dart';
 import '../features/home/home_screen.dart';
 
@@ -15,5 +16,9 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: HomeRoute.page, initial: true),
     AutoRoute(page: BreedListRoute.page),
     AutoRoute(page: FavoritesRoute.page),
+    CustomRoute<void>(
+      page: DogDetailsRoute.page,
+      transitionsBuilder: (_, _, _, Widget child) => child,
+    ),
   ];
 }
