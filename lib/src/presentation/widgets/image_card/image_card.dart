@@ -36,7 +36,7 @@ class ImageCardState extends State<ImageCard>
   Animation<Offset>? _animation;
   Offset _dragOffset = Offset.zero;
 
-  final bool _swipeCompleted = false;
+  bool _swipeCompleted = false;
 
   @override
   void initState() {
@@ -135,6 +135,8 @@ class ImageCardState extends State<ImageCard>
       } else {
         widget.onSwipeLeft?.call();
       }
+
+      _swipeCompleted = true;
     });
   }
 
