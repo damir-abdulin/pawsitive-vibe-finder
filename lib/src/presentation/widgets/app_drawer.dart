@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../localization/locale_extension.dart';
 import '../navigation/app_router.dart';
 
 /// The main navigation drawer for the application.
@@ -14,30 +15,30 @@ class AppDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          const DrawerHeader(
-            decoration: BoxDecoration(color: Colors.blue),
+          DrawerHeader(
+            decoration: const BoxDecoration(color: Colors.blue),
             child: Text(
-              'Pawsitive Vibe Finder',
-              style: TextStyle(color: Colors.white, fontSize: 24),
+              context.locale.drawerTitle,
+              style: const TextStyle(color: Colors.white, fontSize: 24),
             ),
           ),
           ListTile(
             leading: const Icon(Icons.home),
-            title: const Text('Home'),
+            title: Text(context.locale.drawerHome),
             onTap: () {
               context.router.replace(const HomeRoute());
             },
           ),
           ListTile(
             leading: const Icon(Icons.list),
-            title: const Text('Breeds'),
+            title: Text(context.locale.drawerBreeds),
             onTap: () {
               context.router.replace(const BreedListRoute());
             },
           ),
           ListTile(
             leading: const Icon(Icons.favorite),
-            title: const Text('Favorites'),
+            title: Text(context.locale.drawerFavorites),
             onTap: () {
               context.router.replace(const FavoritesRoute());
             },

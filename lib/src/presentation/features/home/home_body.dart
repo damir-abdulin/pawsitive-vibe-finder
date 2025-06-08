@@ -61,7 +61,7 @@ class HomeBody extends StatelessWidget {
           content: Text(context.locale.appTitle),
           actions: <Widget>[
             TextButton(
-              child: const Text('Get Started'),
+              child: Text(context.locale.homeGetStartedButton),
               onPressed: () {
                 Navigator.of(dialogContext).pop();
                 context.read<HomeBloc>().add(CompleteFirstLaunchEvent());
@@ -78,13 +78,11 @@ class HomeBody extends StatelessWidget {
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          title: const Text('Offline'), // Should be localized
-          content: const Text(
-            'Please connect to the internet to discover more dogs!',
-          ),
+          title: Text(context.locale.offlineDialogTitle),
+          content: Text(context.locale.offlineDialogMessage),
           actions: <Widget>[
             TextButton(
-              child: const Text('OK'), // Should be localized
+              child: Text(context.locale.okButton),
               onPressed: () {
                 Navigator.of(dialogContext).pop();
               },

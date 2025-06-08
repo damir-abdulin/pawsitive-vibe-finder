@@ -7,15 +7,15 @@ class RandomDogMapper {
   ///
   /// The breed is parsed from the image URL.
   static RandomDogModel toDomain(RandomDogEntity entity) {
-    final String breed = _parseBreedFromUrl(entity.message);
+    final BreedType breed = _parseBreedFromUrl(entity.message);
     return RandomDogModel(imageUrl: entity.message, breed: breed);
   }
 
   /// Parses the breed name from the dog image URL.
   ///
   /// Example URL: https://images.dog.ceo/breeds/hound-afghan/n02088094_1003.jpg
-  /// Expected output: "afghan hound"
-  static String _parseBreedFromUrl(String url) {
+  /// Expected output: [BreedType.houndAfghan]
+  static BreedType _parseBreedFromUrl(String url) {
     try {
       final Uri uri = Uri.parse(url);
       final List<String> segments = uri.pathSegments;
@@ -23,16 +23,22 @@ class RandomDogMapper {
       // e.g., /breeds/hound-afghan/n02088094_1003.jpg -> "hound-afghan"
       if (segments.length >= 2) {
         final String breedSegment = segments[segments.length - 2];
-        // Replace hyphens with spaces and capitalize words for better readability.
-        return breedSegment
-            .split('-')
-            .reversed
-            .map((String word) => word[0].toUpperCase() + word.substring(1))
-            .join(' ');
+        String enumName = breedSegment;
+        if (breedSegment.contains('-')) {
+          final List<String> parts = breedSegment.split('-');
+          if (parts.length == 2) {
+            enumName =
+                parts[0] + parts[1][0].toUpperCase() + parts[1].substring(1);
+          }
+        }
+        return BreedType.values.firstWhere(
+          (BreedType e) => e.name.toLowerCase() == enumName.toLowerCase(),
+          orElse: () => BreedType.mix,
+        );
       }
-      return 'Unknown';
+      return BreedType.mix;
     } catch (e) {
-      return 'Unknown';
+      return BreedType.mix;
     }
   }
 }

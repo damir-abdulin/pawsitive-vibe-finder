@@ -3,8 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../data/providers/breed_local/breed_local_provider.dart';
-import '../data/providers/breed_local/breed_local_provider_impl.dart';
 import '../data/providers/network_provider.dart';
 import '../data/providers/providers.dart';
 import '../data/repository_impl/breed_repository_impl.dart';
@@ -37,9 +35,6 @@ Future<void> configureDependencies() async {
   appLocator.registerLazySingleton<NetworkProvider>(
     () => NetworkProvider(dio: appLocator()),
   );
-  appLocator.registerLazySingleton<BreedLocalProvider>(
-    BreedLocalProviderImpl.new,
-  );
   appLocator.registerLazySingleton<DogApiProvider>(
     () => DogApiProviderImpl(dio: appLocator()),
   );
@@ -48,9 +43,7 @@ Future<void> configureDependencies() async {
   );
 
   // Repositories
-  appLocator.registerLazySingleton<BreedRepository>(
-    () => BreedRepositoryImpl(breedLocalDataSource: appLocator()),
-  );
+  appLocator.registerLazySingleton<BreedRepository>(BreedRepositoryImpl.new);
   appLocator.registerLazySingleton<DogRepository>(
     () => DogRepositoryImpl(dogApiProvider: appLocator()),
   );

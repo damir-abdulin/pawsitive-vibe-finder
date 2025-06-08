@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import '../breed_type.dart';
 
 /// Represents the domain model for a randomly fetched dog.
 class RandomDogModel extends Equatable {
@@ -6,7 +7,7 @@ class RandomDogModel extends Equatable {
   final String imageUrl;
 
   /// The breed of the dog.
-  final String breed;
+  final BreedType breed;
 
   /// Creates an instance of [RandomDogModel].
   const RandomDogModel({required this.imageUrl, required this.breed});
@@ -15,13 +16,15 @@ class RandomDogModel extends Equatable {
   factory RandomDogModel.fromJson(Map<String, dynamic> json) {
     return RandomDogModel(
       imageUrl: json['imageUrl'] as String,
-      breed: json['breed'] as String,
+      breed: BreedType.values.byName(
+        json['breed'] as String? ?? BreedType.mix.name,
+      ),
     );
   }
 
   /// Converts this [RandomDogModel] instance to a JSON object.
   Map<String, dynamic> toJson() {
-    return <String, dynamic>{'imageUrl': imageUrl, 'breed': breed};
+    return <String, dynamic>{'imageUrl': imageUrl, 'breed': breed.name};
   }
 
   @override

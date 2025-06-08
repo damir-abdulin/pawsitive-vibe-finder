@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 
-import '../../../../domain/models/breed_model.dart';
+import '../../../../domain/models/breed_type.dart';
 import '../../../../domain/use_case/get_breeds_use_case.dart';
 import 'breed_list_event.dart';
 import 'breed_list_state.dart';
@@ -23,7 +23,9 @@ class BreedListBloc extends Bloc<BreedListEvent, BreedListState> {
   ) async {
     emit(state.copyWith(status: BreedListStatus.loading));
     try {
-      final List<BreedModel> breeds = await _getBreedsUseCase.unsafeExecute(null);
+      final List<BreedType> breeds = await _getBreedsUseCase.unsafeExecute(
+        null,
+      );
       emit(
         state.copyWith(
           status: BreedListStatus.success,
@@ -49,8 +51,8 @@ class BreedListBloc extends Bloc<BreedListEvent, BreedListState> {
     if (query.isEmpty) {
       emit(state.copyWith(filteredBreeds: state.breeds));
     } else {
-      final List<BreedModel> filtered = state.breeds
-          .where((BreedModel breed) => breed.displayName.toLowerCase().contains(query))
+      final List<BreedType> filtered = state.breeds
+          .where((BreedType breed) => breed.name.toLowerCase().contains(query))
           .toList();
       emit(state.copyWith(filteredBreeds: filtered));
     }

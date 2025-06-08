@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../localization/locale_extension.dart';
 import 'image_card_controller.dart';
 
 class ImageCard extends StatefulWidget {
@@ -247,7 +248,7 @@ class ImageCardState extends State<ImageCard>
                       child: Transform.rotate(
                         angle: -0.5,
                         child: _Stamp(
-                          text: 'LIKE',
+                          text: context.locale.imageCardLike,
                           color: Colors.green,
                           animationController: _animationController,
                           animationOffset: _animation?.value ?? Offset.zero,
@@ -262,7 +263,7 @@ class ImageCardState extends State<ImageCard>
                       child: Transform.rotate(
                         angle: 0.5,
                         child: _Stamp(
-                          text: 'OTHER',
+                          text: context.locale.imageCardOther,
                           color: Colors.red,
                           animationController: _animationController,
                           animationOffset: _animation?.value ?? Offset.zero,

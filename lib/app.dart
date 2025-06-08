@@ -13,18 +13,18 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'Pawsitive Vibe Finder',
-      theme: AppTheme.lightTheme, // Default light theme
-      darkTheme: AppTheme.darkTheme, // Dark theme
+      onGenerateTitle: (BuildContext context) =>
+          AppLocalizations.of(context)!.appGlobalTitle,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
       localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales:
-          AppLocalizations.supportedLocales, // Define supported locales
-
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: const Locale('fr'),
       routerConfig: appRouter.config(),
     );
   }

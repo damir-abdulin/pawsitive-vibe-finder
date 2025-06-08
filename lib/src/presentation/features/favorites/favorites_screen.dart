@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-
+import '../../localization/locale_extension.dart';
 import '../../widgets/app_drawer.dart';
 
 @RoutePage()
@@ -21,10 +21,10 @@ class FavoritesScreen extends StatelessWidget {
             );
           },
         ),
-        title: const Text('Favorite Dogs'),
+        title: Text(context.locale.favoritesTitle),
       ),
       drawer: const AppDrawer(),
-      body: const Center(child: Text('Favorites Screen')),
+      body: Center(child: Text(context.locale.favoritesScreenMessage)),
     );
   }
 }

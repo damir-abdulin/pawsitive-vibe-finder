@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../domain/models/breed_model.dart';
+import '../../../../domain/models/breed_type.dart';
 
 /// The status of the breed list.
 enum BreedListStatus {
@@ -23,10 +23,10 @@ class BreedListState extends Equatable {
   final BreedListStatus status;
 
   /// The list of all breeds.
-  final List<BreedModel> breeds;
+  final List<BreedType> breeds;
 
   /// The filtered list of breeds.
-  final List<BreedModel> filteredBreeds;
+  final List<BreedType> filteredBreeds;
 
   /// The error message, if any.
   final String? errorMessage;
@@ -34,16 +34,16 @@ class BreedListState extends Equatable {
   /// Creates a [BreedListState].
   const BreedListState({
     this.status = BreedListStatus.initial,
-    this.breeds = const <BreedModel>[],
-    this.filteredBreeds = const <BreedModel>[],
+    this.breeds = const <BreedType>[],
+    this.filteredBreeds = const <BreedType>[],
     this.errorMessage,
   });
 
   /// Creates a copy of this state with the given fields replaced.
   BreedListState copyWith({
     BreedListStatus? status,
-    List<BreedModel>? breeds,
-    List<BreedModel>? filteredBreeds,
+    List<BreedType>? breeds,
+    List<BreedType>? filteredBreeds,
     String? errorMessage,
   }) {
     return BreedListState(
@@ -55,5 +55,10 @@ class BreedListState extends Equatable {
   }
 
   @override
-  List<Object?> get props => <Object?>[status, breeds, filteredBreeds, errorMessage];
+  List<Object?> get props => <Object?>[
+    status,
+    breeds,
+    filteredBreeds,
+    errorMessage,
+  ];
 }

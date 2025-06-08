@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../domain/models/breed_model.dart';
+import '../../../../domain/models/breed_type.dart';
+import '../../../localization/locale_extension.dart';
+import '../../../utils/breed_type_localization.dart';
 import '../../../widgets/app_drawer.dart';
 
 import '../bloc/breed_list_bloc.dart';
@@ -62,7 +64,18 @@ class _BreedListBodyState extends State<BreedListBody> {
             );
           },
         ),
-        title: _isSearching ? _buildSearchField() : const Text('Dog Breeds'),
+        title: _isSearching
+            ? TextField(
+                controller: _searchController,
+                autofocus: true,
+                decoration: InputDecoration(
+                  hintText: context.locale.breedListSearchHint,
+                  border: InputBorder.none,
+                  hintStyle: const TextStyle(color: Colors.white54),
+                ),
+                style: const TextStyle(color: Colors.white, fontSize: 18),
+              )
+            : Text(context.locale.breedListTitle),
         actions: <Widget>[
           IconButton(
             icon: Icon(_isSearching ? Icons.close : Icons.search),
@@ -78,18 +91,23 @@ class _BreedListBodyState extends State<BreedListBody> {
               return const Center(child: CircularProgressIndicator());
             case BreedListStatus.failure:
               return Center(
-                child: Text(state.errorMessage ?? 'Failed to load breeds'),
+                child: Text(
+                  state.errorMessage ?? context.locale.breedListFailedToLoad,
+                ),
               );
             case BreedListStatus.success:
               if (state.filteredBreeds.isEmpty) {
-                return const Center(child: Text('No breeds found'));
+                return Center(
+                  child: Text(context.locale.breedListNoBreedsFound),
+                );
               }
               return ListView.builder(
                 itemCount: state.filteredBreeds.length,
                 itemBuilder: (BuildContext context, int index) {
-                  final BreedModel breed = state.filteredBreeds[index];
+                  final BreedType breed = state.filteredBreeds[index];
+
                   return ListTile(
-                    title: Text(breed.displayName),
+                    title: Text(breed.toLocal(context)),
                     onTap: () {
                       // TODO: Navigate to breed details screen
                     },
@@ -101,19 +119,6 @@ class _BreedListBodyState extends State<BreedListBody> {
           }
         },
       ),
-    );
-  }
-
-  Widget _buildSearchField() {
-    return TextField(
-      controller: _searchController,
-      autofocus: true,
-      decoration: const InputDecoration(
-        hintText: 'Search breeds...',
-        border: InputBorder.none,
-        hintStyle: TextStyle(color: Colors.white54),
-      ),
-      style: const TextStyle(color: Colors.white, fontSize: 18),
     );
   }
 }

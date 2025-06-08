@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../domain/domain.dart';
+import '../../../utils/breed_type_localization.dart';
 import '../../../widgets/image_card/image_card.dart';
 import '../../../widgets/image_card/image_card_controller.dart';
 import '../bloc/home_bloc.dart';
@@ -44,7 +45,7 @@ class _HomeInteractionViewState extends State<HomeInteractionView> {
                   key: ValueKey<String>(dog.imageUrl),
                   controller: isTopCard ? _imageCardController : null,
                   imageUrl: dog.imageUrl,
-                  title: dog.breed,
+                  title: dog.breed.toLocal(context),
                   onSwipeRight: () {
                     context.read<HomeBloc>().add(
                       SwipeRightEvent(dog: widget.dogs.first),

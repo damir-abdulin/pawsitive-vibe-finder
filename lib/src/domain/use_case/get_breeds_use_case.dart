@@ -1,9 +1,9 @@
-import '../models/breed_model.dart';
+import '../models/breed_type.dart';
 import '../repository/breed_repository.dart';
 import 'use_cases.dart';
 
 /// A use case for getting the list of all dog breeds.
-class GetBreedsUseCase extends FutureUseCase<void, List<BreedModel>> {
+class GetBreedsUseCase extends FutureUseCase<void, List<BreedType>> {
   final BreedRepository _breedRepository;
 
   /// Creates a [GetBreedsUseCase].
@@ -11,7 +11,7 @@ class GetBreedsUseCase extends FutureUseCase<void, List<BreedModel>> {
     : _breedRepository = breedRepository;
 
   @override
-  Future<List<BreedModel>> unsafeExecute(void input) async {
+  Future<List<BreedType>> unsafeExecute(void input) async {
     return _breedRepository.getBreeds();
   }
 }
