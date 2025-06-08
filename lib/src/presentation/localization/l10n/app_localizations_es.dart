@@ -42,6 +42,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get favoritesTitle => 'Perros Favoritos';
 
   @override
+  String get favoritesEmptyMessage =>
+      'No favorite woofers yet! Swipe right on an image you like to save it here.';
+
+  @override
   String get favoritesScreenMessage => 'Pantalla de Favoritos';
 
   @override

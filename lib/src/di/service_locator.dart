@@ -14,6 +14,9 @@ import '../domain/services/connectivity_service.dart';
 import '../domain/use_case/get_breeds_use_case.dart';
 import '../domain/use_case/use_cases.dart';
 import '../presentation/navigation/app_router.dart';
+import '../data/providers/database.dart';
+import '../data/repository_impl/favorites_repository_impl.dart';
+import '../domain/domain.dart';
 
 final GetIt appLocator = GetIt.instance;
 
@@ -35,11 +38,17 @@ Future<void> configureDependencies() async {
   appLocator.registerLazySingleton<NetworkProvider>(
     () => NetworkProvider(dio: appLocator()),
   );
+  appLocator.registerSingleton<AppDatabase>(AppDatabase());
   appLocator.registerLazySingleton<DogApiProvider>(
     () => DogApiProviderImpl(dio: appLocator()),
   );
   appLocator.registerSingleton<LocalPreferencesProvider>(
     LocalPreferencesProviderImpl(sharedPreferences: appLocator()),
+  );
+
+  // DAO
+  appLocator.registerLazySingleton<FavoriteDogDao>(
+    () => FavoriteDogDao(appLocator()),
   );
 
   // Repositories
@@ -51,7 +60,7 @@ Future<void> configureDependencies() async {
     () => PreferencesRepositoryImpl(localPreferencesProvider: appLocator()),
   );
   appLocator.registerLazySingleton<FavoritesRepository>(
-    () => const FavoritesRepositoryImpl(),
+    () => FavoritesRepositoryImpl(favoriteDogDao: appLocator()),
   );
 
   // Use Cases
@@ -63,6 +72,12 @@ Future<void> configureDependencies() async {
   );
   appLocator.registerFactory(
     () => GetRandomDogsUseCase(dogRepository: appLocator()),
+  );
+  appLocator.registerFactory(
+    () => GetFavoriteDogsUseCase(favoritesRepository: appLocator()),
+  );
+  appLocator.registerFactory(
+    () => RemoveFavoriteDogUseCase(favoritesRepository: appLocator()),
   );
   appLocator.registerFactory(
     () => CheckFirstLaunchUseCase(preferencesRepository: appLocator()),

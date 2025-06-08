@@ -159,8 +159,14 @@ abstract class AppLocalizations {
   /// No description provided for @favoritesTitle.
   ///
   /// In en, this message translates to:
-  /// **'Favorite Dogs'**
+  /// **'Favorite Images'**
   String get favoritesTitle;
+
+  /// No description provided for @favoritesEmptyMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'No favorite woofers yet! Swipe right on an image you like to save it here.'**
+  String get favoritesEmptyMessage;
 
   /// No description provided for @favoritesScreenMessage.
   ///

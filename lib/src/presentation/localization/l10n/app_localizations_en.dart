@@ -39,7 +39,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get okButton => 'OK';
 
   @override
-  String get favoritesTitle => 'Favorite Dogs';
+  String get favoritesTitle => 'Favorite Images';
+
+  @override
+  String get favoritesEmptyMessage =>
+      'No favorite woofers yet! Swipe right on an image you like to save it here.';
 
   @override
   String get favoritesScreenMessage => 'Favorites Screen';

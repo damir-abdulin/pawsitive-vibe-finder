@@ -1,19 +1,40 @@
-import '../../domain/domain.dart';
+import 'dart:async';
 
-/// A mock implementation of the [FavoritesRepository].
+import '../../domain/domain.dart';
+import '../mappers/favorite_dog_mapper.dart';
+import '../providers/providers.dart';
+
+/// The concrete implementation of the [FavoritesRepository].
 ///
-/// This class simulates saving a favorite dog by printing to the console.
-/// It can be replaced with a real database implementation in the future.
+/// This class interacts with the [FavoriteDogDao] to perform CRUD operations
+/// on the local database and uses [FavoriteDogMapper] to convert data between
+/// the data and domain layers.
 class FavoritesRepositoryImpl implements FavoritesRepository {
+  final FavoriteDogDao _favoriteDogDao;
+
   /// Creates an instance of [FavoritesRepositoryImpl].
-  const FavoritesRepositoryImpl();
+  ///
+  /// Requires a [FavoriteDogDao] to communicate with the database.
+  const FavoritesRepositoryImpl({required FavoriteDogDao favoriteDogDao})
+    : _favoriteDogDao = favoriteDogDao;
 
   @override
-  Future<void> saveFavoriteDog(DogModel dog) async {
-    // Mock implementation: just print the action.
-    // In a real implementation, this would save the dog to a local database.
-    // ignore: avoid_print
-    print('Dog saved to favorites: ${dog.breed} - ${dog.imageUrl}');
-    return Future<void>.value();
+  Stream<List<DogModel>> getFavoriteDogs() {
+    return _favoriteDogDao.watchFavoriteDogs().map(
+      (List<FavoriteDogEntity> event) =>
+          event.map(FavoriteDogMapper.toDomain).toList(),
+    );
+  }
+
+  @override
+  Future<void> removeFavoriteDog(DogModel dog) {
+    final FavoriteDogEntity favoriteDogEntity = FavoriteDogMapper.toData(dog);
+    return _favoriteDogDao.deleteFavoriteDog(favoriteDogEntity);
+  }
+
+  @override
+  Future<void> saveFavoriteDog(DogModel dog) {
+    final FavoriteDogEntity favoriteDogEntity = FavoriteDogMapper.toData(dog);
+    return _favoriteDogDao.insertFavoriteDog(favoriteDogEntity);
   }
 }
