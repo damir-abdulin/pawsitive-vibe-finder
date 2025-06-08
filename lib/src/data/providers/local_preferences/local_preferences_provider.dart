@@ -7,4 +7,12 @@ abstract class LocalPreferencesProvider {
 
   /// Sets a boolean value for the given key.
   Future<void> setBool(String key, bool value);
+
+  /// Gets a string value for the given key.
+  ///
+  /// Returns `null` if the key does not exist.
+  Future<String?> getString(String key);
+
+  /// Sets a string value for the given key.
+  Future<void> setString(String key, String value);
 }

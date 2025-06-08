@@ -1,10 +1,10 @@
 part of 'home_bloc.dart';
 
-abstract class HomeState extends Equatable {
+sealed class HomeState extends Equatable {
   const HomeState();
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => <Object>[];
 }
 
 class HomeInitial extends HomeState {}
@@ -14,13 +14,12 @@ class HomeLoading extends HomeState {}
 class FirstLaunchState extends HomeState {}
 
 class SubsequentLaunchState extends HomeState {
-  final String imageUrl;
-  final String breed;
+  final List<RandomDogModel> dogs;
 
-  const SubsequentLaunchState({required this.imageUrl, required this.breed});
+  const SubsequentLaunchState({required this.dogs});
 
   @override
-  List<Object> get props => [imageUrl, breed];
+  List<Object> get props => <Object>[dogs];
 }
 
 class HomeError extends HomeState {
@@ -29,5 +28,7 @@ class HomeError extends HomeState {
   const HomeError({required this.message});
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => <Object>[message];
 }
+
+class ShowOfflineDialog extends HomeState {}

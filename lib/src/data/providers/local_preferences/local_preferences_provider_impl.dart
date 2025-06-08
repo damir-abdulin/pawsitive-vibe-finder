@@ -1,5 +1,6 @@
-import 'package:pawsitive_vibe_finder/src/data/providers/local_preferences/local_preferences_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'local_preferences_provider.dart';
 
 /// The concrete implementation of [LocalPreferencesProvider] using SharedPreferences.
 class LocalPreferencesProviderImpl implements LocalPreferencesProvider {
@@ -17,5 +18,15 @@ class LocalPreferencesProviderImpl implements LocalPreferencesProvider {
   @override
   Future<void> setBool(String key, bool value) async {
     await _sharedPreferences.setBool(key, value);
+  }
+
+  @override
+  Future<String?> getString(String key) async {
+    return _sharedPreferences.getString(key);
+  }
+
+  @override
+  Future<void> setString(String key, String value) async {
+    await _sharedPreferences.setString(key, value);
   }
 }

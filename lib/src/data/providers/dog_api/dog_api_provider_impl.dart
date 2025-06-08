@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:pawsitive_vibe_finder/src/data/entities/entities.dart';
-import 'package:pawsitive_vibe_finder/src/data/providers/dog_api/dog_api_provider.dart';
-import 'package:pawsitive_vibe_finder/src/data/providers/exceptions/provider_exceptions.dart';
+
+import '../../entities/entities.dart';
+import '../exceptions/provider_exceptions.dart';
+import 'dog_api_provider.dart';
 
 /// The concrete implementation of [DogApiProvider] using the Dio package.
 class DogApiProviderImpl implements DogApiProvider {
@@ -14,7 +15,9 @@ class DogApiProviderImpl implements DogApiProvider {
   @override
   Future<RandomDogEntity> getRandomDog() async {
     try {
-      final response = await _dio.get('$_baseUrl/breeds/image/random');
+      final Response<dynamic> response = await _dio.get(
+        '$_baseUrl/breeds/image/random',
+      );
       if (response.statusCode == 200 && response.data != null) {
         return RandomDogEntity.fromJson(response.data);
       } else {
@@ -27,7 +30,7 @@ class DogApiProviderImpl implements DogApiProvider {
       throw NetworkException('Failed to load random dog: ${e.message}');
     } catch (e) {
       // Handle other unexpected errors
-      throw ProviderException('An unexpected error occurred: ${e.toString()}');
+      throw ProviderException('An unexpected error occurred: $e');
     }
   }
 }

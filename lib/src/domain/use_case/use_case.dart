@@ -1,4 +1,4 @@
-import 'package:pawsitive_vibe_finder/src/domain/exceptions/exceptions.dart';
+import '../exceptions/exceptions.dart';
 
 /// The base class for a use case that returns a value synchronously.
 abstract class UseCase<I, O> {

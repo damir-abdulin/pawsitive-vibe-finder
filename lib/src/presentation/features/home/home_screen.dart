@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pawsitive_vibe_finder/src/di/service_locator.dart';
-import 'package:pawsitive_vibe_finder/src/presentation/features/home/bloc/home_bloc.dart';
-import 'package:pawsitive_vibe_finder/src/presentation/features/home/home_body.dart';
+import '../../../di/service_locator.dart';
+import 'bloc/home_bloc.dart';
+import 'home_body.dart';
 
 @RoutePage()
 class HomeScreen extends StatelessWidget {
@@ -12,9 +12,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<HomeBloc>(
-      create: (BuildContext context) =>
-          appLocator<HomeBloc>()..add(LoadHomeEvent()),
-      child: HomeBody(),
+      create: (BuildContext context) => HomeBloc(
+        getRandomDogsUseCase: appLocator(),
+        checkFirstLaunchUseCase: appLocator(),
+        setFirstLaunchCompletedUseCase: appLocator(),
+        saveFavoriteDogUseCase: appLocator(),
+        saveLastDogUseCase: appLocator(),
+        getLastDogUseCase: appLocator(),
+      )..add(LoadHomeEvent()),
+      child: const HomeBody(),
     );
   }
 }

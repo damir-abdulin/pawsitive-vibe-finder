@@ -1,4 +1,4 @@
-import 'package:pawsitive_vibe_finder/src/domain/domain.dart';
+import '../../domain/domain.dart';
 
 /// A mock implementation of the [FavoritesRepository].
 ///
@@ -14,6 +14,6 @@ class FavoritesRepositoryImpl implements FavoritesRepository {
     // In a real implementation, this would save the dog to a local database.
     // ignore: avoid_print
     print('Dog saved to favorites: ${dog.breed} - ${dog.imageUrl}');
-    return Future.value();
+    return Future<void>.value();
   }
 }

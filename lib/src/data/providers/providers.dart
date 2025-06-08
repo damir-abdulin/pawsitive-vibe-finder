@@ -1,4 +1,4 @@
-library providers;
+library;
 
 export 'dog_api/dog_api_provider.dart';
 export 'dog_api/dog_api_provider_impl.dart';

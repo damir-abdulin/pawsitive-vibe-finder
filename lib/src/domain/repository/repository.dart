@@ -1,4 +1,4 @@
-library repository;
+library;
 
 export 'dog_repository.dart';
 export 'favorites_repository.dart';

@@ -1,13 +1,23 @@
 targets:
   $default:
     builders:
-      # drift_dev:
-      #   generate_for:
-      #     - "lib/src/data/**"
       auto_route_generator:
-        generate_for:
-          - "lib/src/presentation/**"
+        options:
+          # Disable `auto_route` from generating a `router.gr.dart` file
+          # for every file that contains a route.
+          # We only want one `router.gr.dart` file in the entire project.
+          # This is achieved by setting `auto_route_generator` to `true`
+          # in the `build.yaml` file.
+          auto_route_generator: true
+
       json_serializable:
-        generate_for:
-          - "lib/src/data/entities/**"
-          - "lib/src/domain/models/**" 
+        options:
+          # Automatically create `toJson` and `fromJson` methods for all
+          # classes annotated with `@JsonSerializable`.
+          # This avoids having to manually write this code.
+          # We also want to use kebab-case for the keys in the JSON.
+          # This is achieved by setting `field_rename` to `kebab`.
+          # We also want to ignore any unknown keys in the JSON.
+          # This is achieved by setting `any_map` to `true`.
+          field_rename: "kebab"
+          any_map: true 

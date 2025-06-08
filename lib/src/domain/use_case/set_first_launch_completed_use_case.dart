@@ -1,5 +1,5 @@
-import 'package:pawsitive_vibe_finder/src/domain/repository/repository.dart';
-import 'package:pawsitive_vibe_finder/src/domain/use_case/use_case.dart';
+import '../repository/repository.dart';
+import 'use_case.dart';
 
 /// A use case for marking the first launch as completed.
 class SetFirstLaunchCompletedUseCase extends FutureUseCase<void, void> {

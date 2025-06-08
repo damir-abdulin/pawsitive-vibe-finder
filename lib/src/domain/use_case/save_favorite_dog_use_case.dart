@@ -1,6 +1,6 @@
-import 'package:pawsitive_vibe_finder/src/domain/models/models.dart';
-import 'package:pawsitive_vibe_finder/src/domain/repository/repository.dart';
-import 'package:pawsitive_vibe_finder/src/domain/use_case/use_case.dart';
+import '../models/models.dart';
+import '../repository/repository.dart';
+import 'use_case.dart';
 
 /// A use case for saving a dog to the user's favorites.
 class SaveFavoriteDogUseCase extends FutureUseCase<RandomDogModel, void> {

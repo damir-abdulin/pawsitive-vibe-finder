@@ -1,42 +1,57 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pawsitive_vibe_finder/src/data/providers/providers.dart';
-import 'package:pawsitive_vibe_finder/src/data/repository_impl/repository_impl.dart';
-import 'package:pawsitive_vibe_finder/src/domain/domain.dart';
-import 'package:pawsitive_vibe_finder/src/presentation/features/home/bloc/home_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../data/providers/providers.dart';
+import '../data/repository_impl/repository_impl.dart';
+import '../data/services/connectivity_service_impl.dart';
+import '../domain/repository/repository.dart';
+import '../domain/services/connectivity_service.dart';
+import '../domain/use_case/use_cases.dart';
+import '../presentation/navigation/app_router.dart';
 
 final GetIt appLocator = GetIt.instance;
 
 /// Initializes and registers all dependencies for the application.
 Future<void> configureDependencies() async {
   // External
-  appLocator.registerSingleton<Dio>(Dio());
-  final sharedPreferences = await SharedPreferences.getInstance();
-  appLocator.registerSingleton<SharedPreferences>(sharedPreferences);
+  appLocator.registerLazySingleton<Dio>(Dio.new);
+  final SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+  appLocator.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
+  appLocator.registerLazySingleton<Connectivity>(Connectivity.new);
+
+  // Services
+  appLocator.registerLazySingleton<ConnectivityService>(
+    () => ConnectivityServiceImpl(connectivity: appLocator()),
+  );
 
   // Providers
-  appLocator.registerSingleton<DogApiProvider>(
-    DogApiProviderImpl(dio: appLocator()),
+  appLocator.registerLazySingleton<DogApiProvider>(
+    () => DogApiProviderImpl(dio: appLocator()),
   );
   appLocator.registerSingleton<LocalPreferencesProvider>(
     LocalPreferencesProviderImpl(sharedPreferences: appLocator()),
   );
 
   // Repositories
-  appLocator.registerSingleton<DogRepository>(
-    DogRepositoryImpl(dogApiProvider: appLocator()),
+  appLocator.registerLazySingleton<DogRepository>(
+    () => DogRepositoryImpl(dogApiProvider: appLocator()),
   );
-  appLocator.registerSingleton<PreferencesRepository>(
-    PreferencesRepositoryImpl(localPreferencesProvider: appLocator()),
+  appLocator.registerLazySingleton<PreferencesRepository>(
+    () => PreferencesRepositoryImpl(localPreferencesProvider: appLocator()),
   );
-  appLocator.registerSingleton<FavoritesRepository>(
-    const FavoritesRepositoryImpl(),
+  appLocator.registerLazySingleton<FavoritesRepository>(
+    () => const FavoritesRepositoryImpl(),
   );
 
   // Use Cases
   appLocator.registerFactory(
     () => GetRandomDogUseCase(dogRepository: appLocator()),
+  );
+  appLocator.registerFactory(
+    () => GetRandomDogsUseCase(dogRepository: appLocator()),
   );
   appLocator.registerFactory(
     () => CheckFirstLaunchUseCase(preferencesRepository: appLocator()),
@@ -47,14 +62,12 @@ Future<void> configureDependencies() async {
   appLocator.registerFactory(
     () => SaveFavoriteDogUseCase(favoritesRepository: appLocator()),
   );
-
-  // BLoCs
   appLocator.registerFactory(
-    () => HomeBloc(
-      getRandomDogUseCase: appLocator(),
-      checkFirstLaunchUseCase: appLocator(),
-      setFirstLaunchCompletedUseCase: appLocator(),
-      saveFavoriteDogUseCase: appLocator(),
-    ),
+    () => SaveLastDogUseCase(preferencesRepository: appLocator()),
   );
+  appLocator.registerFactory(
+    () => GetLastDogUseCase(preferencesRepository: appLocator()),
+  );
+
+  appLocator.registerLazySingleton(AppRouter.new);
 }

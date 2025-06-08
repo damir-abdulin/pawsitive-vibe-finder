@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pawsitive_vibe_finder/src/presentation/theme/colors.dart';
+import 'colors.dart';
 
 /// A class that holds the theme data for the application.
 class AppTheme {
@@ -26,10 +26,6 @@ class AppTheme {
       primary: AppColors.primary,
       secondary: AppColors.accent,
       error: AppColors.error,
-      onPrimary: AppColors.white,
-      onSecondary: AppColors.black,
-      onError: AppColors.white,
-      surface: AppColors.white,
       onSurface: AppColors.text,
     ),
     textTheme: const TextTheme(
@@ -67,10 +63,8 @@ class AppTheme {
       secondary: AppColors.accent,
       error: AppColors.error,
       onPrimary: AppColors.white,
-      onSecondary: AppColors.black,
       onError: AppColors.white,
       surface: Color(0xFF1E1E1E),
-      onSurface: AppColors.white,
     ),
     textTheme: const TextTheme(
       bodyLarge: TextStyle(color: AppColors.white),

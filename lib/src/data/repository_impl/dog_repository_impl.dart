@@ -1,7 +1,7 @@
-import 'package:pawsitive_vibe_finder/src/data/mappers/mappers.dart';
-import 'package:pawsitive_vibe_finder/src/data/providers/providers.dart';
-import 'package:pawsitive_vibe_finder/src/domain/domain.dart';
-import 'package:pawsitive_vibe_finder/src/domain/exceptions/exceptions.dart';
+import '../../domain/domain.dart';
+import '../entities/random_dog/random_dog_entity.dart';
+import '../mappers/mappers.dart';
+import '../providers/providers.dart';
 
 /// The concrete implementation of the [DogRepository].
 class DogRepositoryImpl implements DogRepository {
@@ -14,7 +14,8 @@ class DogRepositoryImpl implements DogRepository {
   @override
   Future<RandomDogModel> getRandomDog() async {
     try {
-      final randomDogEntity = await _dogApiProvider.getRandomDog();
+      final RandomDogEntity randomDogEntity = await _dogApiProvider
+          .getRandomDog();
       return RandomDogMapper.toDomain(randomDogEntity);
     } on NetworkException catch (e) {
       // Add context and rethrow as a domain-specific exception
@@ -26,9 +27,14 @@ class DogRepositoryImpl implements DogRepository {
       );
     } catch (e) {
       // Handle unexpected errors
-      throw DogException(
-        message: 'An unexpected error occurred: ${e.toString()}',
-      );
+      throw DogException(message: 'An unexpected error occurred: $e');
     }
+  }
+
+  @override
+  Future<List<RandomDogModel>> getRandomDogs(int count) async {
+    return <RandomDogModel>[
+      for (int i = 0; i < count; i++) await getRandomDog(),
+    ];
   }
 }
