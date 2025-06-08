@@ -19,7 +19,7 @@ class IsFavoriteDogUseCase extends FutureUseCase<DogModel, bool> {
 
   @override
   Future<bool> unsafeExecute(DogModel input) async {
-    final favoriteDogs = await _favoritesRepository.getFavoriteDogs().first;
-    return favoriteDogs.any((dog) => dog.imageUrl == input.imageUrl);
+    final List<DogModel> favoriteDogs = await _favoritesRepository.getFavoriteDogs().first;
+    return favoriteDogs.any((DogModel dog) => dog.imageUrl == input.imageUrl);
   }
 }

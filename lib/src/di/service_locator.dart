@@ -90,6 +90,7 @@ Future<void> configureDependencies() async {
   appLocator.registerFactory(
     () => GetLastDogUseCase(preferencesRepository: appLocator()),
   );
+  appLocator.registerFactory(GetQuizQuestionUseCase.new);
 
   appLocator.registerLazySingleton(AppRouter.new);
 }

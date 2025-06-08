@@ -134,3 +134,83 @@ class HomeRouteArgs {
   @override
   int get hashCode => breed.hashCode ^ key.hashCode;
 }
+
+/// generated route for
+/// [QuizScoreScreen]
+class QuizScoreRoute extends PageRouteInfo<QuizScoreRouteArgs> {
+  QuizScoreRoute({
+    required int score,
+    required int totalQuestions,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         QuizScoreRoute.name,
+         args: QuizScoreRouteArgs(
+           score: score,
+           totalQuestions: totalQuestions,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'QuizScoreRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<QuizScoreRouteArgs>();
+      return QuizScoreScreen(
+        score: args.score,
+        totalQuestions: args.totalQuestions,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class QuizScoreRouteArgs {
+  const QuizScoreRouteArgs({
+    required this.score,
+    required this.totalQuestions,
+    this.key,
+  });
+
+  final int score;
+
+  final int totalQuestions;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'QuizScoreRouteArgs{score: $score, totalQuestions: $totalQuestions, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! QuizScoreRouteArgs) return false;
+    return score == other.score &&
+        totalQuestions == other.totalQuestions &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode => score.hashCode ^ totalQuestions.hashCode ^ key.hashCode;
+}
+
+/// generated route for
+/// [QuizScreen]
+class QuizRoute extends PageRouteInfo<void> {
+  const QuizRoute({List<PageRouteInfo>? children})
+    : super(QuizRoute.name, initialChildren: children);
+
+  static const String name = 'QuizRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const QuizScreen();
+    },
+  );
+}

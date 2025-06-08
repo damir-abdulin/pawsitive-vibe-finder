@@ -43,6 +43,13 @@ class AppDrawer extends StatelessWidget {
               context.router.replace(const FavoritesRoute());
             },
           ),
+          ListTile(
+            leading: const Icon(Icons.psychology),
+            title: const Text('Guess the Breed'),
+            onTap: () {
+              context.router.replace(const QuizRoute());
+            },
+          ),
         ],
       ),
     );

@@ -31,7 +31,7 @@ class DogDetailsBloc extends Bloc<DogDetailsEvent, DogDetailsState> {
     Emitter<DogDetailsState> emit,
   ) async {
     emit(DogDetailsLoadInProgress());
-    final isFavorite = await _isFavoriteDogUseCase.execute(_dog);
+    final bool isFavorite = await _isFavoriteDogUseCase.execute(_dog);
     emit(DogDetailsLoadSuccess(isFavorite: isFavorite));
   }
 
@@ -41,7 +41,7 @@ class DogDetailsBloc extends Bloc<DogDetailsEvent, DogDetailsState> {
   ) async {
     if (state is! DogDetailsLoadSuccess) return;
 
-    final currentState = state as DogDetailsLoadSuccess;
+    final DogDetailsLoadSuccess currentState = state as DogDetailsLoadSuccess;
     final bool isCurrentlyFavorite = currentState.isFavorite;
 
     emit(
