@@ -22,6 +22,13 @@ class AppDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
+            leading: const Icon(Icons.home),
+            title: const Text('Home'),
+            onTap: () {
+              context.router.replace(const HomeRoute());
+            },
+          ),
+          ListTile(
             leading: const Icon(Icons.list),
             title: const Text('Breeds'),
             onTap: () {
@@ -33,13 +40,6 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Favorites'),
             onTap: () {
               context.router.replace(const FavoritesRoute());
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.home),
-            title: const Text('Home'),
-            onTap: () {
-              context.router.replace(const HomeRoute());
             },
           ),
         ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../domain/models/breed_model.dart';
 import '../../../widgets/app_drawer.dart';
 
 import '../bloc/breed_list_bloc.dart';
@@ -16,7 +17,7 @@ class BreedListBody extends StatefulWidget {
 }
 
 class _BreedListBodyState extends State<BreedListBody> {
-  final _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   bool _isSearching = false;
 
   @override
@@ -52,7 +53,7 @@ class _BreedListBodyState extends State<BreedListBody> {
     return Scaffold(
       appBar: AppBar(
         leading: Builder(
-          builder: (context) {
+          builder: (BuildContext context) {
             return IconButton(
               icon: const Icon(Icons.menu),
               onPressed: () {
@@ -62,7 +63,7 @@ class _BreedListBodyState extends State<BreedListBody> {
           },
         ),
         title: _isSearching ? _buildSearchField() : const Text('Dog Breeds'),
-        actions: [
+        actions: <Widget>[
           IconButton(
             icon: Icon(_isSearching ? Icons.close : Icons.search),
             onPressed: _toggleSearch,
@@ -71,7 +72,7 @@ class _BreedListBodyState extends State<BreedListBody> {
       ),
       drawer: const AppDrawer(),
       body: BlocBuilder<BreedListBloc, BreedListState>(
-        builder: (context, state) {
+        builder: (BuildContext context, BreedListState state) {
           switch (state.status) {
             case BreedListStatus.loading:
               return const Center(child: CircularProgressIndicator());
@@ -85,8 +86,8 @@ class _BreedListBodyState extends State<BreedListBody> {
               }
               return ListView.builder(
                 itemCount: state.filteredBreeds.length,
-                itemBuilder: (context, index) {
-                  final breed = state.filteredBreeds[index];
+                itemBuilder: (BuildContext context, int index) {
+                  final BreedModel breed = state.filteredBreeds[index];
                   return ListTile(
                     title: Text(breed.displayName),
                     onTap: () {

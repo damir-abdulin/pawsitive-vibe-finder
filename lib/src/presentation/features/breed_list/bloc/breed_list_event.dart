@@ -6,7 +6,7 @@ abstract class BreedListEvent extends Equatable {
   const BreedListEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => <Object>[];
 }
 
 /// An event to fetch the list of breeds.
@@ -21,5 +21,5 @@ class BreedListSearchChanged extends BreedListEvent {
   const BreedListSearchChanged(this.query);
 
   @override
-  List<Object> get props => [query];
+  List<Object> get props => <Object>[query];
 }

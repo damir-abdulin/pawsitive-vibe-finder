@@ -23,7 +23,7 @@ class HomeBody extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           leading: Builder(
-            builder: (context) {
+            builder: (BuildContext context) {
               return IconButton(
                 icon: const Icon(Icons.menu),
                 onPressed: () {

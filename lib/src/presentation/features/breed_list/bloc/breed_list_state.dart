@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../domain/breed/models/breed_model.dart';
+import '../../../../domain/models/breed_model.dart';
 
 /// The status of the breed list.
 enum BreedListStatus {
@@ -55,5 +55,5 @@ class BreedListState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [status, breeds, filteredBreeds, errorMessage];
+  List<Object?> get props => <Object?>[status, breeds, filteredBreeds, errorMessage];
 }
