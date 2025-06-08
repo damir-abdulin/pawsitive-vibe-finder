@@ -9,13 +9,13 @@ class LoadHomeEvent extends HomeEvent {}
 class CompleteFirstLaunchEvent extends HomeEvent {}
 
 class SwipeRightEvent extends HomeEvent {
-  final RandomDogModel dog;
+  final DogModel dog;
 
   const SwipeRightEvent({required this.dog});
 }
 
 class SwipeLeftEvent extends HomeEvent {
-  final RandomDogModel dog;
+  final DogModel dog;
 
   const SwipeLeftEvent({required this.dog});
 }

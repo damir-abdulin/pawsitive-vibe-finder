@@ -14,7 +14,7 @@ class HomeInteractionView extends StatefulWidget {
   const HomeInteractionView({required this.dogs, super.key});
 
   /// The list of dogs to display.
-  final List<RandomDogModel> dogs;
+  final List<DogModel> dogs;
 
   @override
   State<HomeInteractionView> createState() => _HomeInteractionViewState();
@@ -36,7 +36,7 @@ class _HomeInteractionViewState extends State<HomeInteractionView> {
         Expanded(
           child: Stack(
             alignment: Alignment.center,
-            children: widget.dogs.reversed.map((RandomDogModel dog) {
+            children: widget.dogs.reversed.map((DogModel dog) {
               final bool isTopCard = dog == widget.dogs.first;
 
               return IgnorePointer(

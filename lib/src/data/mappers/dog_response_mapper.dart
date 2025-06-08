@@ -1,14 +1,14 @@
 import '../../domain/models/models.dart';
 import '../entities/entities.dart';
 
-/// A mapper class for converting between [RandomDogEntity] and [RandomDogModel].
-class RandomDogMapper {
-  /// Converts a [RandomDogEntity] to a [RandomDogModel].
+/// A mapper class for converting between [DogEntity] and [DogModel].
+class DogResponseMapper {
+  /// Converts a [DogEntity] to a [DogModel].
   ///
   /// The breed is parsed from the image URL.
-  static RandomDogModel toDomain(RandomDogEntity entity) {
+  static DogModel toDomain(DogResponseEntity entity) {
     final BreedType breed = _parseBreedFromUrl(entity.message);
-    return RandomDogModel(imageUrl: entity.message, breed: breed);
+    return DogModel(imageUrl: entity.message, breed: breed);
   }
 
   /// Parses the breed name from the dog image URL.

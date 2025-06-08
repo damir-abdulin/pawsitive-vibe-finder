@@ -1,20 +1,29 @@
-import '../exceptions/exceptions.dart';
+import '../exceptions/app_exception.dart';
 
-/// The base class for a use case that returns a value synchronously.
+/// An abstract class representing a synchronous use case.
+///
+/// A use case is a single-purpose class that encapsulates a specific piece of
+/// business logic. It receives an input [I] and returns an output [O].
+///
+/// This class provides a structured way to execute business logic, including
+/// built-in error handling.
 abstract class UseCase<I, O> {
+  /// Default constructor for subclasses.
   const UseCase();
 
-  /// Executes the use case with the given input.
+  /// The core logic of the use case.
   ///
-  /// This method contains the core logic and is wrapped by the [execute]
-  /// method to provide centralized error handling.
+  /// Subclasses must implement this method to perform the specific business
+  /// operation. If a domain-specific error occurs (an instance of [AppException]),
+  /// it should be thrown.
   O unsafeExecute(I input);
 
-  /// Executes the use case and handles any [AppException] that may occur.
+  /// Executes the use case with error handling.
   ///
-  /// If an [onError] callback is provided, it will be called with the
-  /// caught exception, otherwise the exception will be rethrown.
-  O execute(I input, {required O Function(AppException)? onError}) {
+  /// This method wraps the call to [unsafeExecute] in a try-catch block.
+  /// If an [AppException] is caught, the optional [onError] handler is called.
+  /// If no [onError] handler is provided, the exception is re-thrown.
+  O execute(I input, {O Function(AppException)? onError}) {
     try {
       return unsafeExecute(input);
     } on AppException catch (ex) {
@@ -27,29 +36,35 @@ abstract class UseCase<I, O> {
   }
 
   /// Executes the use case and returns `null` if an [AppException] occurs.
+  ///
+  /// This is a convenience method for scenarios where a failure in the use
+  /// case can be gracefully ignored without needing specific error handling.
   O? executeOrNull(I input) {
     try {
       return unsafeExecute(input);
-    } on AppException catch (_) {
+    } on AppException {
       return null;
     }
   }
 }
 
-/// The base class for a use case that returns a [Future].
+/// An abstract class representing an asynchronous use case that returns a [Future].
+///
+/// This class follows the same structure as [UseCase] but is designed for
+/// operations that are asynchronous, such as network requests or database queries.
 abstract class FutureUseCase<I, O> {
+  /// Default constructor for subclasses.
   const FutureUseCase();
 
-  /// Executes the use case with the given input.
+  /// The core asynchronous logic of the use case.
   ///
-  /// This method contains the core logic and is wrapped by the [execute]
-  /// method to provide centralized error handling.
+  /// Subclasses must implement this method.
   Future<O> unsafeExecute(I input);
 
-  /// Executes the use case and handles any [AppException] that may occur.
+  /// Executes the asynchronous use case with error handling.
   ///
-  /// If an [onError] callback is provided, it will be called with the
-  /// caught exception, otherwise the exception will be rethrown.
+  /// Wraps the call to [unsafeExecute] and handles [AppException]s similarly
+  /// to [UseCase.execute].
   Future<O> execute(
     I input, {
     Future<O> Function(AppException)? onError,
@@ -65,17 +80,20 @@ abstract class FutureUseCase<I, O> {
     }
   }
 
-  /// Executes the use case and returns `null` if an [AppException] occurs.
+  /// Executes the asynchronous use case and returns `null` if an [AppException] occurs.
   Future<O?> executeOrNull(I input) async {
     try {
       return await unsafeExecute(input);
-    } on AppException catch (_) {
+    } on AppException {
       return null;
     }
   }
 }
 
-/// The base class for a use case that returns a [Stream].
+/// An abstract class representing a use case that returns a [Stream].
+///
+/// This is a specialized version of [UseCase] for reactive data flows.
 abstract class StreamUseCase<I, O> extends UseCase<I, Stream<O>> {
+  /// Default constructor for subclasses.
   const StreamUseCase();
 }

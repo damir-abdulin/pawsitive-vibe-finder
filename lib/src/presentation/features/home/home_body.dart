@@ -1,13 +1,18 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../domain/domain.dart';
 import '../../localization/locale_extension.dart';
+import '../../utils/breed_type_localization.dart';
 import '../../widgets/app_drawer.dart';
 import 'bloc/home_bloc.dart';
 import 'widgets/home_interaction_view.dart';
 
 class HomeBody extends StatelessWidget {
-  const HomeBody({super.key});
+  const HomeBody({this.breed, super.key});
+
+  final BreedType? breed;
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +29,24 @@ class HomeBody extends StatelessWidget {
         appBar: AppBar(
           leading: Builder(
             builder: (BuildContext context) {
-              return IconButton(
-                icon: const Icon(Icons.menu),
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-              );
+              if (breed != null) {
+                return IconButton(
+                  icon: const Icon(Icons.arrow_back),
+                  onPressed: () => context.router.pop(),
+                );
+              } else {
+                return IconButton(
+                  icon: const Icon(Icons.menu),
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                );
+              }
             },
           ),
-          title: Text(context.locale.appTitle),
+          title: Text(
+            breed != null ? breed!.toLocal(context) : context.locale.appTitle,
+          ),
         ),
         drawer: const AppDrawer(),
         body: BlocBuilder<HomeBloc, HomeState>(

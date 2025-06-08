@@ -120,11 +120,11 @@ abstract class AppLocalizations {
   /// **'Welcome!'**
   String get homeWelcome;
 
-  /// No description provided for @homeError.
+  /// No description provided for @somethingWentWrong.
   ///
   /// In en, this message translates to:
   /// **'Something went wrong!'**
-  String get homeError;
+  String get somethingWentWrong;
 
   /// No description provided for @homeBreedLabel.
   ///
@@ -1205,6 +1205,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Irish Wolfhound'**
   String get wolfhoundIrish;
+
+  /// No description provided for @homeScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get homeScreenTitle;
+
+  /// No description provided for @breedListScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Breeds'**
+  String get breedListScreenTitle;
+
+  /// No description provided for @favoritesScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorites'**
+  String get favoritesScreenTitle;
+
+  /// No description provided for @breedImageScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{breedName}'**
+  String breedImageScreenTitle(Object breedName);
+
+  /// No description provided for @errorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred: {error}'**
+  String errorMessage(Object error);
+
+  /// No description provided for @unknownBreed.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown Breed'**
+  String get unknownBreed;
+
+  /// No description provided for @noImageAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No image available for this breed.'**
+  String get noImageAvailable;
+
+  /// No description provided for @swipeRightToLike.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe right to like'**
+  String get swipeRightToLike;
+
+  /// No description provided for @swipeLeftToSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe left to skip'**
+  String get swipeLeftToSkip;
+
+  /// No description provided for @offlineMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please connect to the internet to discover more dogs!'**
+  String get offlineMessage;
+
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get ok;
 }
 
 class _AppLocalizationsDelegate

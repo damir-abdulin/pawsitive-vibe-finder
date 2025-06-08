@@ -18,7 +18,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get homeWelcome => 'Bienvenue!';
 
   @override
-  String get homeError => 'Quelque chose s\'est mal passé!';
+  String get somethingWentWrong => 'Quelque chose s\'est mal passé!';
 
   @override
   String homeBreedLabel(String breedName) {
@@ -562,4 +562,42 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get wolfhoundIrish => 'Lévrier Irlandais';
+
+  @override
+  String get homeScreenTitle => 'Home';
+
+  @override
+  String get breedListScreenTitle => 'Breeds';
+
+  @override
+  String get favoritesScreenTitle => 'Favorites';
+
+  @override
+  String breedImageScreenTitle(Object breedName) {
+    return '$breedName';
+  }
+
+  @override
+  String errorMessage(Object error) {
+    return 'An error occurred: $error';
+  }
+
+  @override
+  String get unknownBreed => 'Unknown Breed';
+
+  @override
+  String get noImageAvailable => 'Aucune image disponible pour cette race.';
+
+  @override
+  String get swipeRightToLike => 'Swipe right to like';
+
+  @override
+  String get swipeLeftToSkip => 'Swipe left to skip';
+
+  @override
+  String get offlineMessage =>
+      'Please connect to the internet to discover more dogs!';
+
+  @override
+  String get ok => 'OK';
 }

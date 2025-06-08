@@ -1,6 +1,7 @@
 library;
 
 export 'check_first_launch_use_case.dart';
+export 'get_breeds_use_case.dart';
 export 'get_last_dog_use_case.dart';
 export 'get_random_dog_use_case.dart';
 export 'get_random_dogs_use_case.dart';

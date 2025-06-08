@@ -9,7 +9,7 @@ class FavoritesRepositoryImpl implements FavoritesRepository {
   const FavoritesRepositoryImpl();
 
   @override
-  Future<void> saveFavoriteDog(RandomDogModel dog) async {
+  Future<void> saveFavoriteDog(DogModel dog) async {
     // Mock implementation: just print the action.
     // In a real implementation, this would save the dog to a local database.
     // ignore: avoid_print

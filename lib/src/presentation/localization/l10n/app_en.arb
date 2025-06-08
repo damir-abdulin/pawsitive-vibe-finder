@@ -3,7 +3,7 @@
   "helloWorld": "Hello World!",
   "appTitle": "Pawsitive Vibe Finder",
   "homeWelcome": "Welcome!",
-  "homeError": "Something went wrong!",
+  "somethingWentWrong": "Something went wrong!",
   "homeBreedLabel": "Breed: {breedName}",
   "@homeBreedLabel": {
     "placeholders": {
@@ -190,5 +190,16 @@
   "waterdogSpanish": "Spanish Waterdog",
   "weimaraner": "Weimaraner",
   "whippet": "Whippet",
-  "wolfhoundIrish": "Irish Wolfhound"
+  "wolfhoundIrish": "Irish Wolfhound",
+  "homeScreenTitle": "Home",
+  "breedListScreenTitle": "Breeds",
+  "favoritesScreenTitle": "Favorites",
+  "breedImageScreenTitle": "{breedName}",
+  "errorMessage": "An error occurred: {error}",
+  "unknownBreed": "Unknown Breed",
+  "noImageAvailable": "No image available for this breed.",
+  "swipeRightToLike": "Swipe right to like",
+  "swipeLeftToSkip": "Swipe left to skip",
+  "offlineMessage": "Please connect to the internet to discover more dogs!",
+  "ok": "OK"
 }

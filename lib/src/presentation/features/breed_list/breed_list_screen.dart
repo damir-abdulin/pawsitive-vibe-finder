@@ -6,7 +6,7 @@ import '../../../di/service_locator.dart';
 import '../../../domain/use_case/get_breeds_use_case.dart';
 import 'bloc/breed_list_bloc.dart';
 import 'bloc/breed_list_event.dart';
-import 'widgets/breed_list_body.dart';
+import 'breed_list_body.dart';
 
 @RoutePage()
 /// The screen that displays the list of dog breeds.

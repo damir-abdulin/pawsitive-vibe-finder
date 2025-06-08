@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import '../../domain/domain.dart';
+import '../entities/dog/dog_entity.dart';
+import '../mappers/dog_mapper.dart';
 import '../providers/providers.dart';
 
 /// The concrete implementation of the [PreferencesRepository].
@@ -32,18 +34,23 @@ class PreferencesRepositoryImpl implements PreferencesRepository {
   }
 
   @override
-  Future<void> saveLastDog(RandomDogModel dog) async {
-    final String dogJson = jsonEncode(dog.toJson());
+  Future<void> saveLastDog(DogModel dog) async {
+    final DogEntity dogEntity = DogMapper.fromDomain(dog);
+    final String dogJson = jsonEncode(dogEntity.toJson());
     await _localPreferencesProvider.setString(_lastDogKey, dogJson);
   }
 
   @override
-  Future<RandomDogModel?> getLastDog() async {
-    final String? dogJson = await _localPreferencesProvider.getString(_lastDogKey);
+  Future<DogModel?> getLastDog() async {
+    final String? dogJson = await _localPreferencesProvider.getString(
+      _lastDogKey,
+    );
     if (dogJson != null) {
-      return RandomDogModel.fromJson(
+      final DogEntity dogEntity = DogEntity.fromJson(
         jsonDecode(dogJson) as Map<String, dynamic>,
       );
+
+      return DogMapper.toDomain(dogEntity);
     }
     return null;
   }

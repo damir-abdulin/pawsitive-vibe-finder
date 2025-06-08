@@ -19,6 +19,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   static const int _minDogThreshold = 12;
   static const int _fetchDogCount = 3;
 
+  final BreedType? _breed;
+
   HomeBloc({
     required GetRandomDogsUseCase getRandomDogsUseCase,
     required CheckFirstLaunchUseCase checkFirstLaunchUseCase,
@@ -26,12 +28,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     required SaveFavoriteDogUseCase saveFavoriteDogUseCase,
     required SaveLastDogUseCase saveLastDogUseCase,
     required GetLastDogUseCase getLastDogUseCase,
+    required BreedType? breed,
   }) : _getRandomDogsUseCase = getRandomDogsUseCase,
        _checkFirstLaunchUseCase = checkFirstLaunchUseCase,
        _setFirstLaunchCompletedUseCase = setFirstLaunchCompletedUseCase,
        _saveFavoriteDogUseCase = saveFavoriteDogUseCase,
        _saveLastDogUseCase = saveLastDogUseCase,
        _getLastDogUseCase = getLastDogUseCase,
+       _breed = breed,
        super(HomeInitial()) {
     on<LoadHomeEvent>(_onLoadHome);
     on<CompleteFirstLaunchEvent>(_onCompleteFirstLaunch);
@@ -84,7 +88,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Future<void> _handleSwipe(
-    RandomDogModel dog,
+    DogModel dog,
     Emitter<HomeState> emit, {
     required bool isFavorite,
   }) async {
@@ -96,8 +100,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       await _saveFavoriteDogUseCase.executeOrNull(dog);
     }
 
-    final List<RandomDogModel> dogs =
-        (state as SubsequentLaunchState).dogs.toList()..removeAt(0);
+    final List<DogModel> dogs = (state as SubsequentLaunchState).dogs.toList()
+      ..removeAt(0);
 
     if (dogs.isEmpty) {
       await _fetchRandomDog(emit, currentDogs: dogs);
@@ -113,37 +117,40 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   /// Helper method to fetch a random dog and emit the appropriate state.
   Future<void> _fetchRandomDog(
     Emitter<HomeState> emit, {
-    List<RandomDogModel> currentDogs = const <RandomDogModel>[],
+    List<DogModel> currentDogs = const <DogModel>[],
   }) async {
     if (currentDogs.length >= _maxDogCount) {
       return;
     }
 
     try {
-      final List<RandomDogModel>? newDogs = await _getRandomDogsUseCase
-          .executeOrNull(_fetchDogCount);
+      final List<DogModel>? newDogs = await _getRandomDogsUseCase.executeOrNull(
+        (_fetchDogCount, _breed),
+      );
       if (newDogs != null && newDogs.isNotEmpty) {
         await _saveLastDogUseCase.executeOrNull(newDogs.first);
-        final List<RandomDogModel> updatedDogs = <RandomDogModel>[
+        final List<DogModel> updatedDogs = <DogModel>[
           ...currentDogs,
           ...newDogs,
         ];
         emit(SubsequentLaunchState(dogs: updatedDogs));
       } else if (currentDogs.isEmpty) {
-        final RandomDogModel? cachedDog = await _getLastDogUseCase
-            .executeOrNull(null);
+        final DogModel? cachedDog = await _getLastDogUseCase.executeOrNull(
+          null,
+        );
         if (cachedDog != null) {
-          emit(SubsequentLaunchState(dogs: <RandomDogModel>[cachedDog]));
+          emit(SubsequentLaunchState(dogs: <DogModel>[cachedDog]));
         } else {
           emit(const HomeError(message: 'Could not fetch a new dog.'));
         }
       }
     } on AppException catch (e) {
       if (currentDogs.isEmpty) {
-        final RandomDogModel? cachedDog = await _getLastDogUseCase
-            .executeOrNull(null);
+        final DogModel? cachedDog = await _getLastDogUseCase.executeOrNull(
+          null,
+        );
         if (cachedDog != null) {
-          emit(SubsequentLaunchState(dogs: <RandomDogModel>[cachedDog]));
+          emit(SubsequentLaunchState(dogs: <DogModel>[cachedDog]));
         } else {
           emit(HomeError(message: e.toString()));
         }

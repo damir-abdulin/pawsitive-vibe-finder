@@ -14,7 +14,7 @@ class HomeLoading extends HomeState {}
 class FirstLaunchState extends HomeState {}
 
 class SubsequentLaunchState extends HomeState {
-  final List<RandomDogModel> dogs;
+  final List<DogModel> dogs;
 
   const SubsequentLaunchState({required this.dogs});
 

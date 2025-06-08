@@ -3,7 +3,7 @@ import '../repository/repository.dart';
 import 'use_case.dart';
 
 /// A use case for fetching a random dog.
-class GetRandomDogUseCase extends FutureUseCase<void, RandomDogModel> {
+class GetRandomDogUseCase extends FutureUseCase<void, DogModel> {
   final DogRepository _dogRepository;
 
   /// Creates an instance of [GetRandomDogUseCase].
@@ -11,7 +11,7 @@ class GetRandomDogUseCase extends FutureUseCase<void, RandomDogModel> {
     : _dogRepository = dogRepository;
 
   @override
-  Future<RandomDogModel> unsafeExecute(void input) {
+  Future<DogModel> unsafeExecute(void input) {
     return _dogRepository.getRandomDog();
   }
 }

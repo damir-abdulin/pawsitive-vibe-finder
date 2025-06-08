@@ -1,5 +1,7 @@
-import 'exceptions.dart';
+import 'app_exception.dart';
 
+/// An exception for errors related to breed data operations.
 class BreedException extends AppException {
-  const BreedException(super.message);
+  /// Creates a [BreedException].
+  const BreedException({super.message, super.cause});
 }

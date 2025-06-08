@@ -9,8 +9,8 @@ abstract class PreferencesRepository {
   Future<void> setFirstLaunchCompleted();
 
   /// Caches the last successfully fetched dog.
-  Future<void> saveLastDog(RandomDogModel dog);
+  Future<void> saveLastDog(DogModel dog);
 
   /// Retrieves the last cached dog.
-  Future<RandomDogModel?> getLastDog();
+  Future<DogModel?> getLastDog();
 }

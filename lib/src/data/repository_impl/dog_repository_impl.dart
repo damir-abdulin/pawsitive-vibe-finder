@@ -1,6 +1,6 @@
 import '../../domain/domain.dart';
 import '../../domain/exceptions/dog_exception.dart';
-import '../entities/random_dog/random_dog_entity.dart';
+import '../entities/dog/dog_response_entity.dart';
 import '../mappers/mappers.dart';
 import '../providers/providers.dart';
 
@@ -13,29 +13,63 @@ class DogRepositoryImpl implements DogRepository {
     : _dogApiProvider = dogApiProvider;
 
   @override
-  Future<RandomDogModel> getRandomDog() async {
+  Future<DogModel> getRandomDog() async {
     try {
-      final RandomDogEntity randomDogEntity = await _dogApiProvider
+      final DogResponseEntity randomDogEntity = await _dogApiProvider
           .getRandomDog();
-      return RandomDogMapper.toDomain(randomDogEntity);
+      return DogResponseMapper.toDomain(randomDogEntity);
     } on NetworkException catch (e) {
       // Add context and rethrow as a domain-specific exception
-      throw DogException('Failed to fetch dog from API: ${e.message}');
+      throw DogException(message: 'Failed to fetch dog from API: ${e.message}');
     } on ProviderException catch (e) {
       // Handle other provider errors
       throw DogException(
-        'An error occurred in the data provider: ${e.message}',
+        message: 'An error occurred in the data provider: ${e.message}',
       );
     } catch (e) {
       // Handle unexpected errors
-      throw DogException('An unexpected error occurred: $e');
+      throw DogException(message: 'An unexpected error occurred: $e');
     }
   }
 
   @override
-  Future<List<RandomDogModel>> getRandomDogs(int count) async {
-    return <RandomDogModel>[
-      for (int i = 0; i < count; i++) await getRandomDog(),
+  Future<List<DogModel>> getRandomDogs(int count) async {
+    return <DogModel>[for (int i = 0; i < count; i++) await getRandomDog()];
+  }
+
+  @override
+  Future<DogModel> getRandomDogForBreed(BreedType breed) async {
+    try {
+      final String breedPath = BreedMapper.fromDomain(breed);
+      final DogResponseEntity randomDogEntity = await _dogApiProvider
+          .getRandomDogByBreedPath(breedPath: breedPath);
+      return DogResponseMapper.toDomain(randomDogEntity);
+    } on NetworkException catch (e) {
+      // Add context and rethrow as a domain-specific exception
+      throw DogException(
+        message: 'Failed to fetch dog from API for breed $breed: ${e.message}',
+      );
+    } on ProviderException catch (e) {
+      // Handle other provider errors
+      throw DogException(
+        message:
+            'An error occurred in the data provider for breed $breed: ${e.message}',
+      );
+    } catch (e) {
+      // Handle unexpected errors
+      throw DogException(
+        message: 'An unexpected error occurred for breed $breed: $e',
+      );
+    }
+  }
+
+  @override
+  Future<List<DogModel>> getRandomDogsForBreed(
+    int count,
+    BreedType breed,
+  ) async {
+    return <DogModel>[
+      for (int i = 0; i < count; i++) await getRandomDogForBreed(breed),
     ];
   }
 }

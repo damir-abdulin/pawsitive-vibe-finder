@@ -26,7 +26,7 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.home),
             title: Text(context.locale.drawerHome),
             onTap: () {
-              context.router.replace(const HomeRoute());
+              context.router.replace(HomeRoute());
             },
           ),
           ListTile(
