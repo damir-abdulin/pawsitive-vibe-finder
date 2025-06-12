@@ -65,9 +65,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   ) async {
     try {
       await _setFirstLaunchCompletedUseCase.executeOrNull(null);
-      // Per requirements, no image is shown after first launch welcome.
-      // The user will see the empty state of the home page.
-      emit(HomeInitial());
+      // After first launch, load dogs to show the normal home screen
+      await _fetchRandomDog(emit);
     } on AppException catch (e) {
       emit(HomeError(message: e.toString()));
     }

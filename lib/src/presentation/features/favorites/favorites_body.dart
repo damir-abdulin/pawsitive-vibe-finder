@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/domain.dart';
-import '../../localization/locale_extension.dart';
 import '../../navigation/app_router.dart';
+import '../../widgets/app_bottom_navigation.dart';
 import 'bloc/favorites_bloc.dart';
-import 'widgets/favorite_dog_card.dart';
+import 'widgets/widgets.dart';
 
 /// The body of the favorites screen.
 ///
@@ -25,67 +25,79 @@ class _FavoritesBodyState extends State<FavoritesBody> {
   // during this session, so the heart icon can be updated instantly.
   final Set<String> _unfavoritedInSession = <String>{};
 
+  void _onFavoriteToggle(DogModel dog, bool isFavorite) {
+    setState(() {
+      if (isFavorite) {
+        _unfavoritedInSession.add(dog.imageUrl);
+        context.read<FavoritesBloc>().add(FavoriteDogRemoved(dog: dog));
+      } else {
+        _unfavoritedInSession.remove(dog.imageUrl);
+        context.read<FavoritesBloc>().add(FavoriteDogAdded(dog: dog));
+      }
+    });
+  }
+
+  void _onImageTap(DogModel dog) async {
+    final bool? wasToggled = await context.router.push<bool>(
+      DogDetailsRoute(dog: dog),
+    );
+    if (wasToggled ?? false) {
+      if (context.mounted) {
+        context.read<FavoritesBloc>().add(FavoritesRefreshed());
+        _unfavoritedInSession.clear();
+      }
+    }
+  }
+
+  void _onRetry() {
+    context.read<FavoritesBloc>().add(FavoritesRefreshed());
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FavoritesBloc, FavoritesState>(
-      builder: (BuildContext context, FavoritesState state) {
-        if (state is FavoritesLoadInProgress) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        if (state is FavoritesEmpty) {
-          return Center(child: Text(context.locale.favoritesEmptyMessage));
-        }
-        if (state is FavoritesLoadSuccess) {
-          return GridView.builder(
-            padding: const EdgeInsets.all(16),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-              childAspectRatio: 0.75,
+    return Scaffold(
+      backgroundColor: const Color(0xFFFCF8F8),
+      body: Column(
+        children: <Widget>[
+          // Sticky header
+          const FavoritesHeader(),
+          // Main content
+          Expanded(
+            child: BlocBuilder<FavoritesBloc, FavoritesState>(
+              builder: (BuildContext context, FavoritesState state) {
+                return _buildContent(state);
+              },
             ),
-            itemCount: state.favoriteDogs.length,
-            itemBuilder: (BuildContext context, int index) {
-              final DogModel dog = state.favoriteDogs[index];
-              final bool isFavorite = !_unfavoritedInSession.contains(
-                dog.imageUrl,
-              );
-
-              return FavoriteDogCard(
-                dog: dog,
-                isFavorite: isFavorite,
-                onFavoritePressed: () {
-                  setState(() {
-                    if (isFavorite) {
-                      _unfavoritedInSession.add(dog.imageUrl);
-                      context.read<FavoritesBloc>().add(
-                        FavoriteDogRemoved(dog: dog),
-                      );
-                    } else {
-                      _unfavoritedInSession.remove(dog.imageUrl);
-                      context.read<FavoritesBloc>().add(
-                        FavoriteDogAdded(dog: dog),
-                      );
-                    }
-                  });
-                },
-                onCardTapped: () async {
-                  final bool? wasToggled = await context.router.push<bool>(
-                    DogDetailsRoute(dog: dog),
-                  );
-                  if (wasToggled ?? false) {
-                    if (context.mounted) {
-                      context.read<FavoritesBloc>().add(FavoritesRefreshed());
-                      _unfavoritedInSession.clear();
-                    }
-                  }
-                },
-              );
-            },
-          );
-        }
-        return const Center(child: Text('An unknown error occurred.'));
-      },
+          ),
+          // Bottom navigation
+          const AppBottomNavigation(currentRoute: 'FavoritesRoute'),
+        ],
+      ),
     );
+  }
+
+  Widget _buildContent(FavoritesState state) {
+    if (state is FavoritesLoadInProgress) {
+      return const FavoritesLoading();
+    }
+
+    if (state is FavoritesEmpty) {
+      return const FavoritesEmptyState();
+    }
+
+    if (state is FavoritesLoadSuccess) {
+      return FavoritesGrid(
+        dogs: state.favoriteDogs,
+        unfavoritedInSession: _unfavoritedInSession,
+        onFavoriteToggle: _onFavoriteToggle,
+        onImageTap: _onImageTap,
+      );
+    }
+
+    if (state is FavoritesLoadFailure) {
+      return FavoritesErrorState(message: state.message, onRetry: _onRetry);
+    }
+
+    return const Center(child: Text('An unknown error occurred.'));
   }
 }
