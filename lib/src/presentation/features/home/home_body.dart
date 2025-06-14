@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/domain.dart';
 import '../../widgets/app_bottom_navigation.dart';
 import '../../widgets/image_card/image_card_controller.dart';
+import '../../localization/locale_extension.dart';
 import 'bloc/home_bloc.dart';
 import 'widgets/widgets.dart';
 
@@ -113,29 +114,29 @@ class _HomeBodyState extends State<HomeBody> {
       builder: (BuildContext context, double value, Widget? child) {
         return Transform.scale(
           scale: value,
-          child: const Center(
+          child: Center(
             child: Padding(
-              padding: EdgeInsets.all(32),
+              padding: const EdgeInsets.all(32),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Icon(Icons.pets, size: 80, color: Color(0xFFE8B4B7)),
-                  SizedBox(height: 24),
+                  const Icon(Icons.pets, size: 80, color: Color(0xFFE8B4B7)),
+                  const SizedBox(height: 24),
                   Text(
-                    'Welcome to Doggo!',
+                    context.locale.welcomeToApp,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xFF191011),
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
                       letterSpacing: -0.5,
                     ),
                   ),
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   Text(
-                    'Get ready for some pawsitivity!',
+                    context.locale.pawsitivityMessage,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xFF8B5B5D),
                       fontSize: 16,
                       height: 1.5,
@@ -158,23 +159,23 @@ class _HomeBodyState extends State<HomeBody> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          title: const Text(
-            'No Internet Connection',
-            style: TextStyle(
+          title: Text(
+            context.locale.noInternetConnection,
+            style: const TextStyle(
               color: Color(0xFF191011),
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
-          content: const Text(
-            'Please connect to the internet to discover more dogs!',
-            style: TextStyle(color: Color(0xFF8B5B5D), fontSize: 16),
+          content: Text(
+            context.locale.offlineDialogMessage,
+            style: const TextStyle(color: Color(0xFF8B5B5D), fontSize: 16),
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text(
-                'OK',
-                style: TextStyle(color: Color(0xFFE8B4B7)),
+              child: Text(
+                context.locale.okButton,
+                style: const TextStyle(color: Color(0xFFE8B4B7)),
               ),
               onPressed: () {
                 Navigator.of(dialogContext).pop();

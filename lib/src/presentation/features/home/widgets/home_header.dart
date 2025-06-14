@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../theme/colors.dart';
+import '../../../localization/locale_extension.dart';
 
 /// Header widget for the home screen with the app title.
 class HomeHeader extends StatelessWidget {
@@ -23,7 +24,7 @@ class HomeHeader extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: Text(
-                  'Doggo',
+                  context.locale.appTitle,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: AppColors.textPrimary,

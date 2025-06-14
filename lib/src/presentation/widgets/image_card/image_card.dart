@@ -194,18 +194,42 @@ class ImageCardState extends State<ImageCard>
                         fit: BoxFit.contain,
                         placeholder: (BuildContext context, String url) =>
                             Center(
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  colorScheme.primary,
-                                ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      colorScheme.primary,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    context.locale.imageCardLoading,
+                                    style: textTheme.bodyMedium?.copyWith(
+                                      color: colorScheme.primary,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                         errorWidget:
                             (BuildContext context, String url, Object error) =>
-                                Icon(
-                                  Icons.error_outline,
-                                  color: colorScheme.error,
-                                  size: 48,
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.error_outline,
+                                      color: colorScheme.error,
+                                      size: 48,
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      context.locale.imageCardError,
+                                      style: textTheme.bodyMedium?.copyWith(
+                                        color: colorScheme.error,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                       ),
                     ),

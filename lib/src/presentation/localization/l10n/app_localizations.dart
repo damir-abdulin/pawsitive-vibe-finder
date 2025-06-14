@@ -9,6 +9,8 @@ import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
 import 'app_localizations_es.dart';
 import 'app_localizations_fr.dart';
+import 'app_localizations_it.dart';
+import 'app_localizations_pt.dart';
 
 // ignore_for_file: type=lint
 
@@ -100,6 +102,8 @@ abstract class AppLocalizations {
     Locale('en'),
     Locale('es'),
     Locale('fr'),
+    Locale('it'),
+    Locale('pt'),
   ];
 
   /// No description provided for @helloWorld.
@@ -1277,6 +1281,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'OK'**
   String get ok;
+
+  /// No description provided for @drawerQuiz.
+  ///
+  /// In en, this message translates to:
+  /// **'Quiz'**
+  String get drawerQuiz;
+
+  /// No description provided for @welcomeToApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Pawsitive Vibe Finder!'**
+  String get welcomeToApp;
+
+  /// No description provided for @pawsitivityMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Get ready for some pawsitivity!'**
+  String get pawsitivityMessage;
+
+  /// No description provided for @noInternetConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'No Internet Connection'**
+  String get noInternetConnection;
+
+  /// No description provided for @failedToLoad.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load'**
+  String get failedToLoad;
+
+  /// No description provided for @checkConnectionAndRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Please check your connection and try again.'**
+  String get checkConnectionAndRetry;
+
+  /// No description provided for @tryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Try Again'**
+  String get tryAgain;
+
+  /// No description provided for @imageCardLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get imageCardLoading;
+
+  /// No description provided for @imageCardError.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load image'**
+  String get imageCardError;
 }
 
 class _AppLocalizationsDelegate
@@ -1289,8 +1347,14 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['de', 'en', 'es', 'fr'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>[
+    'de',
+    'en',
+    'es',
+    'fr',
+    'it',
+    'pt',
+  ].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -1307,6 +1371,10 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsEs();
     case 'fr':
       return AppLocalizationsFr();
+    case 'it':
+      return AppLocalizationsIt();
+    case 'pt':
+      return AppLocalizationsPt();
   }
 
   throw FlutterError(

@@ -202,5 +202,14 @@
   "swipeRightToLike": "Swipe right to like",
   "swipeLeftToSkip": "Swipe left to skip",
   "offlineMessage": "Please connect to the internet to discover more dogs!",
-  "ok": "OK"
+  "ok": "OK",
+  "drawerQuiz": "Quiz",
+  "welcomeToApp": "Welcome to Pawsitive Vibe Finder!",
+  "pawsitivityMessage": "Get ready for some pawsitivity!",
+  "noInternetConnection": "No Internet Connection",
+  "failedToLoad": "Failed to load",
+  "checkConnectionAndRetry": "Please check your connection and try again.",
+  "tryAgain": "Try Again",
+  "imageCardLoading": "Loading...",
+  "imageCardError": "Failed to load image"
 }

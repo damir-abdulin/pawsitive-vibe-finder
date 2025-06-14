@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import '../navigation/app_router.dart';
 import '../theme/colors.dart';
+import '../localization/locale_extension.dart';
 
 /// Bottom navigation bar for the application.
 class AppBottomNavigation extends StatelessWidget {
@@ -30,28 +31,28 @@ class AppBottomNavigation extends StatelessWidget {
               _buildNavItem(
                 context: context,
                 icon: Icons.home,
-                label: 'Home',
+                label: context.locale.drawerHome,
                 routeName: 'HomeRoute',
                 onTap: () => context.router.navigate(HomeRoute()),
               ),
               _buildNavItem(
                 context: context,
                 icon: Icons.list_alt,
-                label: 'Breeds',
+                label: context.locale.drawerBreeds,
                 routeName: 'BreedListRoute',
                 onTap: () => context.router.navigate(const BreedListRoute()),
               ),
               _buildNavItem(
                 context: context,
                 icon: Icons.favorite_border,
-                label: 'Favorites',
+                label: context.locale.drawerFavorites,
                 routeName: 'FavoritesRoute',
                 onTap: () => context.router.navigate(const FavoritesRoute()),
               ),
               _buildNavItem(
                 context: context,
                 icon: Icons.quiz,
-                label: 'Quiz',
+                label: context.locale.drawerQuiz,
                 routeName: 'QuizRoute',
                 onTap: () => context.router.navigate(const QuizRoute()),
               ),

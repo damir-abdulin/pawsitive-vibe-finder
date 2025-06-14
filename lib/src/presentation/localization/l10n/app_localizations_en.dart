@@ -604,4 +604,32 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ok => 'OK';
+
+  @override
+  String get drawerQuiz => 'Quiz';
+
+  @override
+  String get welcomeToApp => 'Welcome to Pawsitive Vibe Finder!';
+
+  @override
+  String get pawsitivityMessage => 'Get ready for some pawsitivity!';
+
+  @override
+  String get noInternetConnection => 'No Internet Connection';
+
+  @override
+  String get failedToLoad => 'Failed to load';
+
+  @override
+  String get checkConnectionAndRetry =>
+      'Please check your connection and try again.';
+
+  @override
+  String get tryAgain => 'Try Again';
+
+  @override
+  String get imageCardLoading => 'Loading...';
+
+  @override
+  String get imageCardError => 'Failed to load image';
 }

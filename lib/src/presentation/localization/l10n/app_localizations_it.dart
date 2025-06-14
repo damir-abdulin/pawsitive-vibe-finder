@@ -4,82 +4,82 @@ import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
 
-/// The translations for Spanish Castilian (`es`).
-class AppLocalizationsEs extends AppLocalizations {
-  AppLocalizationsEs([String locale = 'es']) : super(locale);
+/// The translations for Italian (`it`).
+class AppLocalizationsIt extends AppLocalizations {
+  AppLocalizationsIt([String locale = 'it']) : super(locale);
 
   @override
-  String get helloWorld => '¡Hola Mundo!';
+  String get helloWorld => 'Ciao Mondo!';
 
   @override
-  String get appTitle => 'Buscador de Vibras Pawsitivas';
+  String get appTitle => 'Cercatore di Vibrazioni Pawsitive';
 
   @override
-  String get homeWelcome => '¡Bienvenido!';
+  String get homeWelcome => 'Benvenuto!';
 
   @override
-  String get somethingWentWrong => '¡Algo salió mal!';
+  String get somethingWentWrong => 'Qualcosa è andato storto!';
 
   @override
   String homeBreedLabel(String breedName) {
-    return 'Raza: $breedName';
+    return 'Razza: $breedName';
   }
 
   @override
-  String get homeGetStartedButton => 'Empezar';
+  String get homeGetStartedButton => 'Inizia';
 
   @override
-  String get offlineDialogTitle => 'Sin conexión';
+  String get offlineDialogTitle => 'Offline';
 
   @override
   String get offlineDialogMessage =>
-      '¡Conéctate a Internet para descubrir más perros!';
+      'Connettiti a Internet per scoprire più cani!';
 
   @override
-  String get okButton => 'Aceptar';
+  String get okButton => 'OK';
 
   @override
-  String get favoritesTitle => 'Imágenes Favoritas';
+  String get favoritesTitle => 'Immagini Preferite';
 
   @override
   String get favoritesEmptyMessage =>
-      '¡Aún no hay perritos favoritos! Desliza hacia la derecha en una imagen que te guste para guardarla aquí.';
+      'Nessun cagnolino preferito ancora! Scorri a destra su un\'immagine che ti piace per salvarla qui.';
 
   @override
-  String get favoritesScreenMessage => 'Pantalla de Favoritos';
+  String get favoritesScreenMessage => 'Schermo Preferiti';
 
   @override
-  String get drawerTitle => 'Buscador de Vibras Pawsitivas';
+  String get drawerTitle => 'Cercatore di Vibrazioni Pawsitive';
 
   @override
-  String get drawerHome => 'Inicio';
+  String get drawerHome => 'Casa';
 
   @override
-  String get drawerBreeds => 'Razas';
+  String get drawerBreeds => 'Razze';
 
   @override
-  String get drawerFavorites => 'Favoritos';
+  String get drawerFavorites => 'Preferiti';
 
   @override
-  String get imageCardLike => 'ME GUSTA';
+  String get imageCardLike => 'MI PIACE';
 
   @override
-  String get imageCardOther => 'OTRO';
+  String get imageCardOther => 'ALTRO';
 
   @override
-  String get breedListTitle => 'Razas de perros';
+  String get breedListTitle => 'Razze di cani';
 
   @override
-  String get breedListFailedToLoad => 'Error al cargar razas';
+  String get breedListFailedToLoad => 'Impossibile caricare le razze';
 
   @override
-  String get breedListNoBreedsFound => 'No se encontraron razas';
+  String get breedListNoBreedsFound => 'Nessuna razza trovata';
 
   @override
-  String get breedListSearchHint => 'Buscar razas...';
+  String get breedListSearchHint => 'Cerca razze...';
 
   @override
-  String get appGlobalTitle => 'Buscador de Vibras Pawsitivas';
+  String get appGlobalTitle => 'Cercatore di Vibrazioni Pawsitive';
 
   @override
   String get affenpinscher => 'Affenpinscher';
@@ -100,10 +100,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get australianKelpie => 'Kelpie Australiano';
 
   @override
-  String get australianShepherd => 'Pastor Australiano';
+  String get australianShepherd => 'Pastore Australiano';
 
   @override
-  String get bakharwalIndian => 'Bakharwal Indio';
+  String get bakharwalIndian => 'Bakharwal Indiano';
 
   @override
   String get basenji => 'Basenji';
@@ -130,22 +130,22 @@ class AppLocalizationsEs extends AppLocalizations {
   String get briard => 'Briard';
 
   @override
-  String get buhundNorwegian => 'Buhund Noruego';
+  String get buhundNorwegian => 'Buhund Norvegese';
 
   @override
-  String get bulldogBoston => 'Bulldog de Boston';
+  String get bulldogBoston => 'Boston Terrier';
 
   @override
-  String get bulldogEnglish => 'Bulldog Inglés';
+  String get bulldogEnglish => 'Bulldog Inglese';
 
   @override
-  String get bulldogFrench => 'Bulldog Francés';
+  String get bulldogFrench => 'Bulldog Francese';
 
   @override
   String get bullterrierStaffordshire => 'Staffordshire Bull Terrier';
 
   @override
-  String get cattledogAustralian => 'Perro de ganado australiano';
+  String get cattledogAustralian => 'Cane da Bestiame Australiano';
 
   @override
   String get cavapoo => 'Cavapoo';
@@ -154,13 +154,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get chihuahua => 'Chihuahua';
 
   @override
-  String get chippiparaiIndian => 'Chippiparai Indio';
+  String get chippiparaiIndian => 'Chippiparai Indiano';
 
   @override
   String get chow => 'Chow Chow';
 
   @override
-  String get clumber => 'Clumber';
+  String get clumber => 'Clumber Spaniel';
 
   @override
   String get cockapoo => 'Cockapoo';
@@ -178,19 +178,19 @@ class AppLocalizationsEs extends AppLocalizations {
   String get cotondetulear => 'Coton de Tulear';
 
   @override
-  String get dachshund => 'Dachshund';
+  String get dachshund => 'Bassotto';
 
   @override
-  String get dalmatian => 'Dálmata';
+  String get dalmatian => 'Dalmata';
 
   @override
-  String get daneGreat => 'Gran Danés';
+  String get daneGreat => 'Alano';
 
   @override
-  String get danishSwedish => 'Perro de granja danés y sueco';
+  String get danishSwedish => 'Cane da Fattoria Danese-Svedese';
 
   @override
-  String get deerhoundScottish => 'Lebrel escocés';
+  String get deerhoundScottish => 'Levriero Scozzese';
 
   @override
   String get dhole => 'Dhole';
@@ -199,64 +199,64 @@ class AppLocalizationsEs extends AppLocalizations {
   String get dingo => 'Dingo';
 
   @override
-  String get doberman => 'Doberman';
+  String get doberman => 'Dobermann';
 
   @override
-  String get elkhoundNorwegian => 'Elkhound noruego';
+  String get elkhoundNorwegian => 'Elkhound Norvegese';
 
   @override
   String get entlebucher => 'Entlebucher';
 
   @override
-  String get eskimo => 'Esquimal';
+  String get eskimo => 'Eschimese';
 
   @override
-  String get finnishLapphund => 'Spitz Finlandés de Laponia';
+  String get finnishLapphund => 'Spitz Finlandese della Lapponia';
 
   @override
-  String get friseBichon => 'Bichón Frisé';
+  String get friseBichon => 'Bichon Frisé';
 
   @override
-  String get gaddiIndian => 'Gaddi Indio';
+  String get gaddiIndian => 'Gaddi Indiano';
 
   @override
-  String get germanshepherd => 'Pastor Alemán';
+  String get germanshepherd => 'Pastore Tedesco';
 
   @override
-  String get greyhoundIndian => 'Galgo Indio';
+  String get greyhoundIndian => 'Levriero Indiano';
 
   @override
-  String get greyhoundItalian => 'Galgo italiano';
+  String get greyhoundItalian => 'Piccolo Levriero Italiano';
 
   @override
   String get groenendael => 'Groenendael';
 
   @override
-  String get havanese => 'Bichón Habanero';
+  String get havanese => 'Bichon Havanais';
 
   @override
-  String get houndAfghan => 'Lebrel afgano';
+  String get houndAfghan => 'Levriero Afghano';
 
   @override
   String get houndBasset => 'Basset Hound';
 
   @override
-  String get houndBlood => 'Sabueso';
+  String get houndBlood => 'Bloodhound';
 
   @override
-  String get houndEnglish => 'Foxhound inglés';
+  String get houndEnglish => 'Foxhound Inglese';
 
   @override
-  String get houndIbizan => 'Podenco ibicenco';
+  String get houndIbizan => 'Podenco Ibicenco';
 
   @override
-  String get houndPlott => 'Perro de Plott';
+  String get houndPlott => 'Plott Hound';
 
   @override
-  String get houndWalker => 'Perro de Walker';
+  String get houndWalker => 'Walker Hound';
 
   @override
-  String get husky => 'Husky';
+  String get husky => 'Husky Siberiano';
 
   @override
   String get keeshond => 'Keeshond';
@@ -277,49 +277,49 @@ class AppLocalizationsEs extends AppLocalizations {
   String get labradoodle => 'Labradoodle';
 
   @override
-  String get labrador => 'Labrador';
+  String get labrador => 'Labrador Retriever';
 
   @override
-  String get leonberg => 'Leonberg';
+  String get leonberg => 'Leonberger';
 
   @override
   String get lhasa => 'Lhasa Apso';
 
   @override
-  String get malamute => 'Malamute';
+  String get malamute => 'Alaskan Malamute';
 
   @override
   String get malinois => 'Malinois';
 
   @override
-  String get maltese => 'Bichón Maltés';
+  String get maltese => 'Maltese';
 
   @override
-  String get mastiffBull => 'Mastín Inglés';
+  String get mastiffBull => 'Bullmastiff';
 
   @override
-  String get mastiffEnglish => 'Mastín Inglés';
+  String get mastiffEnglish => 'Mastiff Inglese';
 
   @override
-  String get mastiffIndian => 'Mastín Indio';
+  String get mastiffIndian => 'Mastiff Indiano';
 
   @override
-  String get mastiffTibetan => 'Mastín Tibetano';
+  String get mastiffTibetan => 'Mastiff Tibetano';
 
   @override
-  String get mexicanhairless => 'Xoloitzcuintle';
+  String get mexicanhairless => 'Cane Nudo Messicano';
 
   @override
-  String get mix => 'Mestizo';
+  String get mix => 'Meticcio';
 
   @override
-  String get mountainBernese => 'Boyero de Berna';
+  String get mountainBernese => 'Bovaro del Bernese';
 
   @override
-  String get mountainSwiss => 'Gran Boyero Suizo';
+  String get mountainSwiss => 'Grande Bovaro Svizzero';
 
   @override
-  String get mudholIndian => 'Mudhol Indio';
+  String get mudholIndian => 'Mudhol Indiano';
 
   @override
   String get newfoundland => 'Terranova';
@@ -328,70 +328,70 @@ class AppLocalizationsEs extends AppLocalizations {
   String get otterhound => 'Otterhound';
 
   @override
-  String get ovcharkaCaucasian => 'Pastor caucásico';
+  String get ovcharkaCaucasian => 'Pastore del Caucaso';
 
   @override
-  String get papillon => 'Papillón';
+  String get papillon => 'Papillon';
 
   @override
-  String get pariahIndian => 'Paria Indio';
+  String get pariahIndian => 'Paria Indiano';
 
   @override
-  String get pekinese => 'Pequinés';
+  String get pekinese => 'Pechinese';
 
   @override
   String get pembroke => 'Corgi Pembroke';
 
   @override
-  String get pinscherMiniature => 'Pinscher Miniatura';
+  String get pinscherMiniature => 'Pinscher Nano';
 
   @override
   String get pitbull => 'Pitbull';
 
   @override
-  String get pointerGerman => 'Braco alemán de pelo corto';
+  String get pointerGerman => 'Bracco Tedesco';
 
   @override
-  String get pointerGermanlonghair => 'Braco alemán de pelo largo';
+  String get pointerGermanlonghair => 'Bracco Tedesco a Pelo Lungo';
 
   @override
-  String get pomeranian => 'Pomerania';
+  String get pomeranian => 'Volpino di Pomerania';
 
   @override
-  String get poodleMedium => 'Caniche mediano';
+  String get poodleMedium => 'Barboncino Medio';
 
   @override
-  String get poodleMiniature => 'Caniche miniatura';
+  String get poodleMiniature => 'Barboncino Nano';
 
   @override
-  String get poodleStandard => 'Caniche estándar';
+  String get poodleStandard => 'Barboncino Grande';
 
   @override
-  String get poodleToy => 'Caniche Toy';
+  String get poodleToy => 'Barboncino Toy';
 
   @override
-  String get pug => 'Pug';
+  String get pug => 'Carlino';
 
   @override
   String get puggle => 'Puggle';
 
   @override
-  String get pyrenees => 'Pirineo';
+  String get pyrenees => 'Pastore dei Pirenei';
 
   @override
-  String get rajapalayamIndian => 'Rajapalayam Indio';
+  String get rajapalayamIndian => 'Rajapalayam Indiano';
 
   @override
   String get redbone => 'Redbone';
 
   @override
-  String get retrieverChesapeake => 'Retriever de la Bahía de Chesapeake';
+  String get retrieverChesapeake => 'Retriever della Baia di Chesapeake';
 
   @override
-  String get retrieverCurly => 'Retriever de pelo rizado';
+  String get retrieverCurly => 'Retriever a Pelo Riccio';
 
   @override
-  String get retrieverFlatcoated => 'Retriever de pelo liso';
+  String get retrieverFlatcoated => 'Retriever a Pelo Liscio';
 
   @override
   String get retrieverGolden => 'Golden Retriever';
@@ -406,40 +406,40 @@ class AppLocalizationsEs extends AppLocalizations {
   String get saluki => 'Saluki';
 
   @override
-  String get samoyed => 'Samoyedo';
+  String get samoyed => 'Samoiedo';
 
   @override
   String get schipperke => 'Schipperke';
 
   @override
-  String get schnauzerGiant => 'Schnauzer gigante';
+  String get schnauzerGiant => 'Schnauzer Gigante';
 
   @override
-  String get schnauzerMiniature => 'Schnauzer miniatura';
+  String get schnauzerMiniature => 'Schnauzer Nano';
 
   @override
   String get segugioItalian => 'Segugio Italiano';
 
   @override
-  String get setterEnglish => 'Setter inglés';
+  String get setterEnglish => 'Setter Inglese';
 
   @override
   String get setterGordon => 'Setter Gordon';
 
   @override
-  String get setterIrish => 'Setter Irlandés';
+  String get setterIrish => 'Setter Irlandese';
 
   @override
   String get sharpei => 'Shar-Pei';
 
   @override
-  String get sheepdogEnglish => 'Antiguo pastor inglés';
+  String get sheepdogEnglish => 'Bobtail';
 
   @override
-  String get sheepdogIndian => 'Pastor Indio';
+  String get sheepdogIndian => 'Pastore Indiano';
 
   @override
-  String get sheepdogShetland => 'Pastor de Shetland';
+  String get sheepdogShetland => 'Pastore delle Shetland';
 
   @override
   String get shiba => 'Shiba Inu';
@@ -451,31 +451,31 @@ class AppLocalizationsEs extends AppLocalizations {
   String get spanielBlenheim => 'Cavalier King Charles Spaniel';
 
   @override
-  String get spanielBrittany => 'Epagneul bretón';
+  String get spanielBrittany => 'Spaniel Bretone';
 
   @override
   String get spanielCocker => 'Cocker Spaniel';
 
   @override
-  String get spanielIrish => 'Perro de agua irlandés';
+  String get spanielIrish => 'Spaniel d\'Acqua Irlandese';
 
   @override
-  String get spanielJapanese => 'Chin japonés';
+  String get spanielJapanese => 'Chin Giapponese';
 
   @override
   String get spanielSussex => 'Sussex Spaniel';
 
   @override
-  String get spanielWelsh => 'Springer Spaniel Galés';
+  String get spanielWelsh => 'Welsh Springer Spaniel';
 
   @override
-  String get spitzIndian => 'Spitz Indio';
+  String get spitzIndian => 'Spitz Indiano';
 
   @override
-  String get spitzJapanese => 'Spitz japonés';
+  String get spitzJapanese => 'Spitz Giapponese';
 
   @override
-  String get springerEnglish => 'Springer Spaniel Inglés';
+  String get springerEnglish => 'English Springer Spaniel';
 
   @override
   String get stbernard => 'San Bernardo';
@@ -502,7 +502,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get terrierFox => 'Fox Terrier';
 
   @override
-  String get terrierIrish => 'Terrier Irlandés';
+  String get terrierIrish => 'Terrier Irlandese';
 
   @override
   String get terrierKerryblue => 'Kerry Blue Terrier';
@@ -529,7 +529,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get terrierSealyham => 'Sealyham Terrier';
 
   @override
-  String get terrierSilky => 'Terrier Sedoso Australiano';
+  String get terrierSilky => 'Silky Terrier';
 
   @override
   String get terrierTibetan => 'Terrier Tibetano';
@@ -544,7 +544,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get terrierWesthighland => 'West Highland White Terrier';
 
   @override
-  String get terrierWheaten => 'Terrier Irlandés de Pelo Suave';
+  String get terrierWheaten => 'Soft Coated Wheaten Terrier';
 
   @override
   String get terrierYorkshire => 'Yorkshire Terrier';
@@ -556,7 +556,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get vizsla => 'Vizsla';
 
   @override
-  String get waterdogSpanish => 'Perro de agua español';
+  String get waterdogSpanish => 'Cane d\'Acqua Spagnolo';
 
   @override
   String get weimaraner => 'Weimaraner';
@@ -565,16 +565,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get whippet => 'Whippet';
 
   @override
-  String get wolfhoundIrish => 'Lobero irlandés';
+  String get wolfhoundIrish => 'Levriero Irlandese';
 
   @override
-  String get homeScreenTitle => 'Inicio';
+  String get homeScreenTitle => 'Casa';
 
   @override
-  String get breedListScreenTitle => 'Razas';
+  String get breedListScreenTitle => 'Razze';
 
   @override
-  String get favoritesScreenTitle => 'Favoritos';
+  String get favoritesScreenTitle => 'Preferiti';
 
   @override
   String breedImageScreenTitle(Object breedName) {
@@ -583,53 +583,53 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String errorMessage(Object error) {
-    return 'Ocurrió un error: $error';
+    return 'Si è verificato un errore: $error';
   }
 
   @override
-  String get unknownBreed => 'Raza desconocida';
+  String get unknownBreed => 'Razza sconosciuta';
 
   @override
-  String get noImageAvailable => 'No hay imagen disponible para esta raza.';
+  String get noImageAvailable =>
+      'Nessuna immagine disponibile per questa razza.';
 
   @override
-  String get swipeRightToLike => 'Desliza a la derecha para que te guste';
+  String get swipeRightToLike => 'Scorri a destra per apprezzare';
 
   @override
-  String get swipeLeftToSkip => 'Desliza a la izquierda para saltar';
+  String get swipeLeftToSkip => 'Scorri a sinistra per saltare';
 
   @override
-  String get offlineMessage =>
-      '¡Conéctate a Internet para descubrir más perros!';
+  String get offlineMessage => 'Connettiti a Internet per scoprire più cani!';
 
   @override
-  String get ok => 'Aceptar';
+  String get ok => 'OK';
 
   @override
   String get drawerQuiz => 'Quiz';
 
   @override
-  String get welcomeToApp => '¡Bienvenido al Buscador de Vibras Pawsitivas!';
+  String get welcomeToApp => 'Benvenuto nel Cercatore di Vibrazioni Pawsitive!';
 
   @override
-  String get pawsitivityMessage => '¡Prepárate para algo de pawsitividad!';
+  String get pawsitivityMessage => 'Preparati per un po\' di pawsitività!';
 
   @override
-  String get noInternetConnection => 'Sin conexión a Internet';
+  String get noInternetConnection => 'Nessuna connessione Internet';
 
   @override
-  String get failedToLoad => 'Error al cargar';
+  String get failedToLoad => 'Caricamento fallito';
 
   @override
   String get checkConnectionAndRetry =>
-      'Verifique su conexión e inténtelo de nuevo.';
+      'Controlla la tua connessione e riprova.';
 
   @override
-  String get tryAgain => 'Intentar de nuevo';
+  String get tryAgain => 'Riprova';
 
   @override
-  String get imageCardLoading => 'Cargando...';
+  String get imageCardLoading => 'Caricamento...';
 
   @override
-  String get imageCardError => 'Error al cargar la imagen';
+  String get imageCardError => 'Impossibile caricare l\'immagine';
 }
