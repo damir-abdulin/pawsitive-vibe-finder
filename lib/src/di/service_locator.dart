@@ -6,9 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../data/providers/providers.dart';
 import '../data/repository_impl/breed_repository_impl.dart';
 import '../data/repository_impl/repository_impl.dart';
-import '../data/services/connectivity_service_impl.dart';
+import '../data/services/services.dart';
 import '../domain/domain.dart';
-import '../domain/services/connectivity_service.dart';
 import '../presentation/navigation/app_router.dart';
 
 final GetIt appLocator = GetIt.instance;
@@ -43,9 +42,11 @@ Future<void> configureDependencies() async {
   appLocator.registerLazySingleton<FavoriteDogDao>(
     () => FavoriteDogDao(appLocator()),
   );
+  appLocator.registerLazySingleton<BreedImagesCacheDao>(
+    () => BreedImagesCacheDao(appLocator()),
+  );
 
   // Repositories
-  appLocator.registerLazySingleton<BreedRepository>(BreedRepositoryImpl.new);
   appLocator.registerLazySingleton<DogRepository>(
     () => DogRepositoryImpl(dogApiProvider: appLocator()),
   );
@@ -55,6 +56,14 @@ Future<void> configureDependencies() async {
   appLocator.registerLazySingleton<FavoritesRepository>(
     () => FavoritesRepositoryImpl(favoriteDogDao: appLocator()),
   );
+  appLocator.registerLazySingleton<BreedImagesRepository>(
+    () => BreedImagesRepositoryImpl(
+      dogApiProvider: appLocator(),
+      cacheDao: appLocator(),
+      isFavoriteDogUseCase: appLocator(),
+    ),
+  );
+  appLocator.registerLazySingleton<BreedRepository>(BreedRepositoryImpl.new);
 
   // Use Cases
   appLocator.registerFactory(
@@ -91,6 +100,20 @@ Future<void> configureDependencies() async {
     () => GetLastDogUseCase(preferencesRepository: appLocator()),
   );
   appLocator.registerFactory(GetQuizQuestionUseCase.new);
+
+  // Breed Images Use Cases
+  appLocator.registerFactory(
+    () => GetBreedImagesUseCase(
+      breedImagesRepository: appLocator(),
+      connectivityService: appLocator(),
+    ),
+  );
+  appLocator.registerFactory(
+    () => ToggleBreedImageFavoriteUseCase(favoritesRepository: appLocator()),
+  );
+  appLocator.registerFactory(
+    () => ClearBreedImagesCacheUseCase(breedImagesRepository: appLocator()),
+  );
 
   appLocator.registerLazySingleton(AppRouter.new);
 }

@@ -1,6 +1,8 @@
 library;
 
 export 'check_first_launch_use_case.dart';
+export 'clear_breed_images_cache_use_case.dart';
+export 'get_breed_images_use_case.dart';
 export 'get_breeds_use_case.dart';
 export 'get_favorite_dogs_use_case.dart';
 export 'get_last_dog_use_case.dart';
@@ -11,4 +13,5 @@ export 'remove_favorite_dog_use_case.dart';
 export 'save_favorite_dog_use_case.dart';
 export 'save_last_dog_use_case.dart';
 export 'set_first_launch_completed_use_case.dart';
+export 'toggle_breed_image_favorite_use_case.dart';
 export 'use_case.dart';

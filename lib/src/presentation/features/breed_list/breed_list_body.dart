@@ -46,7 +46,7 @@ class _BreedListBodyState extends State<BreedListBody> {
   }
 
   void _onBreedTap(BreedType breed) {
-    context.router.push(HomeRoute(breed: breed));
+    context.router.push(BreedImagesSlideshowRoute(breed: breed));
   }
 
   @override

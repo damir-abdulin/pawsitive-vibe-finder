@@ -59,4 +59,34 @@ class DogApiProviderImpl implements DogApiProvider {
       throw ProviderException('An unexpected error occurred: $e');
     }
   }
+
+  @override
+  Future<BreedImagesResponseEntity> getBreedImages(String breedPath) async {
+    try {
+      final Response<dynamic> response = await _dio.get(
+        '$_baseUrl/breed/$breedPath/images',
+      );
+
+      if (response.statusCode == 200 && response.data != null) {
+        final Map<String, dynamic> jsonData =
+            response.data as Map<String, dynamic>;
+        return BreedImagesResponseEntity.fromJson(jsonData);
+      } else {
+        throw ProviderException(
+          'Failed to fetch breed images. Status: ${response.statusCode}',
+        );
+      }
+    } on DioException catch (e) {
+      throw NetworkException(
+        'Network error while fetching breed images: ${e.message}',
+      );
+    } on ProviderException {
+      // Re-throw provider exceptions as-is
+      rethrow;
+    } catch (e) {
+      throw ProviderException(
+        'Unexpected error while fetching breed images: $e',
+      );
+    }
+  }
 }

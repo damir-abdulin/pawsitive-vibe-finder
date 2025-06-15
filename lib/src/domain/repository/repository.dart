@@ -1,5 +1,6 @@
 library;
 
+export 'breed_images_repository.dart';
 export 'breed_repository.dart';
 export 'dog_repository.dart';
 export 'favorites_repository.dart';

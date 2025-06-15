@@ -11,6 +11,54 @@
 part of 'app_router.dart';
 
 /// generated route for
+/// [BreedImagesSlideshowScreen]
+class BreedImagesSlideshowRoute
+    extends PageRouteInfo<BreedImagesSlideshowRouteArgs> {
+  BreedImagesSlideshowRoute({
+    required BreedType breed,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         BreedImagesSlideshowRoute.name,
+         args: BreedImagesSlideshowRouteArgs(breed: breed, key: key),
+         initialChildren: children,
+       );
+
+  static const String name = 'BreedImagesSlideshowRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<BreedImagesSlideshowRouteArgs>();
+      return BreedImagesSlideshowScreen(breed: args.breed, key: args.key);
+    },
+  );
+}
+
+class BreedImagesSlideshowRouteArgs {
+  const BreedImagesSlideshowRouteArgs({required this.breed, this.key});
+
+  final BreedType breed;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'BreedImagesSlideshowRouteArgs{breed: $breed, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! BreedImagesSlideshowRouteArgs) return false;
+    return breed == other.breed && key == other.key;
+  }
+
+  @override
+  int get hashCode => breed.hashCode ^ key.hashCode;
+}
+
+/// generated route for
 /// [BreedListScreen]
 class BreedListRoute extends PageRouteInfo<void> {
   const BreedListRoute({List<PageRouteInfo>? children})

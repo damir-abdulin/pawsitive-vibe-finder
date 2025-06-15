@@ -9,4 +9,7 @@ abstract class DogApiProvider {
   Future<DogResponseEntity> getRandomDogByBreedPath({
     required String breedPath,
   });
+
+  /// Fetches breed images from the API.
+  Future<BreedImagesResponseEntity> getBreedImages(String breedPath);
 }
