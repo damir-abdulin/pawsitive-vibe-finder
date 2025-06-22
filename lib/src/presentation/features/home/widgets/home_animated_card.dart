@@ -172,7 +172,7 @@ class _HomeAnimatedCardState extends State<HomeAnimatedCard>
                             Container(
                               color: Theme.of(
                                 context,
-                              ).colorScheme.surfaceVariant,
+                              ).colorScheme.surfaceContainerHighest,
                               child: Center(
                                 child: SizedBox(
                                   width: 32,
@@ -191,7 +191,7 @@ class _HomeAnimatedCardState extends State<HomeAnimatedCard>
                                 Container(
                                   color: Theme.of(
                                     context,
-                                  ).colorScheme.surfaceVariant,
+                                  ).colorScheme.surfaceContainerHighest,
                                   child: Center(
                                     child: Column(
                                       mainAxisAlignment:

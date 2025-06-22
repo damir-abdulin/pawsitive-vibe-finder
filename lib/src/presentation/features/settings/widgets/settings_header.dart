@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../localization/locale_extension.dart';
 
 /// Header widget for the settings screen with back button and title.
 class SettingsHeader extends StatelessWidget {

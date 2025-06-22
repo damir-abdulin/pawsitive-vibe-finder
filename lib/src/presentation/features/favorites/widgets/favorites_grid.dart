@@ -35,7 +35,6 @@ class FavoritesGrid extends StatelessWidget {
           crossAxisCount: _getCrossAxisCount(context),
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
-          childAspectRatio: 1.0,
         ),
         itemCount: dogs.length,
         itemBuilder: (BuildContext context, int index) {

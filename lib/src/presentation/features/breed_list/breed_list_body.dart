@@ -65,7 +65,11 @@ class _BreedListBodyState extends State<BreedListBody> {
             Expanded(
               child: BlocBuilder<BreedListBloc, BreedListState>(
                 builder: (BuildContext context, BreedListState state) {
-                  return _buildContent(state);
+                  return BreedListContent(
+                    state: state,
+                    onRetry: _onRetry,
+                    onBreedTap: _onBreedTap,
+                  );
                 },
               ),
             ),
@@ -74,36 +78,6 @@ class _BreedListBodyState extends State<BreedListBody> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildContent(BreedListState state) {
-    switch (state.status) {
-      case BreedListStatus.loading:
-        return const BreedListLoading();
-      case BreedListStatus.failure:
-        return BreedListErrorState(
-          errorMessage: state.errorMessage,
-          onRetry: _onRetry,
-        );
-      case BreedListStatus.success:
-        if (state.filteredBreeds.isEmpty) {
-          return const BreedListEmptyState();
-        }
-        return _buildBreedList(state.filteredBreeds);
-      default:
-        return const SizedBox.shrink();
-    }
-  }
-
-  Widget _buildBreedList(List<BreedType> breeds) {
-    return ListView.builder(
-      padding: EdgeInsets.zero,
-      itemCount: breeds.length,
-      itemBuilder: (BuildContext context, int index) {
-        final BreedType breed = breeds[index];
-        return BreedListItem(breed: breed, onTap: () => _onBreedTap(breed));
-      },
     );
   }
 }

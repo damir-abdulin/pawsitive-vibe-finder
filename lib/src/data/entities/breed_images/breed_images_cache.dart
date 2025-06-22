@@ -23,14 +23,14 @@ class BreedImagesCache extends Table {
       dateTime().withDefault(currentDateAndTime)();
 
   /// Size of the cached data in bytes.
-  IntColumn get sizeInBytes => integer().withDefault(const Constant(0))();
+  IntColumn get sizeInBytes => integer().withDefault(const Constant<int>(0))();
 
   /// Whether all images for this breed are fully cached.
   BoolColumn get isFullyCached =>
-      boolean().withDefault(const Constant(false))();
+      boolean().withDefault(const Constant<bool>(false))();
 
   @override
-  List<Set<Column>> get uniqueKeys => [
-    {breedId}, // Each breed can only have one cache entry
+  List<Set<Column<Object>>> get uniqueKeys => <Set<Column<Object>>>[
+    <Column<Object>>{breedId}, // Each breed can only have one cache entry
   ];
 }

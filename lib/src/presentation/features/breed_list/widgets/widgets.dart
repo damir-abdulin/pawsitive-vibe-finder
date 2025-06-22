@@ -1,3 +1,4 @@
+export 'breed_list_content.dart';
 export 'breed_list_empty_state.dart';
 export 'breed_list_error_state.dart';
 export 'breed_list_header.dart';

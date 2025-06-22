@@ -8,6 +8,7 @@ class DogResponseMapper {
   /// The breed is parsed from the image URL.
   static DogModel toDomain(DogResponseEntity entity) {
     final BreedType breed = _parseBreedFromUrl(entity.message);
+
     return DogModel(imageUrl: entity.message, breed: breed);
   }
 
@@ -28,14 +29,16 @@ class DogResponseMapper {
           final List<String> parts = breedSegment.split('-');
           if (parts.length == 2) {
             enumName =
-                parts[0] + parts[1][0].toUpperCase() + parts[1].substring(1);
+                parts.first + parts[1][0].toUpperCase() + parts[1].substring(1);
           }
         }
+
         return BreedType.values.firstWhere(
           (BreedType e) => e.name.toLowerCase() == enumName.toLowerCase(),
           orElse: () => BreedType.mix,
         );
       }
+
       return BreedType.mix;
     } catch (e) {
       return BreedType.mix;

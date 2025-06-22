@@ -1,5 +1,4 @@
 import '../../domain/domain.dart';
-import '../../domain/exceptions/dog_exception.dart';
 import '../entities/dog/dog_response_entity.dart';
 import '../mappers/mappers.dart';
 import '../providers/providers.dart';

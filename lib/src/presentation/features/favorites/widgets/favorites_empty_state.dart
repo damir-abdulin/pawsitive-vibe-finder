@@ -22,7 +22,7 @@ class FavoritesEmptyState extends StatelessWidget {
                 color: colorScheme.surfaceContainerHighest,
                 borderRadius: BorderRadius.circular(60),
                 border: Border.all(
-                  color: colorScheme.outline.withOpacity(0.08),
+                  color: colorScheme.outline.withValues(alpha: 0.08),
                   width: 2,
                 ),
               ),
@@ -65,8 +65,7 @@ class FavoritesEmptyState extends StatelessWidget {
                 color: colorScheme.surface,
                 borderRadius: BorderRadius.circular(25),
                 border: Border.all(
-                  color: colorScheme.outline.withOpacity(0.08),
-                  width: 1,
+                  color: colorScheme.outline.withValues(alpha: 0.08),
                 ),
               ),
               child: Row(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../localization/locale_extension.dart';
 
 import 'bloc/settings_bloc.dart';
 import 'bloc/settings_event.dart';
@@ -37,19 +36,19 @@ class SettingsBody extends StatelessWidget {
                   topRight: Radius.circular(20),
                 ),
               ),
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(16),
+              child: const SingleChildScrollView(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     // Theme Section
-                    const SettingsSection(
+                    SettingsSection(
                       title: 'Theme',
                       child: ThemeSettingsWidget(),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
                     // Language Section
-                    const SettingsSection(
+                    SettingsSection(
                       title: 'Language',
                       child: LanguageSettingsWidget(),
                     ),

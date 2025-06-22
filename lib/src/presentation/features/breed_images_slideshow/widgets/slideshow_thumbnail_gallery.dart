@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../domain/domain.dart';
 
@@ -90,7 +90,7 @@ class _SlideshowThumbnailGalleryState extends State<SlideshowThumbnailGallery> {
                           BoxShadow(
                             color: Theme.of(
                               context,
-                            ).primaryColor.withOpacity(0.3),
+                            ).primaryColor.withValues(alpha: 0.3),
                             blurRadius: 8,
                             offset: const Offset(0, 2),
                           ),
@@ -155,7 +155,7 @@ class _SlideshowThumbnailGalleryState extends State<SlideshowThumbnailGallery> {
                       if (!isSelected)
                         Container(
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.3),
+                            color: Colors.black.withValues(alpha: 0.3),
                             borderRadius: BorderRadius.circular(6),
                           ),
                         ),
@@ -174,7 +174,7 @@ class _SlideshowThumbnailGalleryState extends State<SlideshowThumbnailGallery> {
   void _scrollToCurrentIndex() {
     if (!_scrollController.hasClients) return;
 
-    final double itemWidth = thumbnailSize + thumbnailSpacing;
+    const double itemWidth = thumbnailSize + thumbnailSpacing;
     final double targetOffset = widget.currentIndex * itemWidth;
     final double maxScrollExtent = _scrollController.position.maxScrollExtent;
     final double viewportWidth = _scrollController.position.viewportDimension;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 /// Loading widget for the home screen.
-class HomeLoadingWidget extends StatelessWidget {
-  /// Creates a [HomeLoadingWidget].
-  const HomeLoadingWidget({super.key});
+class HomeLoadingView extends StatelessWidget {
+  /// Creates a [HomeLoadingView].
+  const HomeLoadingView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import '../navigation/app_router.dart';
 
 import '../localization/locale_extension.dart';
+import '../navigation/app_router.dart';
 
 /// Bottom navigation bar for the application.
 class AppBottomNavigation extends StatelessWidget {
@@ -20,7 +20,6 @@ class AppBottomNavigation extends StatelessWidget {
         border: Border(
           top: BorderSide(
             color: Theme.of(context).dividerTheme.color ?? Colors.grey.shade300,
-            width: 1,
           ),
         ),
       ),

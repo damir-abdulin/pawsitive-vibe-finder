@@ -21,7 +21,7 @@ class QuizHeader extends StatelessWidget {
             color: colorScheme.surface,
             boxShadow: <BoxShadow>[
               BoxShadow(
-                color: colorScheme.shadow.withOpacity(0.08),
+                color: colorScheme.shadow.withValues(alpha: 0.08),
                 offset: const Offset(0, 1),
                 blurRadius: 1,
               ),

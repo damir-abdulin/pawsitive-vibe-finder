@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../localization/locale_extension.dart';
+import '../../theme/app_constants.dart';
 import 'image_card_controller.dart';
 
 class ImageCard extends StatefulWidget {
@@ -9,8 +10,8 @@ class ImageCard extends StatefulWidget {
     required this.imageUrl,
     this.controller,
     this.title,
-    this.duration = const Duration(milliseconds: 300),
-    this.dragBorder = 300,
+    this.duration = AppConstants.defaultAnimationDuration,
+    this.dragBorder = AppConstants.dragBorderThreshold,
     this.onSwipeRight,
     this.onSwipeLeft,
     super.key,
@@ -44,7 +45,7 @@ class ImageCardState extends State<ImageCard>
     _animationController =
         AnimationController(
           vsync: this,
-          duration: const Duration(milliseconds: 300),
+          duration: AppConstants.defaultAnimationDuration,
         )..addListener(() {
           setState(() {});
         });
@@ -78,7 +79,7 @@ class ImageCardState extends State<ImageCard>
   void _onPanEnd(DragEndDetails details) {
     final Offset dragVector = details.velocity.pixelsPerSecond;
 
-    if (dragVector.dx.abs() > 300) {
+    if (dragVector.dx.abs() > AppConstants.dragBorderThreshold) {
       // Start animation only if swipe is fast enough
       final double screenWidth = MediaQuery.of(context).size.width;
       final bool isSwipeRight = dragVector.dx > 0;
@@ -174,12 +175,17 @@ class ImageCardState extends State<ImageCard>
           child: Container(
             decoration: BoxDecoration(
               color: colorScheme.surface,
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(
+                AppConstants.mediumBorderRadius,
+              ),
             ),
             clipBehavior: Clip.antiAlias,
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            margin: const EdgeInsets.symmetric(
+              horizontal: AppConstants.mediumPadding,
+              vertical: AppConstants.largePadding,
+            ),
             child: SizedBox(
-              height: 500,
+              height: AppConstants.cardHeight,
               width: double.infinity,
               child: Stack(
                 children: <Widget>[
@@ -196,7 +202,7 @@ class ImageCardState extends State<ImageCard>
                             Center(
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
-                                children: [
+                                children: <Widget>[
                                   CircularProgressIndicator(
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                       colorScheme.primary,
@@ -216,7 +222,7 @@ class ImageCardState extends State<ImageCard>
                             (BuildContext context, String url, Object error) =>
                                 Column(
                                   mainAxisSize: MainAxisSize.min,
-                                  children: [
+                                  children: <Widget>[
                                     Icon(
                                       Icons.error_outline,
                                       color: colorScheme.error,

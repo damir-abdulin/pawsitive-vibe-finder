@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 
 /// Widget for displaying the main image in the slideshow with zoom, pan, and swipe functionality.
 ///
@@ -56,7 +56,7 @@ class _SlideshowImageDisplayState extends State<SlideshowImageDisplay> {
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.1),
+          color: Colors.black.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(8),
         ),
         child: InteractiveViewer(

@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../domain/domain.dart';
-import '../../../navigation/app_router.dart';
 
 part 'quiz_event.dart';
 part 'quiz_state.dart';
@@ -20,11 +19,9 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
     required GetQuizQuestionUseCase getQuizQuestionUseCase,
     required GetRandomDogsUseCase getRandomDogsUseCase,
     required GetBreedsUseCase getBreedsUseCase,
-    required AppRouter router,
   }) : _getQuizQuestionUseCase = getQuizQuestionUseCase,
        _getRandomDogsUseCase = getRandomDogsUseCase,
        _getBreedsUseCase = getBreedsUseCase,
-       _router = router,
        super(const QuizState.initial()) {
     on<QuizStarted>(_onQuizStarted);
     on<QuizAnswerSelected>(_onQuizAnswerSelected);
@@ -34,7 +31,6 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
   final GetQuizQuestionUseCase _getQuizQuestionUseCase;
   final GetRandomDogsUseCase _getRandomDogsUseCase;
   final GetBreedsUseCase _getBreedsUseCase;
-  final AppRouter _router;
 
   Future<void> _onQuizStarted(
     QuizStarted event,

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../di/service_locator.dart';
 import '../../../domain/domain.dart';
-import '../../navigation/app_router.dart';
+
 import 'bloc/quiz_bloc.dart';
 import 'quiz_body.dart';
 
@@ -19,7 +19,6 @@ class QuizScreen extends StatelessWidget {
         getQuizQuestionUseCase: appLocator<GetQuizQuestionUseCase>(),
         getRandomDogsUseCase: appLocator<GetRandomDogsUseCase>(),
         getBreedsUseCase: appLocator<GetBreedsUseCase>(),
-        router: appLocator<AppRouter>(),
       )..add(QuizStarted()),
       child: const QuizBody(),
     );

@@ -1,8 +1,8 @@
 export 'answer_button.dart';
 export 'quiz_answer_button.dart';
+export 'quiz_content.dart';
 export 'quiz_error_state.dart';
 export 'quiz_exit_confirmation_sheet.dart';
-export 'quiz_footer.dart';
 export 'quiz_header.dart';
 export 'quiz_image.dart';
 export 'quiz_loading.dart';

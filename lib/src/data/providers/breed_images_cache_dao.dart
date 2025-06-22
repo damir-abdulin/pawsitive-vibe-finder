@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:drift/drift.dart';
 
-import '../entities/breed_images/breed_images_cache_entity.dart';
+import '../entities/breed_images/breed_images_cache.dart';
 import 'database.dart';
 
 part 'breed_images_cache_dao.g.dart';
@@ -11,7 +11,7 @@ part 'breed_images_cache_dao.g.dart';
 ///
 /// This DAO handles all database operations for breed images caching,
 /// including LRU cache management and storage size tracking.
-@DriftAccessor(tables: [BreedImagesCache])
+@DriftAccessor(tables: <Type>[BreedImagesCache])
 class BreedImagesCacheDao extends DatabaseAccessor<AppDatabase>
     with _$BreedImagesCacheDaoMixin {
   /// Creates an instance of [BreedImagesCacheDao].
@@ -20,7 +20,11 @@ class BreedImagesCacheDao extends DatabaseAccessor<AppDatabase>
   /// Gets cached breed images by breed ID.
   Future<BreedImagesCacheEntity?> getCachedBreedImages(String breedId) async {
     try {
-      final query = select(breedImagesCache)
+      final SimpleSelectStatement<
+        $BreedImagesCacheTable,
+        BreedImagesCacheEntity
+      >
+      query = select(breedImagesCache)
         ..where((BreedImagesCache tbl) => tbl.breedId.equals(breedId));
 
       final BreedImagesCacheEntity? result = await query.getSingleOrNull();
@@ -28,6 +32,7 @@ class BreedImagesCacheDao extends DatabaseAccessor<AppDatabase>
       if (result != null) {
         // Update last accessed time for LRU
         await _updateLastAccessedTime(result.id);
+        
         return result;
       }
 
@@ -51,12 +56,12 @@ class BreedImagesCacheDao extends DatabaseAccessor<AppDatabase>
       // Use replace to handle unique constraint properly
       await into(breedImagesCache).insert(
         BreedImagesCacheCompanion(
-          breedId: Value(breedId),
-          imageUrls: Value(imageUrlsJson),
-          sizeInBytes: Value(sizeInBytes),
-          isFullyCached: const Value(true),
-          createdAt: Value(now),
-          lastAccessedAt: Value(now),
+          breedId: Value<String>(breedId),
+          imageUrls: Value<String>(imageUrlsJson),
+          sizeInBytes: Value<int>(sizeInBytes),
+          isFullyCached: const Value<bool>(true),
+          createdAt: Value<DateTime>(now),
+          lastAccessedAt: Value<DateTime>(now),
         ),
         mode: InsertMode.replace,
       );
@@ -69,10 +74,15 @@ class BreedImagesCacheDao extends DatabaseAccessor<AppDatabase>
   /// Checks if breed images are cached.
   Future<bool> isBreedCached(String breedId) async {
     try {
-      final query = select(breedImagesCache)
+      final SimpleSelectStatement<
+        $BreedImagesCacheTable,
+        BreedImagesCacheEntity
+      >
+      query = select(breedImagesCache)
         ..where((BreedImagesCache tbl) => tbl.breedId.equals(breedId));
 
       final BreedImagesCacheEntity? result = await query.getSingleOrNull();
+     
       return result != null && result.isFullyCached;
     } catch (e) {
       // If table doesn't exist or other database error, return false
@@ -84,16 +94,17 @@ class BreedImagesCacheDao extends DatabaseAccessor<AppDatabase>
   Future<int> getTotalCacheSize() async {
     try {
       // Use COALESCE to handle NULL values from SUM when table is empty
-      final Expression<int> sumExpression = coalesce([
+      final Expression<int> sumExpression = coalesce(<Expression<int>>[
         breedImagesCache.sizeInBytes.sum(),
-        const Constant(0),
+        const Constant<int>(0),
       ]);
 
       final Selectable<TypedResult> query = selectOnly(breedImagesCache)
-        ..addColumns([sumExpression]);
+        ..addColumns(<Expression<Object>>[sumExpression]);
 
       final TypedResult result = await query.getSingle();
       final int? totalSize = result.read(sumExpression);
+     
       return totalSize ?? 0;
     } catch (e) {
       // If the table doesn't exist or any other error occurs, return 0
@@ -116,8 +127,12 @@ class BreedImagesCacheDao extends DatabaseAccessor<AppDatabase>
       }
 
       // Get entries ordered by least recently used
-      final query = select(breedImagesCache)
-        ..orderBy([
+      final SimpleSelectStatement<
+        $BreedImagesCacheTable,
+        BreedImagesCacheEntity
+      >
+      query = select(breedImagesCache)
+        ..orderBy(<OrderClauseGenerator<$BreedImagesCacheTable>>[
           (BreedImagesCache tbl) => OrderingTerm.asc(tbl.lastAccessedAt),
         ]);
 
@@ -151,6 +166,7 @@ class BreedImagesCacheDao extends DatabaseAccessor<AppDatabase>
       try {
         final List<dynamic> decoded =
             jsonDecode(cacheEntry.imageUrls) as List<dynamic>;
+       
         return decoded.cast<String>();
       } catch (e) {
         // If JSON decoding fails, return null
@@ -166,7 +182,9 @@ class BreedImagesCacheDao extends DatabaseAccessor<AppDatabase>
     await (update(
       breedImagesCache,
     )..where((BreedImagesCache tbl) => tbl.id.equals(cacheId))).write(
-      BreedImagesCacheCompanion(lastAccessedAt: Value(DateTime.now())),
+      BreedImagesCacheCompanion(
+        lastAccessedAt: Value<DateTime>(DateTime.now()),
+      ),
     );
   }
 }

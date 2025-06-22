@@ -2,8 +2,6 @@ import '../../domain/domain.dart';
 import '../entities/breed_images/breed_images_response_entity.dart';
 import '../mappers/breed_images_mapper.dart';
 import '../mappers/breed_mapper.dart';
-import '../providers/breed_images_cache_dao.dart';
-import '../providers/exceptions/provider_exceptions.dart';
 import '../providers/providers.dart';
 
 /// The concrete implementation of [BreedImagesRepository].

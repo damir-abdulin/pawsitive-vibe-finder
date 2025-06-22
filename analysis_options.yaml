@@ -1,8 +1,6 @@
 include: package:flutter_lints/flutter.yaml
 
 analyzer:
-  plugins:
-    - dart_code_metrics
   exclude:
     - "**/*.g.dart"
     - "**/*.gr.dart"
@@ -41,13 +39,10 @@ dart_code_metrics:
     - avoid-unused-parameters
     - avoid-unrelated-type-assertions
     - avoid-border-all
-    - avoid-non-null-assertion
     - avoid-non-ascii-symbols
-    - ban-name
     - binary-expression-operand-order
     - double-literal-format
     - format-comment
-    - member-ordering-extended
     - member-ordering
     - newline-before-return
     - no-boolean-literal-compare

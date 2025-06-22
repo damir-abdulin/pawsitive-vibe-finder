@@ -67,7 +67,7 @@ class HomeImageCard extends StatelessWidget {
                 ),
                 errorWidget: (BuildContext context, String url, Object error) =>
                     Container(
-                      color: Theme.of(context).colorScheme.surfaceVariant,
+                      color: Theme.of(context).colorScheme.surfaceContainerHighest,
                       child: Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,

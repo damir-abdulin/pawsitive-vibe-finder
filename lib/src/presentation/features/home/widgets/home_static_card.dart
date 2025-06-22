@@ -51,7 +51,7 @@ class HomeStaticCard extends StatelessWidget {
                   memCacheWidth: 400, // Optimize memory usage
                   memCacheHeight: 533, // 400 * 4/3 for aspect ratio
                   placeholder: (BuildContext context, String url) => Container(
-                    color: Theme.of(context).colorScheme.surfaceVariant,
+                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
                     child: Center(
                       child: SizedBox(
                         width: 24,
@@ -68,7 +68,7 @@ class HomeStaticCard extends StatelessWidget {
                   errorWidget:
                       (BuildContext context, String url, Object error) =>
                           Container(
-                            color: Theme.of(context).colorScheme.surfaceVariant,
+                            color: Theme.of(context).colorScheme.surfaceContainerHighest,
                             child: Center(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,

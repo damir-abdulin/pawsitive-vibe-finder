@@ -18,7 +18,7 @@ class QuizImage extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.10),
+            color: colorScheme.shadow.withValues(alpha: 0.10),
             offset: const Offset(0, 4),
             blurRadius: 8,
           ),

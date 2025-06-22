@@ -35,12 +35,12 @@ class AppSettingsBloc extends Bloc<AppSettingsEvent, AppSettingsState> {
     try {
       final ThemeMode themeMode = await _getThemeModeUseCase.execute(
         null,
-        onError: (_) => Future.value(ThemeMode.system),
+        onError: (AppException _) => Future<ThemeMode>.value(ThemeMode.system),
       );
 
       final String? languageCode = await _getLanguageCodeUseCase.execute(
         null,
-        onError: (_) => Future.value(null),
+        onError: (AppException _) => Future<String?>.value(),
       );
 
       emit(
@@ -68,7 +68,7 @@ class AppSettingsBloc extends Bloc<AppSettingsEvent, AppSettingsState> {
       try {
         await _saveThemeModeUseCase.execute(
           event.themeMode,
-          onError: (_) => Future.value(),
+          onError: (AppException _) => Future<void>.value(),
         );
 
         emit(currentState.copyWith(themeMode: event.themeMode));
@@ -88,7 +88,7 @@ class AppSettingsBloc extends Bloc<AppSettingsEvent, AppSettingsState> {
       try {
         await _saveLanguageCodeUseCase.execute(
           event.languageCode,
-          onError: (_) => Future.value(),
+          onError: (AppException _) => Future<void>.value(),
         );
 
         emit(currentState.copyWith(languageCode: event.languageCode));

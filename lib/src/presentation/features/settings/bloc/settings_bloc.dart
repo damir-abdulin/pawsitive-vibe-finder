@@ -19,6 +19,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     NavigateBackEvent event,
     Emitter<SettingsState> emit,
   ) async {
-    _router.maybePop();
+    await _router.maybePop();
   }
 }

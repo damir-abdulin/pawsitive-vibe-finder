@@ -91,7 +91,7 @@ class QuizAnswerButton extends StatelessWidget {
       if (isSelected) {
         return colorScheme.primary;
       }
-      return colorScheme.outline.withOpacity(0.3);
+      return colorScheme.outline.withValues(alpha: 0.3);
     }
     if (isCorrect) {
       return colorScheme.secondaryContainer;
@@ -99,7 +99,7 @@ class QuizAnswerButton extends StatelessWidget {
     if (isSelected && !isCorrect) {
       return colorScheme.errorContainer;
     }
-    return colorScheme.outline.withOpacity(0.3);
+    return colorScheme.outline.withValues(alpha: 0.3);
   }
 
   Color _getTextColor(ColorScheme colorScheme) {
@@ -124,7 +124,7 @@ class QuizAnswerButton extends StatelessWidget {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(
-            color: colorScheme.outline.withOpacity(0.3),
+            color: colorScheme.outline.withValues(alpha: 0.3),
             width: 2,
           ),
         ),
@@ -163,7 +163,7 @@ class QuizAnswerButton extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(
-          color: colorScheme.outline.withOpacity(0.3),
+          color: colorScheme.outline.withValues(alpha: 0.3),
           width: 2,
         ),
       ),

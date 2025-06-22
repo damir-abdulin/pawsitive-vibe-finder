@@ -49,7 +49,7 @@ class _FavoriteImageGridItemState extends State<FavoriteImageGridItem> {
               borderRadius: BorderRadius.circular(12),
               boxShadow: <BoxShadow>[
                 BoxShadow(
-                  color: colorScheme.shadow.withOpacity(0.10),
+                  color: colorScheme.shadow.withValues(alpha: 0.10),
                   offset: const Offset(0, 2),
                   blurRadius: 4,
                 ),
@@ -119,11 +119,11 @@ class _FavoriteImageGridItemState extends State<FavoriteImageGridItem> {
           width: 36,
           height: 36,
           decoration: BoxDecoration(
-            color: colorScheme.surface.withOpacity(0.85),
+            color: colorScheme.surface.withValues(alpha: 0.85),
             borderRadius: BorderRadius.circular(20),
             boxShadow: <BoxShadow>[
               BoxShadow(
-                color: colorScheme.shadow.withOpacity(0.10),
+                color: colorScheme.shadow.withValues(alpha: 0.10),
                 offset: const Offset(0, 2),
                 blurRadius: 4,
               ),

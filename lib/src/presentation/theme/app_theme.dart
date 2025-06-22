@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
+import 'app_constants.dart';
 
 /// A class that holds the theme data for the application.
 class AppTheme {
@@ -16,7 +17,7 @@ class AppTheme {
       iconTheme: IconThemeData(color: AppColors.textPrimary),
       titleTextStyle: TextStyle(
         color: AppColors.textPrimary,
-        fontSize: 20,
+        fontSize: AppConstants.largeFontSize,
         fontWeight: FontWeight.bold,
       ),
     ),
@@ -26,7 +27,6 @@ class AppTheme {
       error: AppColors.error,
       onSurface: AppColors.textPrimary,
       surface: AppColors.primaryBackground,
-      onPrimary: AppColors.white,
     ),
     textTheme: const TextTheme(
       bodyLarge: TextStyle(color: AppColors.textPrimary),
@@ -47,18 +47,24 @@ class AppTheme {
       filled: true,
       fillColor: AppColors.secondaryBackground,
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(AppConstants.smallBorderRadius),
         borderSide: BorderSide.none,
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(AppConstants.smallBorderRadius),
         borderSide: BorderSide.none,
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: AppColors.accent, width: 2),
+        borderRadius: BorderRadius.circular(AppConstants.smallBorderRadius),
+        borderSide: const BorderSide(
+          color: AppColors.accent,
+          width: AppConstants.thickBorder,
+        ),
       ),
-      contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      contentPadding: const EdgeInsets.symmetric(
+        vertical: AppConstants.extraSmallPadding + AppConstants.smallPadding,
+        horizontal: AppConstants.mediumPadding,
+      ),
       hintStyle: const TextStyle(color: AppColors.textSecondary),
     ),
   );
@@ -164,7 +170,6 @@ class AppTheme {
         borderRadius: const BorderRadius.all(Radius.circular(16)),
         side: BorderSide(
           color: AppColors.darkBorder.withValues(alpha: 0.3),
-          width: 1,
         ),
       ),
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),

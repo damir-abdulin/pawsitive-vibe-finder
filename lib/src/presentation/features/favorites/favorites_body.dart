@@ -37,12 +37,12 @@ class _FavoritesBodyState extends State<FavoritesBody> {
     });
   }
 
-  void _onImageTap(DogModel dog) async {
+  Future<void> _onImageTap(DogModel dog) async {
     final bool? wasToggled = await context.router.push<bool>(
       DogDetailsRoute(dog: dog),
     );
     if (wasToggled ?? false) {
-      if (context.mounted) {
+      if (mounted) {
         context.read<FavoritesBloc>().add(FavoritesRefreshed());
         _unfavoritedInSession.clear();
       }
@@ -65,7 +65,13 @@ class _FavoritesBodyState extends State<FavoritesBody> {
           Expanded(
             child: BlocBuilder<FavoritesBloc, FavoritesState>(
               builder: (BuildContext context, FavoritesState state) {
-                return _buildContent(state);
+                return FavoritesContent(
+                  state: state,
+                  unfavoritedInSession: _unfavoritedInSession,
+                  onFavoriteToggle: _onFavoriteToggle,
+                  onImageTap: _onImageTap,
+                  onRetry: _onRetry,
+                );
               },
             ),
           ),
@@ -74,30 +80,5 @@ class _FavoritesBodyState extends State<FavoritesBody> {
         ],
       ),
     );
-  }
-
-  Widget _buildContent(FavoritesState state) {
-    if (state is FavoritesLoadInProgress) {
-      return const FavoritesLoading();
-    }
-
-    if (state is FavoritesEmpty) {
-      return const FavoritesEmptyState();
-    }
-
-    if (state is FavoritesLoadSuccess) {
-      return FavoritesGrid(
-        dogs: state.favoriteDogs,
-        unfavoritedInSession: _unfavoritedInSession,
-        onFavoriteToggle: _onFavoriteToggle,
-        onImageTap: _onImageTap,
-      );
-    }
-
-    if (state is FavoritesLoadFailure) {
-      return FavoritesErrorState(message: state.message, onRetry: _onRetry);
-    }
-
-    return const Center(child: Text('An unknown error occurred.'));
   }
 }
