@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../theme/colors.dart';
 
 /// Loading widget for the breed list screen.
 class BreedListLoading extends StatelessWidget {
@@ -8,9 +7,11 @@ class BreedListLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: CircularProgressIndicator(
-        valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+        valueColor: AlwaysStoppedAnimation<Color>(
+          Theme.of(context).colorScheme.primary,
+        ),
       ),
     );
   }

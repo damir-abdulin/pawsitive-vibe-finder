@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../theme/colors.dart';
 
 /// Loading widget for the favorites screen.
 class FavoritesLoading extends StatelessWidget {
@@ -8,18 +7,19 @@ class FavoritesLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+            valueColor: AlwaysStoppedAnimation<Color>(colorScheme.primary),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Text(
             'Loading your favorites...',
             style: TextStyle(
-              color: Color(0xFF756B6B),
+              color: colorScheme.onSurfaceVariant,
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),

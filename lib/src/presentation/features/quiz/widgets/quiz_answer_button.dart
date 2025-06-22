@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../theme/colors.dart';
 
 /// Answer option button for the quiz with different visual states.
 class QuizAnswerButton extends StatelessWidget {
@@ -31,6 +30,7 @@ class QuizAnswerButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       child: Material(
@@ -43,10 +43,10 @@ class QuizAnswerButton extends StatelessWidget {
             curve: Curves.easeInOut,
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: _getBackgroundColor(),
+              color: _getBackgroundColor(colorScheme),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: _getBorderColor(),
+                color: _getBorderColor(colorScheme),
                 width: isSelected && !isAnswered ? 2 : 1,
               ),
             ),
@@ -57,14 +57,14 @@ class QuizAnswerButton extends StatelessWidget {
                   child: Text(
                     text,
                     style: TextStyle(
-                      color: _getTextColor(),
+                      color: _getTextColor(colorScheme),
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
                 // Status indicator
-                _buildStatusIndicator(),
+                _buildStatusIndicator(colorScheme),
               ],
             ),
           ),
@@ -73,49 +73,49 @@ class QuizAnswerButton extends StatelessWidget {
     );
   }
 
-  Color _getBackgroundColor() {
+  Color _getBackgroundColor(ColorScheme colorScheme) {
     if (!isAnswered) {
-      return AppColors.white;
+      return colorScheme.surface;
     }
     if (isCorrect) {
-      return const Color(0xFFD1FAE5); // Correct answer background
+      return colorScheme.secondaryContainer;
     }
     if (isSelected && !isCorrect) {
-      return const Color(0xFFFEE2E2); // Incorrect answer background
+      return colorScheme.errorContainer;
     }
-    return AppColors.white;
+    return colorScheme.surface;
   }
 
-  Color _getBorderColor() {
+  Color _getBorderColor(ColorScheme colorScheme) {
     if (!isAnswered) {
       if (isSelected) {
-        return AppColors.primary;
+        return colorScheme.primary;
       }
-      return const Color(0xFFE7D0D1); // Default border color
+      return colorScheme.outline.withOpacity(0.3);
     }
     if (isCorrect) {
-      return const Color(0xFFD1FAE5); // Correct answer border
+      return colorScheme.secondaryContainer;
     }
     if (isSelected && !isCorrect) {
-      return const Color(0xFFFEE2E2); // Incorrect answer border
+      return colorScheme.errorContainer;
     }
-    return const Color(0xFFE7D0D1);
+    return colorScheme.outline.withOpacity(0.3);
   }
 
-  Color _getTextColor() {
+  Color _getTextColor(ColorScheme colorScheme) {
     if (!isAnswered) {
-      return AppColors.textPrimary;
+      return colorScheme.onSurface;
     }
     if (isCorrect) {
-      return const Color(0xFF065F46); // Correct answer text
+      return colorScheme.secondary;
     }
     if (isSelected && !isCorrect) {
-      return const Color(0xFF991B1B); // Incorrect answer text
+      return colorScheme.error;
     }
-    return AppColors.textPrimary;
+    return colorScheme.onSurface;
   }
 
-  Widget _buildStatusIndicator() {
+  Widget _buildStatusIndicator(ColorScheme colorScheme) {
     if (!isAnswered) {
       // Show empty circle for unselected, ring for selected
       return Container(
@@ -123,7 +123,10 @@ class QuizAnswerButton extends StatelessWidget {
         height: 24,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: const Color(0xFFE7D0D1), width: 2),
+          border: Border.all(
+            color: colorScheme.outline.withOpacity(0.3),
+            width: 2,
+          ),
         ),
       );
     }
@@ -133,11 +136,11 @@ class QuizAnswerButton extends StatelessWidget {
       return Container(
         width: 24,
         height: 24,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: Color(0xFF065F46), // Correct answer icon background
+          color: colorScheme.secondary,
         ),
-        child: const Icon(Icons.check, color: Colors.white, size: 16),
+        child: Icon(Icons.check, color: colorScheme.onSecondary, size: 16),
       );
     }
 
@@ -145,11 +148,11 @@ class QuizAnswerButton extends StatelessWidget {
       return Container(
         width: 24,
         height: 24,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: Color(0xFF991B1B), // Incorrect answer icon background
+          color: colorScheme.error,
         ),
-        child: const Icon(Icons.close, color: Colors.white, size: 16),
+        child: Icon(Icons.close, color: colorScheme.onError, size: 16),
       );
     }
 
@@ -159,7 +162,10 @@ class QuizAnswerButton extends StatelessWidget {
       height: 24,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        border: Border.all(color: const Color(0xFFE7D0D1), width: 2),
+        border: Border.all(
+          color: colorScheme.outline.withOpacity(0.3),
+          width: 2,
+        ),
       ),
     );
   }

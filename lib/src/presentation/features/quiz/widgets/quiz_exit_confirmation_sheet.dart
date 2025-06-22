@@ -36,6 +36,7 @@ class QuizExitConfirmationSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
       child: Container(
@@ -46,9 +47,9 @@ class QuizExitConfirmationSheet extends StatelessWidget {
           maxChildSize: 0.6,
           builder: (BuildContext context, ScrollController scrollController) {
             return Container(
-              decoration: const BoxDecoration(
-                color: Color(0xFFFBF9F9), // Background color matching design
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                color: colorScheme.surface,
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(24),
                   topRight: Radius.circular(24),
                 ),
@@ -64,7 +65,7 @@ class QuizExitConfirmationSheet extends StatelessWidget {
                         height: 6,
                         width: 40,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE3D4D5), // Modal handle color
+                          color: colorScheme.outline.withOpacity(0.15),
                           borderRadius: BorderRadius.circular(3),
                         ),
                       ),
@@ -83,24 +84,22 @@ class QuizExitConfirmationSheet extends StatelessWidget {
                             width: 80,
                             height: 80,
                             decoration: BoxDecoration(
-                              color: const Color(
-                                0xFFE8B4B7,
-                              ).withValues(alpha: 0.1),
+                              color: colorScheme.primary.withOpacity(0.1),
                               shape: BoxShape.circle,
                             ),
-                            child: const Icon(
+                            child: Icon(
                               Icons.warning_rounded,
                               size: 40,
-                              color: Color(0xFFE8B4B7),
+                              color: colorScheme.primary,
                             ),
                           ),
                           const SizedBox(height: 24),
                           // Title
-                          const Text(
+                          Text(
                             'Exit Quiz?',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: Color(0xFF191011), // Primary text color
+                              color: colorScheme.onSurface,
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
                               height: 1.2,
@@ -109,11 +108,11 @@ class QuizExitConfirmationSheet extends StatelessWidget {
                           ),
                           const SizedBox(height: 16),
                           // Description
-                          const Text(
+                          Text(
                             'Are you sure you want to exit? Your progress will be lost and you\'ll need to start over.',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: Color(0xFF4F4A4B), // Secondary text color
+                              color: colorScheme.onSurfaceVariant,
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
                               height: 1.5,
@@ -129,15 +128,11 @@ class QuizExitConfirmationSheet extends StatelessWidget {
                                 child: ElevatedButton(
                                   onPressed: onContinueQuiz,
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(
-                                      0xFFE8B4B7,
-                                    ), // Primary color
-                                    foregroundColor: const Color(
-                                      0xFF191011,
-                                    ), // Primary text color
+                                    backgroundColor: colorScheme.primary,
+                                    foregroundColor: colorScheme.onPrimary,
                                     elevation: 4,
-                                    shadowColor: Colors.black.withValues(
-                                      alpha: 0.2,
+                                    shadowColor: colorScheme.shadow.withOpacity(
+                                      0.2,
                                     ),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(16),
@@ -168,9 +163,8 @@ class QuizExitConfirmationSheet extends StatelessWidget {
                                 child: TextButton(
                                   onPressed: onConfirmExit,
                                   style: TextButton.styleFrom(
-                                    foregroundColor: const Color(
-                                      0xFF8B5B5D,
-                                    ), // Secondary text color
+                                    foregroundColor:
+                                        colorScheme.onSurfaceVariant,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(16),
                                     ),

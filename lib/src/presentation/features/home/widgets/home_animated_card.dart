@@ -1,10 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../../../domain/domain.dart';
-import '../../../theme/colors.dart';
 import '../../../widgets/image_card/image_card_controller.dart';
 
-/// Animated home image card widget that displays a dog image with swipe functionality.
+/// Animated home image card widget for swipeable interaction.
 class HomeAnimatedCard extends StatefulWidget {
   /// Creates a [HomeAnimatedCard].
   const HomeAnimatedCard({
@@ -32,7 +31,7 @@ class HomeAnimatedCard extends StatefulWidget {
 }
 
 class _HomeAnimatedCardState extends State<HomeAnimatedCard>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late AnimationController _animationController;
   Animation<Offset>? _animation;
   Offset _dragOffset = Offset.zero;
@@ -41,25 +40,11 @@ class _HomeAnimatedCardState extends State<HomeAnimatedCard>
   @override
   void initState() {
     super.initState();
-    _animationController =
-        AnimationController(
-          vsync: this,
-          duration: const Duration(milliseconds: 300),
-        )..addListener(() {
-          setState(() {});
-        });
-
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 250),
+      vsync: this,
+    );
     widget.controller?.addListener(_onChangeImageController);
-  }
-
-  @override
-  void didUpdateWidget(covariant HomeAnimatedCard oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.dog.imageUrl != oldWidget.dog.imageUrl) {
-      // Don't reset animation controller to prevent blinking
-      _dragOffset = Offset.zero;
-      _swipeCompleted = false;
-    }
   }
 
   @override
@@ -69,62 +54,49 @@ class _HomeAnimatedCardState extends State<HomeAnimatedCard>
     super.dispose();
   }
 
+  @override
+  void didUpdateWidget(HomeAnimatedCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.controller != widget.controller) {
+      oldWidget.controller?.removeListener(_onChangeImageController);
+      widget.controller?.addListener(_onChangeImageController);
+    }
+  }
+
   void _onPanUpdate(DragUpdateDetails details) {
-    if (_animationController.isAnimating) return;
+    if (_animationController.isAnimating || _swipeCompleted) return;
     setState(() {
-      _dragOffset = Offset(_dragOffset.dx + details.delta.dx, 0);
+      _dragOffset += details.delta;
     });
   }
 
   void _onPanEnd(DragEndDetails details) {
-    final Offset dragVector = details.velocity.pixelsPerSecond;
+    if (_animationController.isAnimating || _swipeCompleted) return;
 
-    if (dragVector.dx.abs() > 300) {
-      // Start animation only if swipe is fast enough
-      final double screenWidth = MediaQuery.of(context).size.width;
-      final bool isSwipeRight = dragVector.dx > 0;
-      final double targetX = isSwipeRight
-          ? screenWidth * 1.5
-          : -screenWidth * 1.5;
+    const double swipeThreshold = 100.0;
+    const double velocityThreshold = 500.0;
 
-      _triggerSwipe(
-        isSwipeRight: isSwipeRight,
-        beginOffset: _dragOffset,
-        endOffset: Offset(targetX, _dragOffset.dy),
-      );
+    final double dragDistance = _dragOffset.dx.abs();
+    final double velocity = details.velocity.pixelsPerSecond.dx.abs();
+
+    if (dragDistance > swipeThreshold || velocity > velocityThreshold) {
+      _triggerSwipe(isSwipeRight: _dragOffset.dx > 0);
     } else {
-      // Animate back to center
-      _animation = Tween<Offset>(begin: _dragOffset, end: Offset.zero).animate(
-        CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
-      );
-      _animationController.forward().whenComplete(() {
-        setState(() {
-          _dragOffset = Offset.zero;
-          _animationController.reset();
-        });
+      // Return to center
+      setState(() {
+        _dragOffset = Offset.zero;
       });
     }
   }
 
-  void _triggerSwipe({
-    required bool isSwipeRight,
-    Offset? beginOffset,
-    Offset? endOffset,
-  }) {
-    if (_animationController.isAnimating) return;
+  void _triggerSwipe({required bool isSwipeRight}) {
+    if (_swipeCompleted) return;
 
-    final Offset begin = beginOffset ?? Offset.zero;
-    final Offset end;
-
-    if (endOffset != null) {
-      end = endOffset;
-    } else {
-      final double screenWidth = MediaQuery.of(context).size.width;
-      final double targetX = isSwipeRight
-          ? screenWidth * 1.5
-          : -screenWidth * 1.5;
-      end = Offset(targetX, 0);
-    }
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final Offset begin = _dragOffset;
+    final Offset end = isSwipeRight
+        ? Offset(screenWidth + 100, _dragOffset.dy + 50)
+        : Offset(-screenWidth - 100, _dragOffset.dy - 50);
 
     _animation = Tween<Offset>(begin: begin, end: end).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeOut),
@@ -174,7 +146,7 @@ class _HomeAnimatedCardState extends State<HomeAnimatedCard>
               aspectRatio: 3 / 4, // 3:4 aspect ratio from design
               child: Container(
                 decoration: BoxDecoration(
-                  color: AppColors.white,
+                  color: Theme.of(context).cardTheme.color,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: const <BoxShadow>[
                     BoxShadow(
@@ -198,15 +170,17 @@ class _HomeAnimatedCardState extends State<HomeAnimatedCard>
                         memCacheHeight: 533, // 400 * 4/3 for aspect ratio
                         placeholder: (BuildContext context, String url) =>
                             Container(
-                              color: AppColors.secondaryBackground,
-                              child: const Center(
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.surfaceVariant,
+                              child: Center(
                                 child: SizedBox(
                                   width: 32,
                                   height: 32,
                                   child: CircularProgressIndicator(
                                     strokeWidth: 3,
                                     valueColor: AlwaysStoppedAnimation<Color>(
-                                      AppColors.primary,
+                                      Theme.of(context).colorScheme.primary,
                                     ),
                                   ),
                                 ),
@@ -215,8 +189,10 @@ class _HomeAnimatedCardState extends State<HomeAnimatedCard>
                         errorWidget:
                             (BuildContext context, String url, Object error) =>
                                 Container(
-                                  color: AppColors.secondaryBackground,
-                                  child: const Center(
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.surfaceVariant,
+                                  child: Center(
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -224,15 +200,16 @@ class _HomeAnimatedCardState extends State<HomeAnimatedCard>
                                         Icon(
                                           Icons.pets,
                                           size: 48,
-                                          color: AppColors.textSecondary,
+                                          color: Theme.of(
+                                            context,
+                                          ).textTheme.bodyMedium?.color,
                                         ),
-                                        SizedBox(height: 8),
+                                        const SizedBox(height: 8),
                                         Text(
                                           'Image unavailable',
-                                          style: TextStyle(
-                                            color: AppColors.textSecondary,
-                                            fontSize: 14,
-                                          ),
+                                          style: Theme.of(
+                                            context,
+                                          ).textTheme.bodyMedium,
                                         ),
                                       ],
                                     ),

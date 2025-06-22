@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 
 import '../../domain/domain.dart';
 import '../entities/dog/dog_entity.dart';
@@ -10,6 +11,8 @@ class PreferencesRepositoryImpl implements PreferencesRepository {
   final LocalPreferencesProvider _localPreferencesProvider;
   static const String _firstLaunchKey = 'is_first_launch';
   static const String _lastDogKey = 'last_dog_cache';
+  static const String _themeModeKey = 'theme_mode';
+  static const String _languageCodeKey = 'language_code';
 
   /// Creates an instance of [PreferencesRepositoryImpl].
   PreferencesRepositoryImpl({
@@ -53,5 +56,40 @@ class PreferencesRepositoryImpl implements PreferencesRepository {
       return DogMapper.toDomain(dogEntity);
     }
     return null;
+  }
+
+  @override
+  Future<void> saveThemeMode(ThemeMode themeMode) async {
+    await _localPreferencesProvider.setString(_themeModeKey, themeMode.name);
+  }
+
+  @override
+  Future<ThemeMode> getThemeMode() async {
+    final String? themeModeString = await _localPreferencesProvider.getString(
+      _themeModeKey,
+    );
+
+    if (themeModeString != null) {
+      switch (themeModeString) {
+        case 'light':
+          return ThemeMode.light;
+        case 'dark':
+          return ThemeMode.dark;
+        case 'system':
+          return ThemeMode.system;
+      }
+    }
+
+    return ThemeMode.system; // Default to system theme
+  }
+
+  @override
+  Future<void> saveLanguageCode(String languageCode) async {
+    await _localPreferencesProvider.setString(_languageCodeKey, languageCode);
+  }
+
+  @override
+  Future<String?> getLanguageCode() async {
+    return _localPreferencesProvider.getString(_languageCodeKey);
   }
 }

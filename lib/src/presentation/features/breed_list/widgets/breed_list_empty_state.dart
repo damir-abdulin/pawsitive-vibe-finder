@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../localization/locale_extension.dart';
-import '../../../theme/colors.dart';
 
 /// Empty state widget for the breed list screen.
 class BreedListEmptyState extends StatelessWidget {
@@ -12,6 +11,8 @@ class BreedListEmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32),
@@ -19,14 +20,14 @@ class BreedListEmptyState extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // Icon
-            const Icon(Icons.pets, color: AppColors.textSecondary, size: 64),
+            Icon(Icons.pets, color: colorScheme.onSurfaceVariant, size: 64),
             const SizedBox(height: 16),
             // Message
             Text(
               message ?? context.locale.breedListNoBreedsFound,
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: AppColors.textSecondary,
+              style: TextStyle(
+                color: colorScheme.onSurface,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),

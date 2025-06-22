@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import '../../../theme/colors.dart';
+
 import '../../../localization/locale_extension.dart';
+import '../../../navigation/app_router.dart';
 
 /// Header widget for the home screen with the app title.
 class HomeHeader extends StatelessWidget {
@@ -11,7 +13,7 @@ class HomeHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.primaryBackground.withOpacity(0.8),
+        color: Theme.of(context).scaffoldBackgroundColor.withValues(alpha: 0.8),
         boxShadow: const <BoxShadow>[
           BoxShadow(color: Colors.black12, offset: Offset(0, 1), blurRadius: 1),
         ],
@@ -26,12 +28,23 @@ class HomeHeader extends StatelessWidget {
                 child: Text(
                   context.locale.appTitle,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: AppColors.textPrimary,
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.titleLarge?.color,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     letterSpacing: -0.25,
                   ),
+                ),
+              ),
+              // Settings dropdown menu
+              IconButton(
+                onPressed: () {
+                  context.router.push(const SettingsRoute());
+                },
+                icon: Icon(
+                  Icons.settings,
+                  color: Theme.of(context).iconTheme.color,
+                  size: 24,
                 ),
               ),
             ],

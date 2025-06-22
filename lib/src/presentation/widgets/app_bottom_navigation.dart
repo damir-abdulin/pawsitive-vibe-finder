@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import '../navigation/app_router.dart';
-import '../theme/colors.dart';
+
 import '../localization/locale_extension.dart';
 
 /// Bottom navigation bar for the application.
@@ -16,9 +16,12 @@ class AppBottomNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.primaryBackground.withOpacity(0.9),
-        border: const Border(
-          top: BorderSide(color: AppColors.secondaryBackground, width: 1),
+        color: Theme.of(context).scaffoldBackgroundColor.withValues(alpha: 0.9),
+        border: Border(
+          top: BorderSide(
+            color: Theme.of(context).dividerTheme.color ?? Colors.grey.shade300,
+            width: 1,
+          ),
         ),
       ),
       child: SafeArea(
@@ -83,13 +86,17 @@ class AppBottomNavigation extends StatelessWidget {
               Icon(
                 icon,
                 size: 28,
-                color: isActive ? AppColors.primary : AppColors.textSecondary,
+                color: isActive
+                    ? Theme.of(context).colorScheme.primary
+                    : Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               const SizedBox(height: 2),
               Text(
                 label,
                 style: TextStyle(
-                  color: isActive ? AppColors.primary : AppColors.textSecondary,
+                  color: isActive
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).colorScheme.onSurfaceVariant,
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                   letterSpacing: 0.5,

@@ -56,7 +56,7 @@ class _FavoritesBodyState extends State<FavoritesBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFCF8F8),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
         children: <Widget>[
           // Sticky header

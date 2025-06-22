@@ -33,9 +33,9 @@ class WelcomeBottomSheet extends StatelessWidget {
           maxChildSize: 0.8,
           builder: (BuildContext context, ScrollController scrollController) {
             return Container(
-              decoration: const BoxDecoration(
-                color: Color(0xFFFBF9F9), // Background color from design
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(24),
                   topRight: Radius.circular(24),
                 ),
@@ -51,7 +51,7 @@ class WelcomeBottomSheet extends StatelessWidget {
                         height: 6,
                         width: 40,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE3D4D5), // Modal handle color
+                          color: Theme.of(context).dividerTheme.color,
                           borderRadius: BorderRadius.circular(3),
                         ),
                       ),
@@ -65,35 +65,33 @@ class WelcomeBottomSheet extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           // Icon
-                          const Icon(
+                          Icon(
                             Icons.pets,
                             size: 96,
-                            color: Color(0xFFE8B4B7), // Primary color
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                           const SizedBox(height: 32),
                           // Title
-                          const Text(
+                          Text(
                             'Welcome to Doggy Delights!',
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Color(0xFF191011), // Primary text color
-                              fontSize: 32,
-                              fontWeight: FontWeight.bold,
-                              height: 1.2,
-                              letterSpacing: -0.5,
-                            ),
+                            style: Theme.of(context).textTheme.headlineMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  height: 1.2,
+                                  letterSpacing: -0.5,
+                                ),
                           ),
                           const SizedBox(height: 24),
                           // Description
-                          const Text(
+                          Text(
                             'Explore a world of adorable dog breeds and their delightful photos. Get ready to be charmed!',
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Color(0xFF4F4A4B), // Secondary text color
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400,
-                              height: 1.5,
-                            ),
+                            style: Theme.of(context).textTheme.titleMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w400,
+                                  height: 1.5,
+                                ),
                           ),
                           const SizedBox(height: 48),
                           // Get Started button
@@ -104,12 +102,12 @@ class WelcomeBottomSheet extends StatelessWidget {
                               child: ElevatedButton(
                                 onPressed: onGetStarted,
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(
-                                    0xFFE8B4B7,
-                                  ), // Primary color
-                                  foregroundColor: const Color(
-                                    0xFF191011,
-                                  ), // Primary text color
+                                  backgroundColor: Theme.of(
+                                    context,
+                                  ).colorScheme.primary,
+                                  foregroundColor: Theme.of(
+                                    context,
+                                  ).colorScheme.onPrimary,
                                   elevation: 8,
                                   shadowColor: Colors.black.withValues(
                                     alpha: 0.3,

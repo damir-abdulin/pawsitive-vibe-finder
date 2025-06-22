@@ -52,7 +52,7 @@ class _BreedListBodyState extends State<BreedListBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFBF9F9), // Match new design background
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: <Widget>[

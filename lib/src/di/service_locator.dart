@@ -8,6 +8,7 @@ import '../data/repository_impl/breed_repository_impl.dart';
 import '../data/repository_impl/repository_impl.dart';
 import '../data/services/services.dart';
 import '../domain/domain.dart';
+import '../presentation/bloc/app_settings/app_settings_bloc.dart';
 import '../presentation/navigation/app_router.dart';
 
 final GetIt appLocator = GetIt.instance;
@@ -99,6 +100,18 @@ Future<void> configureDependencies() async {
   appLocator.registerFactory(
     () => GetLastDogUseCase(preferencesRepository: appLocator()),
   );
+  appLocator.registerFactory(
+    () => SaveThemeModeUseCase(preferencesRepository: appLocator()),
+  );
+  appLocator.registerFactory(
+    () => GetThemeModeUseCase(preferencesRepository: appLocator()),
+  );
+  appLocator.registerFactory(
+    () => SaveLanguageCodeUseCase(preferencesRepository: appLocator()),
+  );
+  appLocator.registerFactory(
+    () => GetLanguageCodeUseCase(preferencesRepository: appLocator()),
+  );
   appLocator.registerFactory(GetQuizQuestionUseCase.new);
 
   // Breed Images Use Cases
@@ -116,4 +129,14 @@ Future<void> configureDependencies() async {
   );
 
   appLocator.registerLazySingleton(AppRouter.new);
+
+  // App Settings BLoC (singleton since it's app-wide)
+  appLocator.registerLazySingleton<AppSettingsBloc>(
+    () => AppSettingsBloc(
+      getThemeModeUseCase: appLocator(),
+      saveThemeModeUseCase: appLocator(),
+      getLanguageCodeUseCase: appLocator(),
+      saveLanguageCodeUseCase: appLocator(),
+    ),
+  );
 }

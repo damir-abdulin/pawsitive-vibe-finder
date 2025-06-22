@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../theme/colors.dart';
+import '../../../theme/app_colors.dart';
 
 /// Widget to display the current score and question number in the quiz.
 class QuizScoreDisplay extends StatelessWidget {

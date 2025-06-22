@@ -58,7 +58,7 @@ class _QuizBodyState extends State<QuizBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFCF8F8), // Background color from design
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: BlocConsumer<QuizBloc, QuizState>(
         listener: (BuildContext context, QuizState state) {
           if (state.status == QuizStatus.complete) {

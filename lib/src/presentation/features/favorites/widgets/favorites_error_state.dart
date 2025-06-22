@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../theme/colors.dart';
 
 /// Error state widget for the favorites screen.
 class FavoritesErrorState extends StatelessWidget {
@@ -14,6 +13,7 @@ class FavoritesErrorState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32),
@@ -21,23 +21,26 @@ class FavoritesErrorState extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // Error icon
-            const Icon(Icons.error_outline, color: AppColors.error, size: 64),
+            Icon(Icons.error_outline, color: colorScheme.error, size: 64),
             const SizedBox(height: 16),
             // Error message
             Text(
               message ?? 'Failed to load favorites',
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Color(0xFF1B0E0E),
+              style: TextStyle(
+                color: colorScheme.onSurface,
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
               ),
             ),
             const SizedBox(height: 8),
-            const Text(
+            Text(
               'Please try again later.',
               textAlign: TextAlign.center,
-              style: TextStyle(color: Color(0xFF756B6B), fontSize: 14),
+              style: TextStyle(
+                color: colorScheme.onSurfaceVariant,
+                fontSize: 14,
+              ),
             ),
             if (onRetry != null) ...<Widget>[
               const SizedBox(height: 24),
@@ -45,8 +48,8 @@ class FavoritesErrorState extends StatelessWidget {
               ElevatedButton(
                 onPressed: onRetry,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  foregroundColor: AppColors.white,
+                  backgroundColor: colorScheme.primary,
+                  foregroundColor: colorScheme.onPrimary,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 32,
                     vertical: 12,

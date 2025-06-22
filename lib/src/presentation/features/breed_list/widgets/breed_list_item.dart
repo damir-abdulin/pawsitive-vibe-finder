@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../domain/models/breed_type.dart';
-import '../../../theme/colors.dart';
+
 import '../../../utils/breed_type_localization.dart';
 
 /// A single breed item in the breed list.
@@ -24,6 +24,9 @@ class _BreedListItemState extends State<BreedListItem> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme colorScheme = theme.colorScheme;
+
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
@@ -36,9 +39,11 @@ class _BreedListItemState extends State<BreedListItem> {
           duration: const Duration(milliseconds: 150),
           curve: Curves.easeInOut,
           decoration: BoxDecoration(
-            color: _getBackgroundColor(),
-            border: const Border(
-              bottom: BorderSide(color: AppColors.dividerColor, width: 1),
+            color: _getBackgroundColor(colorScheme),
+            border: Border(
+              bottom: BorderSide(
+                color: colorScheme.outline.withValues(alpha: 0.2),
+              ),
             ),
           ),
           child: Padding(
@@ -49,8 +54,8 @@ class _BreedListItemState extends State<BreedListItem> {
                 Expanded(
                   child: Text(
                     widget.breed.toLocal(context),
-                    style: const TextStyle(
-                      color: AppColors.textPrimary,
+                    style: TextStyle(
+                      color: colorScheme.onSurface,
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                       letterSpacing: 0,
@@ -60,9 +65,9 @@ class _BreedListItemState extends State<BreedListItem> {
                   ),
                 ),
                 // Chevron right icon
-                const Icon(
+                Icon(
                   Icons.chevron_right,
-                  color: AppColors.textSecondary,
+                  color: colorScheme.onSurfaceVariant,
                   size: 24,
                 ),
               ],
@@ -73,13 +78,13 @@ class _BreedListItemState extends State<BreedListItem> {
     );
   }
 
-  Color _getBackgroundColor() {
+  Color _getBackgroundColor(ColorScheme colorScheme) {
     if (_isPressed) {
-      return AppColors.activeBackground;
+      return colorScheme.surfaceContainerHighest;
     } else if (_isHovered) {
-      return AppColors.hoverBackground;
+      return colorScheme.surfaceContainerHigh;
     } else {
-      return AppColors.primaryBackground;
+      return colorScheme.surface;
     }
   }
 }

@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../../../domain/domain.dart';
-import '../../../theme/colors.dart';
 
 /// Home image card widget that displays a dog image with swipe functionality.
 class HomeImageCard extends StatelessWidget {
@@ -57,34 +56,33 @@ class HomeImageCard extends StatelessWidget {
                 imageUrl: dog.imageUrl,
                 fit: BoxFit.cover,
                 placeholder: (BuildContext context, String url) => Container(
-                  color: AppColors.white,
-                  child: const Center(
+                  color: Theme.of(context).cardTheme.color,
+                  child: Center(
                     child: CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(
-                        AppColors.primary,
+                        Theme.of(context).colorScheme.primary,
                       ),
                     ),
                   ),
                 ),
                 errorWidget: (BuildContext context, String url, Object error) =>
                     Container(
-                      color: AppColors.secondaryBackground,
-                      child: const Center(
+                      color: Theme.of(context).colorScheme.surfaceVariant,
+                      child: Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Icon(
                               Icons.error_outline,
                               size: 48,
-                              color: AppColors.textSecondary,
+                              color: Theme.of(
+                                context,
+                              ).textTheme.bodyMedium?.color,
                             ),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             Text(
                               'Failed to load image',
-                              style: TextStyle(
-                                color: AppColors.textSecondary,
-                                fontSize: 14,
-                              ),
+                              style: Theme.of(context).textTheme.bodyMedium,
                             ),
                           ],
                         ),

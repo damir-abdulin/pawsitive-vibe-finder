@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../../../domain/models/dog_model.dart';
-import '../../../theme/colors.dart';
 
 /// A grid item widget for displaying a favorite dog image.
 class FavoriteImageGridItem extends StatefulWidget {
@@ -35,6 +34,7 @@ class _FavoriteImageGridItemState extends State<FavoriteImageGridItem> {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
@@ -47,10 +47,10 @@ class _FavoriteImageGridItemState extends State<FavoriteImageGridItem> {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              boxShadow: const <BoxShadow>[
+              boxShadow: <BoxShadow>[
                 BoxShadow(
-                  color: Colors.black12,
-                  offset: Offset(0, 2),
+                  color: colorScheme.shadow.withOpacity(0.10),
+                  offset: const Offset(0, 2),
                   blurRadius: 4,
                 ),
               ],
@@ -70,11 +70,11 @@ class _FavoriteImageGridItemState extends State<FavoriteImageGridItem> {
                         fit: BoxFit.cover,
                         placeholder: (BuildContext context, String url) =>
                             Container(
-                              color: AppColors.secondaryBackground,
-                              child: const Center(
+                              color: colorScheme.surfaceContainerHighest,
+                              child: Center(
                                 child: CircularProgressIndicator(
                                   valueColor: AlwaysStoppedAnimation<Color>(
-                                    AppColors.primary,
+                                    colorScheme.primary,
                                   ),
                                 ),
                               ),
@@ -82,11 +82,11 @@ class _FavoriteImageGridItemState extends State<FavoriteImageGridItem> {
                         errorWidget:
                             (BuildContext context, String url, dynamic error) =>
                                 Container(
-                                  color: AppColors.secondaryBackground,
-                                  child: const Center(
+                                  color: colorScheme.surfaceContainerHighest,
+                                  child: Center(
                                     child: Icon(
                                       Icons.error_outline,
-                                      color: AppColors.error,
+                                      color: colorScheme.error,
                                       size: 32,
                                     ),
                                   ),
@@ -94,7 +94,11 @@ class _FavoriteImageGridItemState extends State<FavoriteImageGridItem> {
                       ),
                     ),
                     // Heart button overlay
-                    Positioned(top: 8, right: 8, child: _buildHeartButton()),
+                    Positioned(
+                      top: 8,
+                      right: 8,
+                      child: _buildHeartButton(colorScheme),
+                    ),
                   ],
                 ),
               ),
@@ -105,7 +109,7 @@ class _FavoriteImageGridItemState extends State<FavoriteImageGridItem> {
     );
   }
 
-  Widget _buildHeartButton() {
+  Widget _buildHeartButton(ColorScheme colorScheme) {
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -115,12 +119,12 @@ class _FavoriteImageGridItemState extends State<FavoriteImageGridItem> {
           width: 36,
           height: 36,
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.8),
+            color: colorScheme.surface.withOpacity(0.85),
             borderRadius: BorderRadius.circular(20),
-            boxShadow: const <BoxShadow>[
+            boxShadow: <BoxShadow>[
               BoxShadow(
-                color: Colors.black12,
-                offset: Offset(0, 2),
+                color: colorScheme.shadow.withOpacity(0.10),
+                offset: const Offset(0, 2),
                 blurRadius: 4,
               ),
             ],
@@ -129,8 +133,8 @@ class _FavoriteImageGridItemState extends State<FavoriteImageGridItem> {
             child: Icon(
               widget.isFavorite ? Icons.favorite : Icons.favorite_border,
               color: widget.isFavorite
-                  ? const Color(0xFFE92933)
-                  : const Color(0xFF9CA3AF),
+                  ? colorScheme.error
+                  : colorScheme.onSurfaceVariant,
               size: 20,
             ),
           ),

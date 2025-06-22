@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../theme/colors.dart';
 
 /// Header widget for the quiz screen with close button and title.
 class QuizHeader extends StatelessWidget {
@@ -11,18 +10,19 @@ class QuizHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Container(
-      color: AppColors.primaryBackground,
+      color: colorScheme.surface,
       child: SafeArea(
         bottom: false,
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: const BoxDecoration(
-            color: AppColors.primaryBackground,
+          decoration: BoxDecoration(
+            color: colorScheme.surface,
             boxShadow: <BoxShadow>[
               BoxShadow(
-                color: Colors.black12,
-                offset: Offset(0, 1),
+                color: colorScheme.shadow.withOpacity(0.08),
+                offset: const Offset(0, 1),
                 blurRadius: 1,
               ),
             ],
@@ -41,9 +41,9 @@ class QuizHeader extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.close,
-                      color: AppColors.textPrimary,
+                      color: colorScheme.onSurface,
                       size: 24,
                     ),
                   ),
@@ -54,8 +54,8 @@ class QuizHeader extends StatelessWidget {
                 child: Text(
                   'Guess the Breed',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: AppColors.textPrimary,
+                  style: TextStyle(
+                    color: colorScheme.onSurface,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     letterSpacing: -0.015,

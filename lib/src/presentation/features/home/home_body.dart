@@ -35,7 +35,7 @@ class _HomeBodyState extends State<HomeBody> {
         }
       },
       child: Scaffold(
-        backgroundColor: const Color(0xFFFBF9F9), // Design background color
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: Column(
           children: <Widget>[
             // Sticky header
@@ -120,14 +120,16 @@ class _HomeBodyState extends State<HomeBody> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  const Icon(Icons.pets, size: 80, color: Color(0xFFE8B4B7)),
+                  Icon(
+                    Icons.pets,
+                    size: 80,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                   const SizedBox(height: 24),
                   Text(
                     context.locale.welcomeToApp,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Color(0xFF191011),
-                      fontSize: 28,
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       letterSpacing: -0.5,
                     ),
@@ -136,11 +138,9 @@ class _HomeBodyState extends State<HomeBody> {
                   Text(
                     context.locale.pawsitivityMessage,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Color(0xFF8B5B5D),
-                      fontSize: 16,
-                      height: 1.5,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyLarge?.copyWith(height: 1.5),
                   ),
                 ],
               ),
@@ -156,26 +156,21 @@ class _HomeBodyState extends State<HomeBody> {
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
           title: Text(
             context.locale.noInternetConnection,
-            style: const TextStyle(
-              color: Color(0xFF191011),
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
           ),
           content: Text(
             context.locale.offlineDialogMessage,
-            style: const TextStyle(color: Color(0xFF8B5B5D), fontSize: 16),
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
           actions: <Widget>[
             TextButton(
               child: Text(
                 context.locale.okButton,
-                style: const TextStyle(color: Color(0xFFE8B4B7)),
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
               ),
               onPressed: () {
                 Navigator.of(dialogContext).pop();

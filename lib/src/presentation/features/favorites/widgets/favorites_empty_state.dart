@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../theme/colors.dart';
 
 /// Empty state widget for the favorites screen.
 class FavoritesEmptyState extends StatelessWidget {
@@ -8,6 +7,7 @@ class FavoritesEmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32),
@@ -19,25 +19,28 @@ class FavoritesEmptyState extends StatelessWidget {
               width: 120,
               height: 120,
               decoration: BoxDecoration(
-                color: AppColors.secondaryBackground,
+                color: colorScheme.surfaceContainerHighest,
                 borderRadius: BorderRadius.circular(60),
-                border: Border.all(color: const Color(0xFFF3E7E8), width: 2),
+                border: Border.all(
+                  color: colorScheme.outline.withOpacity(0.08),
+                  width: 2,
+                ),
               ),
-              child: const Center(
+              child: Center(
                 child: Icon(
                   Icons.favorite_border,
-                  color: Color(0xFF756B6B),
+                  color: colorScheme.onSurfaceVariant,
                   size: 48,
                 ),
               ),
             ),
             const SizedBox(height: 24),
             // Title
-            const Text(
+            Text(
               'No favorite woofers yet!',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Color(0xFF1B0E0E),
+                color: colorScheme.onSurface,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 letterSpacing: -0.5,
@@ -45,11 +48,11 @@ class FavoritesEmptyState extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             // Description
-            const Text(
+            Text(
               'Swipe right on an image you like to save it here.',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Color(0xFF756B6B),
+                color: colorScheme.onSurfaceVariant,
                 fontSize: 16,
                 height: 1.5,
               ),
@@ -59,19 +62,22 @@ class FavoritesEmptyState extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               decoration: BoxDecoration(
-                color: const Color(0xFFFCF8F8),
+                color: colorScheme.surface,
                 borderRadius: BorderRadius.circular(25),
-                border: Border.all(color: const Color(0xFFF3E7E8), width: 1),
+                border: Border.all(
+                  color: colorScheme.outline.withOpacity(0.08),
+                  width: 1,
+                ),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  const Icon(Icons.swipe, color: Color(0xFFE92933), size: 20),
+                  Icon(Icons.swipe, color: colorScheme.primary, size: 20),
                   const SizedBox(width: 8),
-                  const Text(
+                  Text(
                     'Swipe right to favorite',
                     style: TextStyle(
-                      color: Color(0xFF1B0E0E),
+                      color: colorScheme.onSurface,
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                     ),

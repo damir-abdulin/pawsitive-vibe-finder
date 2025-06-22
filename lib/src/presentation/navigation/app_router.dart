@@ -9,6 +9,7 @@ import '../features/favorites/favorites_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/quiz/quiz_screen.dart';
 import '../features/quiz_score/quiz_score_screen.dart';
+import '../features/settings/settings_screen.dart';
 
 part 'app_router.gr.dart';
 
@@ -22,6 +23,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: QuizRoute.page),
     AutoRoute(page: QuizScoreRoute.page),
     AutoRoute(page: BreedImagesSlideshowRoute.page),
+    AutoRoute(page: SettingsRoute.page),
     CustomRoute<void>(
       page: DogDetailsRoute.page,
       transitionsBuilder: (_, _, _, Widget child) => child,

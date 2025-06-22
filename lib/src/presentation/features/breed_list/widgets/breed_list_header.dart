@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../localization/locale_extension.dart';
-import '../../../theme/colors.dart';
 
 /// Header widget for the breed list screen with title and search functionality.
 class BreedListHeader extends StatelessWidget {
@@ -19,8 +18,11 @@ class BreedListHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme colorScheme = theme.colorScheme;
+
     return Container(
-      color: AppColors.primaryBackground,
+      color: colorScheme.surface,
       child: Column(
         children: <Widget>[
           // Title section
@@ -33,8 +35,8 @@ class BreedListHeader extends StatelessWidget {
                   child: Text(
                     context.locale.breedListTitle,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: AppColors.textPrimary,
+                    style: TextStyle(
+                      color: colorScheme.onSurface,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       letterSpacing: -0.25,
@@ -52,12 +54,12 @@ class BreedListHeader extends StatelessWidget {
               onChanged: (_) => onSearchChanged(),
               decoration: InputDecoration(
                 hintText: context.locale.breedListSearchHint,
-                prefixIcon: const Icon(
+                prefixIcon: Icon(
                   Icons.search,
-                  color: AppColors.textSecondary,
+                  color: colorScheme.onSurfaceVariant,
                 ),
                 filled: true,
-                fillColor: AppColors.secondaryBackground,
+                fillColor: colorScheme.surfaceContainerHighest,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,
@@ -68,34 +70,28 @@ class BreedListHeader extends StatelessWidget {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(
-                    color: AppColors.accent,
-                    width: 2,
-                  ),
+                  borderSide: BorderSide(color: colorScheme.primary, width: 2),
                 ),
                 contentPadding: const EdgeInsets.symmetric(
                   vertical: 12,
                   horizontal: 16,
                 ),
-                hintStyle: const TextStyle(
-                  color: AppColors.textSecondary,
+                hintStyle: TextStyle(
+                  color: colorScheme.onSurfaceVariant,
                   fontSize: 14,
                 ),
               ),
-              style: const TextStyle(
-                color: AppColors.textPrimary,
-                fontSize: 14,
-              ),
+              style: TextStyle(color: colorScheme.onSurface, fontSize: 14),
             ),
           ),
           // Shadow separator
           Container(
             height: 1,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               boxShadow: <BoxShadow>[
                 BoxShadow(
-                  color: Colors.black12,
-                  offset: Offset(0, 1),
+                  color: colorScheme.shadow.withValues(alpha: 0.1),
+                  offset: const Offset(0, 1),
                   blurRadius: 1,
                 ),
               ],

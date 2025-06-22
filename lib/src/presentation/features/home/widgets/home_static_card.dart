@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../../../domain/domain.dart';
-import '../../../theme/colors.dart';
 
 /// Static home image card widget for background cards in the stack.
 class HomeStaticCard extends StatelessWidget {
@@ -27,7 +26,7 @@ class HomeStaticCard extends StatelessWidget {
         aspectRatio: 3 / 4, // 3:4 aspect ratio from design
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.white,
+            color: Theme.of(context).cardTheme.color,
             borderRadius: BorderRadius.circular(16),
             boxShadow: <BoxShadow>[
               BoxShadow(
@@ -52,15 +51,15 @@ class HomeStaticCard extends StatelessWidget {
                   memCacheWidth: 400, // Optimize memory usage
                   memCacheHeight: 533, // 400 * 4/3 for aspect ratio
                   placeholder: (BuildContext context, String url) => Container(
-                    color: AppColors.secondaryBackground,
-                    child: const Center(
+                    color: Theme.of(context).colorScheme.surfaceVariant,
+                    child: Center(
                       child: SizedBox(
                         width: 24,
                         height: 24,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
                           valueColor: AlwaysStoppedAnimation<Color>(
-                            AppColors.primary,
+                            Theme.of(context).colorScheme.primary,
                           ),
                         ),
                       ),
@@ -69,23 +68,24 @@ class HomeStaticCard extends StatelessWidget {
                   errorWidget:
                       (BuildContext context, String url, Object error) =>
                           Container(
-                            color: AppColors.secondaryBackground,
-                            child: const Center(
+                            color: Theme.of(context).colorScheme.surfaceVariant,
+                            child: Center(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Icon(
                                     Icons.pets,
                                     size: 32,
-                                    color: AppColors.textSecondary,
+                                    color: Theme.of(
+                                      context,
+                                    ).textTheme.bodyMedium?.color,
                                   ),
-                                  SizedBox(height: 4),
+                                  const SizedBox(height: 4),
                                   Text(
                                     'Image unavailable',
-                                    style: TextStyle(
-                                      color: AppColors.textSecondary,
-                                      fontSize: 12,
-                                    ),
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.labelSmall,
                                   ),
                                 ],
                               ),

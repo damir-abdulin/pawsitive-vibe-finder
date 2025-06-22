@@ -59,12 +59,13 @@ class FavoriteDogCard extends StatelessWidget {
   }
 
   Widget _buildFavoriteIcon(ThemeData theme) {
+    final ColorScheme colorScheme = theme.colorScheme;
     return Align(
       alignment: Alignment.bottomLeft,
       child: IconButton(
         icon: Icon(
           isFavorite ? Icons.favorite : Icons.favorite_border,
-          color: theme.colorScheme.error,
+          color: isFavorite ? colorScheme.error : colorScheme.onSurfaceVariant,
         ),
         onPressed: onFavoritePressed,
       ),

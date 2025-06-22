@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import '../../../theme/colors.dart';
 
 /// Image widget for displaying the dog image in the quiz.
 class QuizImage extends StatelessWidget {
@@ -12,12 +11,17 @@ class QuizImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        boxShadow: const <BoxShadow>[
-          BoxShadow(color: Colors.black12, offset: Offset(0, 4), blurRadius: 8),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: colorScheme.shadow.withOpacity(0.10),
+            offset: const Offset(0, 4),
+            blurRadius: 8,
+          ),
         ],
       ),
       child: ClipRRect(
@@ -28,30 +32,32 @@ class QuizImage extends StatelessWidget {
             imageUrl: imageUrl,
             fit: BoxFit.cover,
             placeholder: (BuildContext context, String url) => Container(
-              color: AppColors.secondaryBackground,
-              child: const Center(
+              color: colorScheme.surfaceContainerHighest,
+              child: Center(
                 child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    colorScheme.primary,
+                  ),
                 ),
               ),
             ),
             errorWidget: (BuildContext context, String url, dynamic error) =>
                 Container(
-                  color: AppColors.secondaryBackground,
-                  child: const Center(
+                  color: colorScheme.surfaceContainerHighest,
+                  child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Icon(
                           Icons.error_outline,
-                          color: AppColors.error,
+                          color: colorScheme.error,
                           size: 48,
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Text(
                           'Failed to load image',
                           style: TextStyle(
-                            color: AppColors.textSecondary,
+                            color: colorScheme.onSurfaceVariant,
                             fontSize: 14,
                           ),
                         ),

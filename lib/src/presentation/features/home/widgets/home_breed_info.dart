@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../domain/domain.dart';
-import '../../../theme/colors.dart';
 import '../../../utils/breed_type_localization.dart';
 
 /// Home breed info widget that displays breed name and instructions with animation.
@@ -63,9 +62,7 @@ class _HomeBreedInfoState extends State<HomeBreedInfo>
                 Text(
                   widget.dog.breed.toLocal(context),
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: AppColors.textPrimary,
-                    fontSize: 24,
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.w600,
                     letterSpacing: -0.5,
                     height: 1.2,
@@ -73,16 +70,14 @@ class _HomeBreedInfoState extends State<HomeBreedInfo>
                 ),
                 const SizedBox(height: 8),
                 // Instructions text
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
                     'Swipe left to discover, swipe right to like!',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: AppColors.textSecondary,
-                      fontSize: 14,
-                      height: 1.4,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(height: 1.4),
                   ),
                 ),
               ],
