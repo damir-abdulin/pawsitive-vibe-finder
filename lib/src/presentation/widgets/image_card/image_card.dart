@@ -5,7 +5,32 @@ import '../../localization/locale_extension.dart';
 import '../../theme/app_constants.dart';
 import 'image_card_controller.dart';
 
+/// A swipeable card widget for displaying dog images with Tinder-like interactions.
+///
+/// This widget allows users to swipe left or right on dog images, providing
+/// visual feedback through rotation and stamp overlays. It's commonly used
+/// in the home screen for the main dog discovery experience.
+///
+/// Features:
+/// - Swipe gestures (left/right) with visual feedback
+/// - Cached network image loading with placeholder and error states
+/// - Card rotation based on swipe direction
+/// - Customizable swipe callbacks
+/// - External controller support for programmatic swiping
+///
+/// Example usage:
+/// ```dart
+/// ImageCard(
+///   imageUrl: 'https://example.com/dog.jpg',
+///   title: 'Golden Retriever',
+///   onSwipeRight: () => print('Liked!'),
+///   onSwipeLeft: () => print('Passed!'),
+/// )
+/// ```
 class ImageCard extends StatefulWidget {
+  /// Creates an [ImageCard] widget.
+  ///
+  /// The [imageUrl] parameter is required and must not be null.
   const ImageCard({
     required this.imageUrl,
     this.controller,
@@ -17,26 +42,54 @@ class ImageCard extends StatefulWidget {
     super.key,
   });
 
+  /// The URL of the image to display in the card.
   final String imageUrl;
+
+  /// Optional title text to display at the bottom of the card.
   final String? title;
+
+  /// Optional controller for programmatic control of card swiping.
+  ///
+  /// When provided, allows external widgets to trigger swipe animations
+  /// without user interaction.
   final ImageCardController? controller;
 
+  /// Duration of the swipe animation.
+  ///
+  /// Defaults to [AppConstants.defaultAnimationDuration].
   final Duration duration;
+
+  /// The minimum drag distance required to trigger a swipe.
+  ///
+  /// Defaults to [AppConstants.dragBorderThreshold].
   final double dragBorder;
 
+  /// Callback fired when the card is swiped right (like gesture).
   final VoidCallback? onSwipeRight;
+
+  /// Callback fired when the card is swiped left (pass gesture).
   final VoidCallback? onSwipeLeft;
 
   @override
   State<ImageCard> createState() => ImageCardState();
 }
 
+/// The state class for [ImageCard].
+///
+/// Manages animation controllers, drag handling, and swipe interactions.
+/// This class is exposed to allow for testing and advanced customization.
 class ImageCardState extends State<ImageCard>
     with SingleTickerProviderStateMixin {
+  /// Animation controller for managing card transitions.
   late AnimationController _animationController;
+
+  /// Current animation for card movement.
   Animation<Offset>? _animation;
+
+  /// Current drag offset from the center position.
   Offset _dragOffset = Offset.zero;
 
+  /// Whether the swipe animation has completed.
   bool _swipeCompleted = false;
 
   @override
@@ -69,6 +122,10 @@ class ImageCardState extends State<ImageCard>
     super.dispose();
   }
 
+  /// Handles pan update events during drag gestures.
+  ///
+  /// Updates the card position based on horizontal drag movement.
+  /// Vertical movement is ignored to maintain card behavior consistency.
   void _onPanUpdate(DragUpdateDetails details) {
     if (_animationController.isAnimating) return;
     setState(() {
@@ -76,6 +133,10 @@ class ImageCardState extends State<ImageCard>
     });
   }
 
+  /// Handles pan end events when user releases drag gesture.
+  ///
+  /// Determines whether to complete the swipe or return to center
+  /// based on the drag velocity and current position.
   void _onPanEnd(DragEndDetails details) {
     final Offset dragVector = details.velocity.pixelsPerSecond;
 
@@ -106,6 +167,11 @@ class ImageCardState extends State<ImageCard>
     }
   }
 
+  /// Triggers a swipe animation in the specified direction.
+  ///
+  /// [isSwipeRight] determines the swipe direction (true for right, false for left).
+  /// [beginOffset] is the starting position for the animation.
+  /// [endOffset] is the target position for the animation.
   void _triggerSwipe({
     required bool isSwipeRight,
     Offset? beginOffset,
@@ -141,6 +207,7 @@ class ImageCardState extends State<ImageCard>
     });
   }
 
+  /// Handles external controller events for programmatic swiping.
   void _onChangeImageController() {
     final ImageCardEvent? event = widget.controller?.value;
 
@@ -313,7 +380,15 @@ class ImageCardState extends State<ImageCard>
   }
 }
 
+/// A visual stamp overlay that appears during swipe gestures.
+///
+/// This widget displays "LIKE" or "PASS" text with a colored border
+/// when the user is actively swiping the card in either direction.
+/// The stamp rotates slightly based on the card's rotation angle.
 class _Stamp extends StatelessWidget {
+  /// Creates a [_Stamp] widget.
+  ///
+  /// All parameters are required for proper animation synchronization.
   const _Stamp({
     required this.text,
     required this.color,
@@ -322,11 +397,19 @@ class _Stamp extends StatelessWidget {
     required this.dragOffset,
   });
 
+  /// The text to display in the stamp (e.g., "LIKE", "PASS").
   final String text;
+
+  /// The color of the stamp border and text.
   final Color color;
 
+  /// Animation controller from the parent [ImageCard].
   final AnimationController animationController;
+
+  /// Current animation offset for position calculation.
   final Offset animationOffset;
+
+  /// Current drag offset for position calculation.
   final Offset dragOffset;
 
   @override

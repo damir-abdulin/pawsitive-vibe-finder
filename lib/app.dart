@@ -9,7 +9,20 @@ import 'src/presentation/localization/l10n/app_localizations.dart';
 import 'src/presentation/navigation/app_router.dart';
 import 'src/presentation/theme/app_theme.dart';
 
+/// The main application widget for Pawsitive Vibe Finder.
+///
+/// This widget is the root of the application and configures all global
+/// settings including:
+/// - Theme management (light/dark mode support)
+/// - Internationalization and localization
+/// - Routing configuration using AutoRoute
+/// - BLoC pattern setup for global state management
+///
+/// The app follows Clean Architecture principles and uses Material Design 3.
 class App extends StatelessWidget {
+  /// Creates the main [App] widget.
+  ///
+  /// This widget should be used as the root widget passed to [runApp].
   const App({super.key});
 
   @override

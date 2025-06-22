@@ -1,36 +1,93 @@
 import 'package:flutter/material.dart';
 
-/// A class that holds the color palette for the application.
+/// A comprehensive color palette for the Pawsitive Vibe Finder application.
+///
+/// This class provides a centralized collection of colors used throughout
+/// the application, supporting both light and dark theme modes. All colors
+/// are carefully chosen to create a cohesive, accessible, and visually
+/// appealing user experience.
+///
+/// The color system follows Material Design 3 principles and includes:
+/// - Primary brand colors for both light and dark themes
+/// - Background colors with proper contrast ratios
+/// - Text colors for optimal readability
+/// - Semantic colors for success, error, warning, and info states
+/// - Interactive state colors for hover and active states
+/// - Gradient colors for enhanced visual appeal
+///
+/// Usage:
+/// ```dart
+/// Container(
+///   color: AppColors.primary,
+///   child: Text(
+///     'Hello World',
+///     style: TextStyle(color: AppColors.textPrimary),
+///   ),
+/// )
+/// ```
 class AppColors {
   // ========== LIGHT THEME COLORS ==========
 
-  // Primary Colors - Light Theme
-  static const Color primary = Color(0xFFE8B4B7); // Light pinkish primary color
-  static const Color primaryDark = Color(
-    0xFFD8A0A4,
-  ); // Darker shade for light theme
-  static const Color accent = Color(0xFFE8B4B7); // Accent color
+  /// Primary brand color for light theme.
+  ///
+  /// A soft pinkish color that represents the warm, friendly nature
+  /// of the Pawsitive Vibe Finder brand.
+  static const Color primary = Color(0xFFE8B4B7);
 
-  // Background Colors - Light Theme
-  static const Color primaryBackground = Color(0xFFFBF9F9); // Light background
-  static const Color secondaryBackground = Color(
-    0xFFF1E9EA,
-  ); // Light secondary background
+  /// Darker variant of the primary color for light theme.
+  ///
+  /// Used for hover states, pressed states, and subtle variations
+  /// of the primary color in light theme contexts.
+  static const Color primaryDark = Color(0xFFD8A0A4);
 
-  // Text Colors - Light Theme
-  static const Color textPrimary = Color(0xFF191011); // Primary text color
-  static const Color textSecondary = Color(0xFF8B5B5D); // Secondary text color
+  /// Accent color for light theme.
+  ///
+  /// Complements the primary color and is used for highlights,
+  /// active states, and secondary brand elements.
+  static const Color accent = Color(0xFFE8B4B7);
+
+  /// Primary background color for light theme.
+  ///
+  /// A very light, warm off-white that provides a gentle backdrop
+  /// for content without being harsh on the eyes.
+  static const Color primaryBackground = Color(0xFFFBF9F9);
+
+  /// Secondary background color for light theme.
+  ///
+  /// Used for cards, elevated surfaces, and areas that need subtle
+  /// differentiation from the primary background.
+  static const Color secondaryBackground = Color(0xFFF1E9EA);
+
+  /// Primary text color for light theme.
+  ///
+  /// A dark, high-contrast color that ensures excellent readability
+  /// against light backgrounds.
+  static const Color textPrimary = Color(0xFF191011);
+
+  /// Secondary text color for light theme.
+  ///
+  /// Used for less prominent text elements like captions, helper text,
+  /// and secondary information.
+  static const Color textSecondary = Color(0xFF8B5B5D);
 
   // ========== BEAUTIFUL DARK THEME COLORS ==========
 
-  // Primary Colors - Enhanced Dark Theme
-  static const Color primaryDarkTheme = Color(
-    0xFFFF6B9D,
-  ); // Vibrant pink primary for dark
-  static const Color primaryDarkShade = Color(0xFFE8B4B7); // Softer pink shade
-  static const Color accentDark = Color(
-    0xFFFF6B9D,
-  ); // Accent color for dark theme
+  /// Primary brand color for dark theme.
+  ///
+  /// A vibrant pink that maintains brand consistency while providing
+  /// excellent visibility against dark backgrounds.
+  static const Color primaryDarkTheme = Color(0xFFFF6B9D);
+
+  /// Softer variant of the primary color for dark theme.
+  ///
+  /// Used for subtle accents and secondary brand elements in dark mode.
+  static const Color primaryDarkShade = Color(0xFFE8B4B7);
+
+  /// Accent color for dark theme.
+  ///
+  /// Complements the primary dark theme color and is used for
+  /// highlights and interactive elements.
+  static const Color accentDark = Color(0xFFFF6B9D);
 
   // Background Colors - Modern Dark Theme
   static const Color darkPrimaryBackground = Color(
@@ -60,8 +117,22 @@ class AppColors {
 
   // ========== NEUTRAL COLORS ==========
 
+  /// Pure white color.
+  ///
+  /// Used for high-contrast elements and as a base for
+  /// light theme variations.
   static const Color white = Color(0xFFFFFFFF);
+
+  /// Pure black color.
+  ///
+  /// Used for high-contrast elements and as a base for
+  /// dark theme variations.
   static const Color black = Color(0xFF000000);
+
+  /// Light grey color.
+  ///
+  /// Used for subtle background variations and disabled states
+  /// in light theme contexts.
   static const Color lightGrey = Color(
     0xFFF2F2F7,
   ); // For light theme backgrounds
@@ -73,24 +144,55 @@ class AppColors {
 
   // ========== ENHANCED SEMANTIC COLORS ==========
 
-  // Light Theme Semantic Colors
-  static const Color success = Color(0xFF10B981); // Emerald success
-  static const Color error = Color(0xFFEF4444); // Red error
-  static const Color warning = Color(0xFFF59E0B); // Amber warning
-  static const Color info = Color(0xFF3B82F6); // Blue info
+  /// Success color for light theme.
+  ///
+  /// Used to indicate successful operations, positive feedback,
+  /// and completed actions.
+  static const Color success = Color(0xFF10B981);
 
-  // Dark Theme Semantic Colors
-  static const Color successDark = Color(0xFF34D399); // Bright emerald for dark
-  static const Color errorDark = Color(0xFFF87171); // Bright red for dark
-  static const Color warningDark = Color(0xFFFBBF24); // Bright amber for dark
-  static const Color infoDark = Color(0xFF60A5FA); // Bright blue for dark
+  /// Error color for light theme.
+  ///
+  /// Used to indicate errors, failures, and critical issues
+  /// that require user attention.
+  static const Color error = Color(0xFFEF4444);
+
+  /// Warning color for light theme.
+  ///
+  /// Used to indicate warnings, cautions, and situations
+  /// that require user awareness.
+  static const Color warning = Color(0xFFF59E0B);
+
+  /// Info color for light theme.
+  ///
+  /// Used to indicate informational messages, tips,
+  /// and general guidance.
+  static const Color info = Color(0xFF3B82F6);
+
+  /// Dark error color.
+  ///
+  /// Used to indicate errors, failures, and critical issues
+  /// that require user attention in dark theme contexts.
+  static const Color errorDark = Color(0xFFF87171);
 
   // ========== ENHANCED INTERACTIVE COLORS ==========
 
-  // Light Theme Interactive States
-  static const Color hoverBackground = Color(0xFFF8FAFC); // slate-50
-  static const Color activeBackground = Color(0xFFF1F5F9); // slate-100
-  static const Color dividerColor = Color(0xFFF1F5F9); // slate-100
+  /// Hover background color for light theme.
+  ///
+  /// Used for interactive elements to indicate hover state
+  /// through subtle background color changes.
+  static const Color hoverBackground = Color(0xFFF8FAFC);
+
+  /// Active background color for light theme.
+  ///
+  /// Used for interactive elements to indicate pressed or
+  /// active state through background color changes.
+  static const Color activeBackground = Color(0xFFF1F5F9);
+
+  /// Divider color for light theme.
+  ///
+  /// Used for horizontal and vertical dividers to separate
+  /// content sections in light theme contexts.
+  static const Color dividerColor = Color(0xFFF1F5F9);
 
   // Dark Theme Interactive States - Modern & Beautiful
   static const Color darkHoverBackground = Color(0xFF2D3748); // Warm hover
