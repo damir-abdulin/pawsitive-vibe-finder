@@ -15,10 +15,14 @@ class LoadBreedImagesEvent extends BreedImagesSlideshowEvent {
 }
 
 /// Event to navigate to the next image in the slideshow.
-class NavigateToNextImageEvent extends BreedImagesSlideshowEvent {}
+class NavigateToNextImageEvent extends BreedImagesSlideshowEvent {
+  const NavigateToNextImageEvent();
+}
 
 /// Event to navigate to the previous image in the slideshow.
-class NavigateToPreviousImageEvent extends BreedImagesSlideshowEvent {}
+class NavigateToPreviousImageEvent extends BreedImagesSlideshowEvent {
+  const NavigateToPreviousImageEvent();
+}
 
 /// Event to navigate to a specific image by index.
 class NavigateToImageEvent extends BreedImagesSlideshowEvent {
@@ -30,7 +34,9 @@ class NavigateToImageEvent extends BreedImagesSlideshowEvent {
 }
 
 /// Event to toggle the favorite status of the current image.
-class ToggleFavoriteEvent extends BreedImagesSlideshowEvent {}
+class ToggleFavoriteEvent extends BreedImagesSlideshowEvent {
+  const ToggleFavoriteEvent();
+}
 
 /// Event to handle zoom state changes.
 class ZoomStateChangedEvent extends BreedImagesSlideshowEvent {
@@ -42,4 +48,6 @@ class ZoomStateChangedEvent extends BreedImagesSlideshowEvent {
 }
 
 /// Event to retry loading images after an error.
-class RetryLoadingEvent extends BreedImagesSlideshowEvent {}
+class RetryLoadingEvent extends BreedImagesSlideshowEvent {
+  const RetryLoadingEvent();
+}

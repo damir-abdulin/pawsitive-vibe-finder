@@ -32,7 +32,7 @@ class BreedImagesCacheDao extends DatabaseAccessor<AppDatabase>
       if (result != null) {
         // Update last accessed time for LRU
         await _updateLastAccessedTime(result.id);
-        
+
         return result;
       }
 
@@ -82,7 +82,7 @@ class BreedImagesCacheDao extends DatabaseAccessor<AppDatabase>
         ..where((BreedImagesCache tbl) => tbl.breedId.equals(breedId));
 
       final BreedImagesCacheEntity? result = await query.getSingleOrNull();
-     
+
       return result != null && result.isFullyCached;
     } catch (e) {
       // If table doesn't exist or other database error, return false
@@ -104,7 +104,7 @@ class BreedImagesCacheDao extends DatabaseAccessor<AppDatabase>
 
       final TypedResult result = await query.getSingle();
       final int? totalSize = result.read(sumExpression);
-     
+
       return totalSize ?? 0;
     } catch (e) {
       // If the table doesn't exist or any other error occurs, return 0
@@ -164,9 +164,11 @@ class BreedImagesCacheDao extends DatabaseAccessor<AppDatabase>
 
     if (cacheEntry != null) {
       try {
+        // ignore: avoid-dynamic
         final List<dynamic> decoded =
+            // ignore: avoid-dynamic
             jsonDecode(cacheEntry.imageUrls) as List<dynamic>;
-       
+
         return decoded.cast<String>();
       } catch (e) {
         // If JSON decoding fails, return null

@@ -8,7 +8,7 @@ import 'use_case.dart';
 ///
 /// This class encapsulates the business logic for determining the favorite
 /// status of a single dog.
-class IsFavoriteDogUseCase extends FutureUseCase<DogModel, bool> {
+class IsFavoriteDogUseCase extends StreamUseCase<DogModel, bool> {
   final FavoritesRepository _favoritesRepository;
 
   /// Creates an [IsFavoriteDogUseCase] instance.
@@ -18,8 +18,10 @@ class IsFavoriteDogUseCase extends FutureUseCase<DogModel, bool> {
     : _favoritesRepository = favoritesRepository;
 
   @override
-  Future<bool> unsafeExecute(DogModel input) async {
-    final List<DogModel> favoriteDogs = await _favoritesRepository.getFavoriteDogs().first;
-    return favoriteDogs.any((DogModel dog) => dog.imageUrl == input.imageUrl);
+  Stream<bool> unsafeExecute(DogModel input) {
+    return _favoritesRepository.getFavoriteDogs().map(
+      (favoriteDogs) =>
+          favoriteDogs.any((dog) => dog.imageUrl == input.imageUrl),
+    );
   }
 }

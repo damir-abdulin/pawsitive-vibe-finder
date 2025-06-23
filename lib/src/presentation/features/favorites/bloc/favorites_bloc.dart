@@ -68,13 +68,22 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
     FavoriteDogRemoved event,
     Emitter<FavoritesState> emit,
   ) async {
-    await _removeFavoriteDogUseCase.execute(event.dog);
+    try {
+      await _removeFavoriteDogUseCase.execute(event.dog);
+    } catch (_) {
+      // Handle error gracefully, maybe log it.
+      // For now, we don't emit a state to avoid disrupting the UI.
+    }
   }
 
   Future<void> _onFavoriteDogAdded(
     FavoriteDogAdded event,
     Emitter<FavoritesState> emit,
   ) async {
-    await _saveFavoriteDogUseCase.execute(event.dog);
+    try {
+      await _saveFavoriteDogUseCase.execute(event.dog);
+    } catch (_) {
+      // Handle error gracefully, maybe log it.
+    }
   }
 }

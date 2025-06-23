@@ -49,7 +49,6 @@ dart_code_metrics:
     - no-empty-block
     - no-equal-arguments
     - no-equal-then-else
-    - no-magic-number
     - no-object-declaration
     - prefer-conditional-expressions
     - prefer-commenting-analyzer-ignores
@@ -59,7 +58,6 @@ dart_code_metrics:
     - prefer-first
     - prefer-last
     - prefer-async-await
-    - prefer-match-file-name
     - prefer-trailing-comma
     - prefer-immediate-return
     - prefer-moving-to-variable

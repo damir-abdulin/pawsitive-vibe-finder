@@ -67,8 +67,11 @@ class BreedImagesRepositoryImpl implements BreedImagesRepository {
         cause: e,
       );
     } catch (e) {
+      if (e is BreedImagesException) {
+        rethrow;
+      }
       throw BreedImagesException(
-        message: 'An unexpected error occurred while fetching breed images: $e',
+        message: 'An unexpected error occurred while fetching breed images',
         cause: e,
       );
     }
@@ -128,8 +131,9 @@ class BreedImagesRepositoryImpl implements BreedImagesRepository {
       final int newTotalSize = currentCacheSize + sizeInBytes;
 
       if (newTotalSize > maxCacheSizeBytes) {
+        final int sizeToRetain = maxCacheSizeBytes - sizeInBytes;
         // Evict least recently used entries to make space
-        await _cacheDao.evictLeastRecentlyUsed(maxCacheSizeBytes - sizeInBytes);
+        await _cacheDao.evictLeastRecentlyUsed(sizeToRetain);
       }
 
       // Save to cache
@@ -185,10 +189,12 @@ class BreedImagesRepositoryImpl implements BreedImagesRepository {
         );
 
         // Check if this image is favorited using the use case
-        final bool isFavorite = await _isFavoriteDogUseCase.execute(
+        final Stream<bool> isFavoriteStream = _isFavoriteDogUseCase.execute(
           dogModel,
-          onError: (AppException exception) async => false,
+          onError: (AppException exception) => Stream.value(false),
         );
+
+        final bool isFavorite = await isFavoriteStream.first;
 
         // Update the image with the correct favorite status
         final BreedImageModel updatedImage = image.copyWith(
