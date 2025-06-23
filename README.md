@@ -15,7 +15,6 @@ A simple, delightful mobile application for dog enthusiasts to browse different 
 * [Git Workflow](#git-workflow)
 * [Future Enhancements](#future-enhancements)
 * [Contributing](#contributing)
-* [License](#license)
 * [Contact](#contact)
 
 ## About The Project
@@ -148,11 +147,7 @@ Contributions are what make the open-source community such an amazing place to l
 
 Please ensure your pull requests align with the Gitflow Workflow and Conventional Commits standards.
 
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
 ## Contact
 
-Your Name - your.email@example.com
-Project Link: [https://github.com/your-username/pawsitive_vibe_finder](https://github.com/your-username/pawsitive_vibe_finder)
+Your Name - damir.abdulin.tel@gmail.com
+Project Link: [https://github.com/damir-abdulin/pawsitive-vibe-finder](https://github.com/damir-abdulin/pawsitive-vibe-finder)
